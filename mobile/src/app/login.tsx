@@ -1,17 +1,17 @@
-import { router } from "expo-router"
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { router } from "expo-router"
 
-export default function Home() {
+export default function Login() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Home</Text>
+      <Text style={styles.text}>Login</Text>
 
       <TouchableOpacity
         style={styles.button}
         activeOpacity={0.7}
-        onPress={() => router.navigate("/login")}
+        onPress={() => router.back()}
       >
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
     </View>
   )

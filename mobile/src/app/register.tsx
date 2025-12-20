@@ -1,18 +1,8 @@
-import { Text, TouchableOpacity, View } from "react-native"
-import { router } from "expo-router"
+import { RegisterView } from "@/view-models/register/register.view"
+import { useRegisterViewModel } from "@/view-models/register/use-register.viewmodel"
 
 export default function Register() {
-  return (
-    <View className="flex-1 items-center justify-center bg-zinc-100">
-      <Text className="text-2xl text-zinc-950">Register</Text>
+  const props = useRegisterViewModel()
 
-      <TouchableOpacity
-        className="mt-5 rounded-md bg-purple-base px-4 py-2"
-        activeOpacity={0.7}
-        onPress={() => router.back()}
-      >
-        <Text className="text-white">Login</Text>
-      </TouchableOpacity>
-    </View>
-  )
+  return <RegisterView {...props} />
 }

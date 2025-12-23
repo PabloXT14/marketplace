@@ -1,14 +1,31 @@
-import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+import { type RegisterFormData, registerSchema } from "./register.schema"
 
 export const useRegisterViewModel = () => {
-  const [userData, setUserData] = useState({
-    name: "John Doe",
-    email: "3yUfM@example.com",
-    password: "password123",
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      phone: "",
+    },
+  })
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data)
   })
 
   return {
-    userData,
-    setUserData,
+    control,
+    onSubmit,
+    errors,
   }
 }

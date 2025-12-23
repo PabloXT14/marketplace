@@ -20,3 +20,5 @@ export const registerSchema = z
     error: "As senhas não coincidem",
     path: ["confirmPassword"],
   })
+
+export type RegisterFormData = z.infer<typeof registerSchema>

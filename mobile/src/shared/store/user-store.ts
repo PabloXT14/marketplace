@@ -1,4 +1,6 @@
 import { create } from "zustand"
+import { persist, createJSONStorage } from "zustand/middleware"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import type { User } from "../interfaces/user"
 
@@ -23,20 +25,28 @@ export type UserStore = {
   updateTokens: (params: UpdateTokensParams) => void
 }
 
-export const useUserStore = create<UserStore>((set) => ({
-  user: null,
-  token: null,
-  refreshToken: null,
+export const useUserStore = create<UserStore>()(
+  persist(
+    (set) => ({
+      user: null,
+      token: null,
+      refreshToken: null,
 
-  setSession: ({ user, token, refreshToken }) => {
-    set({ user, token, refreshToken })
-  },
+      setSession: ({ user, token, refreshToken }) => {
+        set({ user, token, refreshToken })
+      },
 
-  logout: () => {
-    set({ user: null, token: null, refreshToken: null })
-  },
+      logout: () => {
+        set({ user: null, token: null, refreshToken: null })
+      },
 
-  updateTokens: ({ token, refreshToken }) => {
-    set({ token, refreshToken })
-  },
-}))
+      updateTokens: ({ token, refreshToken }) => {
+        set({ token, refreshToken })
+      },
+    }),
+    {
+      name: "user-storage",
+      storage: createJSONStorage(() => AsyncStorage),
+    }
+  )
+)

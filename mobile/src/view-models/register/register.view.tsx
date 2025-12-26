@@ -7,7 +7,7 @@ import { Input } from "@/shared/components/input"
 type RegisterViewProps = ReturnType<typeof useRegisterViewModel>
 
 export const RegisterView = ({ onSubmit }: RegisterViewProps) => (
-  <View className="flex-1 items-center justify-center bg-zinc-100">
+  <View className="flex-1 items-center justify-center bg-zinc-100 px-10 py-9">
     <Input />
 
     <TouchableOpacity

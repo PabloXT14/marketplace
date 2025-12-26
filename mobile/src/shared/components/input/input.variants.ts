@@ -3,9 +3,10 @@ import { tv, type VariantProps } from "tailwind-variants"
 export const inputVariants = tv({
   slots: {
     container: "w-full",
-    label: "",
-    content: "",
-    input: "",
+    label: "font-semibold text-gray-300 text-xs uppercase",
+    content:
+      "flex-row items-center gap-2 border-gray-100 border-b px-0.5 py-3.5",
+    input: "flex-1 bg-transparent text-base text-gray-500",
     errorMessage: "",
   },
   variants: {
@@ -29,4 +30,4 @@ export const inputVariants = tv({
   },
 })
 
-export type InputVariants = VariantProps<typeof inputVariants>
+export type InputVariantsProps = VariantProps<typeof inputVariants>

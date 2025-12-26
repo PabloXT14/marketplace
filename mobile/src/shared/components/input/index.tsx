@@ -1,16 +1,16 @@
 import { Text, TextInput, TouchableOpacity, View } from "react-native"
-import { Ionicons } from "@expo/vector-icons"
+import { SolarIcon } from "react-native-solar-icons"
 
 export const Input = () => (
   <View>
     <Text>LABEL</Text>
     <View>
-      <Ionicons name="mail" />
+      <SolarIcon name="Letter" size={24} color="black" type="linear" />
 
       <TextInput />
 
       <TouchableOpacity>
-        <Ionicons name="eye" />
+        <SolarIcon name="Eye" size={24} color="black" type="linear" />
       </TouchableOpacity>
     </View>
   </View>

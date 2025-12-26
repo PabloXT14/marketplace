@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity, View } from "react-native"
 
 import type { useRegisterViewModel } from "./use-register.viewmodel"
+
 import { Input } from "@/shared/components/input"
 
 type RegisterViewProps = ReturnType<typeof useRegisterViewModel>

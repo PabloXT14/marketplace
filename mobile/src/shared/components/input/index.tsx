@@ -8,8 +8,10 @@ import {
 import { SolarIcon } from "react-native-solar-icons"
 import type { LinearIconName } from "react-native-solar-icons/dist/icons"
 
-import { inputVariants, type InputVariantsProps } from "./input.variants"
 import { colors } from "@/styles/colors"
+
+import { inputVariants, type InputVariantsProps } from "./input.variants"
+import { useInputViewModel } from "./use-input-view-model"
 
 type InputProps = TextInputProps &
   InputVariantsProps & {
@@ -18,6 +20,7 @@ type InputProps = TextInputProps &
     rightIcon?: LinearIconName
     containerClassName?: string
     mask?: (value: string) => string | undefined
+    errorMessage?: string
   }
 
 export const Input = ({
@@ -28,11 +31,36 @@ export const Input = ({
   isFocused,
   isError,
   isDisabled,
+  value,
+  onChangeText,
+  secureTextEntry = false,
+  onBlur,
+  onFocus,
+  mask,
+  errorMessage,
   ...textInputProps
 }: InputProps) => {
   const styles = inputVariants({
     isFocused,
     isError,
+    isDisabled,
+  })
+
+  const {
+    showPassword,
+    getIconColor,
+    handleTogglePassword,
+    handleBlur,
+    handleFocus,
+  } = useInputViewModel({
+    value,
+    onChangeText,
+    isError: !!errorMessage,
+    onBlur,
+    onFocus,
+    secureTextEntry,
+    mask,
+    errorMessage,
     isDisabled,
   })
 

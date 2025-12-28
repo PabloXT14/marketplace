@@ -70,12 +70,14 @@ export const Input = ({
       <Text className={styles.label()}>{label}</Text>
 
       <View className={styles.content()}>
-        <SolarIcon
-          name="Letter"
-          size={24}
-          color={colors.gray[200]}
-          type="linear"
-        />
+        {leftIcon ? (
+          <SolarIcon
+            name={leftIcon}
+            size={24}
+            color={getIconColor()}
+            type="linear"
+          />
+        ) : null}
 
         <TextInput
           value={value}

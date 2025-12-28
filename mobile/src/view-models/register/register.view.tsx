@@ -8,7 +8,10 @@ type RegisterViewProps = ReturnType<typeof useRegisterViewModel>
 
 export const RegisterView = ({ onSubmit }: RegisterViewProps) => (
   <View className="flex-1 items-center justify-center bg-zinc-100 px-10 py-9">
-    <Input />
+    <View className="w-full gap-4">
+      <Input label="E-mail" placeholder="mail@exemplo.br" />
+      <Input label="Senha" placeholder="Sua senha" />
+    </View>
 
     <TouchableOpacity
       className="mt-5 rounded-md bg-purple-base px-4 py-2"

@@ -36,12 +36,16 @@ export const useInputViewModel = ({
   }
 
   const handleFocus = (event: FocusEvent) => {
+    console.log("Focused")
+
     inputRef.current?.focus()
     setIsFocused(true)
     onFocus?.(event)
   }
 
   const handleBlur = (event: BlurEvent) => {
+    console.log("Blurred")
+
     inputRef.current?.blur()
     setIsFocused(false)
     onBlur?.(event)
@@ -63,11 +67,21 @@ export const useInputViewModel = ({
     return colors.gray[200]
   }
 
+  const handleChangeText = (value: string) => {
+    if (mask) {
+      onChangeText?.(mask(value) || "")
+    } else {
+      onChangeText?.(value)
+    }
+  }
+
   return {
+    showPassword,
+    isFocused,
     handleFocus,
     handleBlur,
     handleTogglePassword,
-    showPassword,
+    handleChangeText,
     getIconColor,
   }
 }

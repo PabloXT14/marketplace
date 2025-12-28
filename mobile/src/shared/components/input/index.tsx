@@ -28,7 +28,6 @@ export const Input = ({
   leftIcon,
   rightIcon,
   containerClassName,
-  isFocused,
   isError,
   isDisabled,
   value,
@@ -40,18 +39,14 @@ export const Input = ({
   errorMessage,
   ...textInputProps
 }: InputProps) => {
-  const styles = inputVariants({
-    isFocused,
-    isError,
-    isDisabled,
-  })
-
   const {
+    isFocused,
     showPassword,
-    getIconColor,
     handleTogglePassword,
     handleBlur,
     handleFocus,
+    handleChangeText,
+    getIconColor,
   } = useInputViewModel({
     value,
     onChangeText,
@@ -64,9 +59,15 @@ export const Input = ({
     isDisabled,
   })
 
+  const styles = inputVariants({
+    isFocused,
+    isError,
+    isDisabled,
+  })
+
   return (
     <View className={styles.container({ className: containerClassName })}>
-      <Text className={styles.label()}>Label</Text>
+      <Text className={styles.label()}>{label}</Text>
 
       <View className={styles.content()}>
         <SolarIcon
@@ -77,9 +78,12 @@ export const Input = ({
         />
 
         <TextInput
-          placeholder="Placeholder"
+          value={value}
+          onChangeText={handleChangeText}
           placeholderTextColor={colors.gray[200]}
           cursorColor={colors.gray[500]}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
           style={{
             padding: 0,
             margin: 0,

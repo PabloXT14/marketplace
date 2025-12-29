@@ -7,7 +7,8 @@ export const inputVariants = tv({
     content:
       "flex-row items-center gap-2 border-gray-100 border-b px-0.5 py-3.5",
     input: "flex-1 bg-transparent text-base text-gray-500",
-    errorMessage: "",
+    errorContainer: "flex-row items-center gap-1 py-1.5",
+    errorMessage: "text-danger text-xs",
   },
   variants: {
     isFocused: {

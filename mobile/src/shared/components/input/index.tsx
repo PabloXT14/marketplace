@@ -105,6 +105,19 @@ export const Input = ({
           />
         </TouchableOpacity>
       </View>
+
+      {errorMessage ? (
+        <View className={styles.errorContainer()}>
+          <SolarIcon
+            name="InfoCircle"
+            type="linear"
+            size={16}
+            color={colors.danger}
+          />
+
+          <Text className={styles.errorMessage()}>{errorMessage}</Text>
+        </View>
+      ) : null}
     </View>
   )
 }

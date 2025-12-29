@@ -21,12 +21,14 @@ export const RegisterView = ({ onSubmit }: RegisterViewProps) => {
           onChangeText={setEmail}
           leftIcon="Letter"
         />
+
         <Input
           label="Senha"
           placeholder="Sua senha"
           value={password}
           onChangeText={setPassword}
           leftIcon="KeyMinimalisticSquare2"
+          errorMessage="Helper text"
         />
       </View>
 

@@ -26,7 +26,7 @@ export const useInputViewModel = ({
   isError,
   isDisabled,
 }: InputViewModelProps) => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(secureTextEntry)
   const [isFocused, setIsFocused] = useState(false)
 
   const inputRef = useRef<TextInput>(null)
@@ -36,16 +36,12 @@ export const useInputViewModel = ({
   }
 
   const handleFocus = (event: FocusEvent) => {
-    console.log("Focused")
-
     inputRef.current?.focus()
     setIsFocused(true)
     onFocus?.(event)
   }
 
   const handleBlur = (event: BlurEvent) => {
-    console.log("Blurred")
-
     inputRef.current?.blur()
     setIsFocused(false)
     onBlur?.(event)
@@ -67,11 +63,11 @@ export const useInputViewModel = ({
     return colors.gray[200]
   }
 
-  const handleChangeText = (value: string) => {
+  const handleChangeText = (text: string) => {
     if (mask) {
-      onChangeText?.(mask(value) || "")
+      onChangeText?.(mask(text) || "")
     } else {
-      onChangeText?.(value)
+      onChangeText?.(text)
     }
   }
 

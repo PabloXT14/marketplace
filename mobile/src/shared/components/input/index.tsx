@@ -93,17 +93,20 @@ export const Input = ({
             includeFontPadding: false, // Remove extra padding on Android
           }}
           className={styles.input()}
+          secureTextEntry={showPassword}
           {...textInputProps}
         />
 
-        <TouchableOpacity>
-          <SolarIcon
-            name="Eye"
-            size={24}
-            color={colors.gray[300]}
-            type="linear"
-          />
-        </TouchableOpacity>
+        {secureTextEntry ? (
+          <TouchableOpacity onPress={handleTogglePassword} activeOpacity={0.7}>
+            <SolarIcon
+              name={showPassword ? "Eye" : "EyeClosed"}
+              size={24}
+              color={colors.gray[300]}
+              type="linear"
+            />
+          </TouchableOpacity>
+        ) : null}
       </View>
 
       {errorMessage ? (

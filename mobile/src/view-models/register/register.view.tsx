@@ -28,7 +28,7 @@ export const RegisterView = ({ onSubmit }: RegisterViewProps) => {
           value={password}
           onChangeText={setPassword}
           leftIcon="KeyMinimalisticSquare2"
-          errorMessage="Helper text"
+          secureTextEntry
         />
       </View>
 

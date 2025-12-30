@@ -20,6 +20,7 @@ export const RegisterView = ({ onSubmit }: RegisterViewProps) => {
           value={email}
           onChangeText={setEmail}
           leftIcon="Letter"
+          isDisabled
         />
 
         <Input
@@ -29,6 +30,7 @@ export const RegisterView = ({ onSubmit }: RegisterViewProps) => {
           onChangeText={setPassword}
           leftIcon="KeyMinimalisticSquare2"
           secureTextEntry
+          errorMessage="Wrong password"
         />
       </View>
 

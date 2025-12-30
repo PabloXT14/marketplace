@@ -1,12 +1,12 @@
-import { colors } from "@/styles/colors"
 import { useRef, useState } from "react"
-import type { BlurEvent, TextInput } from "react-native"
+import type { BlurEvent, FocusEvent, TextInput } from "react-native"
+
+import { colors } from "@/styles/colors"
 
 type InputViewModelProps = {
   isError?: boolean
   isFocused?: boolean
   isDisabled?: boolean
-  errorMessage?: string
   secureTextEntry?: boolean
   onFocus?: (event: FocusEvent) => void
   onBlur?: (event: BlurEvent) => void
@@ -22,9 +22,7 @@ export const useInputViewModel = ({
   onFocus,
   onBlur,
   mask,
-  errorMessage,
   isError,
-  isDisabled,
 }: InputViewModelProps) => {
   const [showPassword, setShowPassword] = useState(secureTextEntry)
   const [isFocused, setIsFocused] = useState(false)
@@ -48,12 +46,12 @@ export const useInputViewModel = ({
   }
 
   const getIconColor = () => {
-    if (isFocused) {
-      return colors.purple.base
-    }
-
     if (isError) {
       return colors.danger
+    }
+
+    if (isFocused) {
+      return colors.purple.base
     }
 
     if (value) {

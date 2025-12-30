@@ -55,13 +55,12 @@ export const Input = ({
     onFocus,
     secureTextEntry,
     mask,
-    errorMessage,
     isDisabled,
   })
 
   const styles = inputVariants({
     isFocused,
-    isError,
+    isError: !!errorMessage,
     isDisabled,
   })
 

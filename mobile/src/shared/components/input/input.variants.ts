@@ -19,11 +19,18 @@ export const inputVariants = tv({
       false: {},
     },
     isError: {
-      true: {},
+      true: {
+        content: "border-danger",
+        label: "text-danger",
+      },
       false: {},
     },
     isDisabled: {
-      true: {},
+      true: {
+        content: "opacity-50",
+        label: "text-gray-200",
+        input: "text-gray-300",
+      },
       false: {},
     },
   },

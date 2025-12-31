@@ -13,7 +13,7 @@ import { colors } from "@/styles/colors"
 import { inputVariants, type InputVariantsProps } from "./input.variants"
 import { useInputViewModel } from "./use-input-view-model"
 
-type InputProps = TextInputProps &
+export type InputProps = TextInputProps &
   InputVariantsProps & {
     label?: string
     leftIcon?: LinearIconName

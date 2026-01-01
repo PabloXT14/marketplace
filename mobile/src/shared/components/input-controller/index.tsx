@@ -13,13 +13,31 @@ type InputControllerProps<T extends FieldValues> = Omit<
 > & {
   control: Control<T>
   name: Path<T>
-  errors: FieldErrors<T>
+  errors?: FieldErrors<T>
 }
 
 export const InputController = <T extends FieldValues>({
   control,
   name,
   errors,
+  ...rest
 }: InputControllerProps<T>) => (
-  <Controller control={control} name={name} render={({ field }) => <Input />} />
+  <Controller
+    control={control}
+    name={name}
+    render={({
+      field: { value, onChange, onBlur },
+      fieldState: { error },
+      formState: { isSubmitting },
+    }) => (
+      <Input
+        value={value}
+        onChangeText={onChange}
+        onBlur={onBlur}
+        errorMessage={error?.message}
+        isDisabled={isSubmitting || rest.isDisabled}
+        {...rest}
+      />
+    )}
+  />
 )

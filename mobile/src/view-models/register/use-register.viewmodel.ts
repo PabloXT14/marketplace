@@ -17,11 +17,11 @@ export const useRegisterViewModel = () => {
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      name: "Alice Doe",
-      email: "alicedoe@email.com",
-      password: "123456",
-      confirmPassword: "123456",
-      phone: "11999999999",
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      phone: "",
     },
   })
 

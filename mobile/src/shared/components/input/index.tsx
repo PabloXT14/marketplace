@@ -81,6 +81,7 @@ export const Input = ({
         <TextInput
           value={value}
           onChangeText={handleChangeText}
+          // editable={!isDisabled}
           placeholderTextColor={colors.gray[200]}
           cursorColor={colors.gray[500]}
           onBlur={handleBlur}

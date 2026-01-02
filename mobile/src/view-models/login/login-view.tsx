@@ -17,7 +17,7 @@ export const LoginView = () => (
         /* TODO: navigate to home */
       }}
     >
-      <Text className="font-bold text-base text-white">Acessar</Text>
+      <Text className="font-lato-bold text-base text-white">Acessar</Text>
     </TouchableOpacity>
 
     <TouchableOpacity
@@ -27,7 +27,9 @@ export const LoginView = () => (
         router.navigate("/register")
       }}
     >
-      <Text className="font-bold text-base text-purple-base">Cadastrar</Text>
+      <Text className="font-lato-bold text-base text-purple-base">
+        Cadastrar
+      </Text>
     </TouchableOpacity>
   </View>
 )

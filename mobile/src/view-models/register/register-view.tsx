@@ -19,7 +19,7 @@ export const RegisterView = ({ onSubmit }: RegisterViewProps) => (
       activeOpacity={0.7}
       onPress={() => onSubmit()}
     >
-      <Text className="font-bold text-base text-white">Cadastrar</Text>
+      <Text className="font-lato-bold text-base text-white">Cadastrar</Text>
     </TouchableOpacity>
 
     <TouchableOpacity
@@ -29,7 +29,7 @@ export const RegisterView = ({ onSubmit }: RegisterViewProps) => (
         router.back()
       }}
     >
-      <Text className="font-bold text-base text-purple-base">Acessar</Text>
+      <Text className="font-lato-bold text-base text-purple-base">Acessar</Text>
     </TouchableOpacity>
   </View>
 )

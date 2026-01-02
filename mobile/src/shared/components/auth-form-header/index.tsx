@@ -14,11 +14,13 @@ export const AuthFormHeader = ({ title, subtitle }: AuthFormHeaderProps) => (
     />
 
     <View className="items-center gap-2">
-      <Text className="font-bold text-2xl text-gray-500 leading-tight">
+      <Text className="font-lato-bold text-2xl text-gray-500 leading-tight">
         {title}
       </Text>
 
-      <Text className="text-gray-300 text-sm leading-snug">{subtitle}</Text>
+      <Text className="font-lato text-gray-300 text-sm leading-snug">
+        {subtitle}
+      </Text>
     </View>
   </View>
 )

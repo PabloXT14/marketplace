@@ -10,7 +10,7 @@ import type { LinearIconName } from "react-native-solar-icons/dist/icons"
 
 import { colors } from "@/styles/colors"
 
-import { inputVariants, type InputVariantsProps } from "./input.variants"
+import { inputVariants, type InputVariantsProps } from "./input-variants"
 import { useInputViewModel } from "./use-input-view-model"
 
 export type InputProps = TextInputProps &

@@ -3,7 +3,7 @@ import { router } from "expo-router"
 
 import { AuthFormHeader } from "@/shared/components/auth-form-header"
 
-import type { useRegisterViewModel } from "./use-register.viewmodel"
+import type { useRegisterViewModel } from "./use-register-view-model"
 
 type RegisterViewProps = ReturnType<typeof useRegisterViewModel>
 

@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-import { type RegisterFormData, registerSchema } from "./register.schema"
+import { type RegisterFormData, registerSchema } from "./register-schema"
 
-import { useRegisterMutation } from "@/shared/queries/auth/use-register.mutation"
+import { useRegisterMutation } from "@/shared/queries/auth/use-register-mutation"
 import { useUserStore } from "@/shared/store/user-store"
 
 export const useRegisterViewModel = () => {

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 // biome-ignore lint/performance/noNamespaceImport: needed for authService
-import * as authService from "@/shared/services/auth.service"
+import * as authService from "@/shared/services/auth-service"
 import type { RegisterHttpRequest } from "@/shared/interfaces/http/register"
 
 export const useRegisterMutation = () => {

@@ -7,9 +7,13 @@ import { colors } from "@/styles/colors"
 
 import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 import { AuthFormHeader } from "@/shared/components/auth-form-header"
-import { Input } from "@/shared/components/input"
+import { InputController } from "@/shared/components/input-controller"
 
-export const LoginView = () => (
+import type { useLoginViewModel } from "./use-login-view-model"
+
+type LoginViewProps = ReturnType<typeof useLoginViewModel>
+
+export const LoginView = ({ control, onSubmit, errors }: LoginViewProps) => (
   <SafeAreaView className="flex-1">
     <DismissKeyboardView>
       <View className="flex-1 bg-zinc-100 px-10 py-9">
@@ -22,16 +26,23 @@ export const LoginView = () => (
         <View className="mb-10 w-full gap-10">
           {/* FIELD */}
           <View className="w-full gap-5">
-            <Input
+            <InputController
+              control={control}
+              name="email"
+              errors={errors}
               label="E-mail"
               placeholder="mail@exemplo.br"
               leftIcon="Letter"
             />
 
-            <Input
+            <InputController
+              control={control}
+              name="password"
+              errors={errors}
               label="Senha"
               placeholder="Sua senha"
               leftIcon="KeyMinimalisticSquare2"
+              secureTextEntry
             />
           </View>
 
@@ -39,7 +50,7 @@ export const LoginView = () => (
             className="mb-4 h-button w-full flex-row items-center justify-between rounded-xl bg-purple-base px-4"
             activeOpacity={0.7}
             onPress={() => {
-              /* TODO: navigate to home */
+              onSubmit()
             }}
           >
             <Text className="font-lato-bold text-base text-white">Acessar</Text>

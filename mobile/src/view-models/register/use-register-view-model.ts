@@ -4,11 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { type RegisterFormData, registerSchema } from "./register-schema"
 
 import { useRegisterMutation } from "@/shared/queries/auth/use-register-mutation"
-import { useUserStore } from "@/shared/store/user-store"
 
 export const useRegisterViewModel = () => {
   const { mutateAsync } = useRegisterMutation()
-  const { setSession } = useUserStore()
 
   const {
     control,
@@ -28,13 +26,7 @@ export const useRegisterViewModel = () => {
   const onSubmit = handleSubmit(async (userData: RegisterFormData) => {
     const { confirmPassword: _, ...rest } = userData
 
-    const response = await mutateAsync(rest)
-
-    setSession({
-      user: response.user,
-      token: response.token,
-      refreshToken: response.refreshToken,
-    })
+    await mutateAsync(rest)
   })
 
   return {

@@ -5,12 +5,20 @@ import * as authService from "@/shared/services/auth-service"
 
 import type { LoginHttpRequest } from "@/shared/interfaces/http/login"
 
+import { useUserStore } from "@/shared/store/user-store"
+
 export const useLoginMutation = () => {
+  const { setSession } = useUserStore()
+
   const mutation = useMutation({
     mutationFn: (userData: LoginHttpRequest) =>
       authService.loginService(userData),
     onSuccess: (response) => {
-      console.log("Login successful:", response)
+      setSession({
+        user: response.user,
+        token: response.token,
+        refreshToken: response.refreshToken,
+      })
     },
     onError: (error) => {
       console.error("Login failed:", error)

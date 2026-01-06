@@ -8,7 +8,7 @@ import { useUserStore } from "@/shared/store/user-store"
 
 export const useRegisterViewModel = () => {
   const { mutateAsync } = useRegisterMutation()
-  const { setSession, user } = useUserStore()
+  const { setSession } = useUserStore()
 
   const {
     control,
@@ -36,8 +36,6 @@ export const useRegisterViewModel = () => {
       refreshToken: response.refreshToken,
     })
   })
-
-  console.log("Current user in store:", user)
 
   return {
     control,

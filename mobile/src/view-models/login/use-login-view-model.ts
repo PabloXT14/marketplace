@@ -3,7 +3,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import { type LoginFormData, loginSchema } from "./login-schema"
 
+import { useLoginMutation } from "@/shared/queries/auth/use-login-mutation"
+
 export const useLoginViewModel = () => {
+  const { mutateAsync } = useLoginMutation()
+
   const {
     control,
     handleSubmit,
@@ -16,8 +20,10 @@ export const useLoginViewModel = () => {
     },
   })
 
-  const onSubmit = handleSubmit((data: LoginFormData) => {
-    console.log("Login data:", data)
+  const onSubmit = handleSubmit(async (data: LoginFormData) => {
+    const response = await mutateAsync(data)
+
+    console.log("Login successful:", response)
   })
 
   return {

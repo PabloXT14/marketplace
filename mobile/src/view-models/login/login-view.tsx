@@ -65,7 +65,7 @@ export const LoginView = ({ control, onSubmit, errors }: LoginViewProps) => (
           </TouchableOpacity> */}
 
           <Button
-            title="Acessar"
+            text="Acessar"
             onPress={() => {
               onSubmit()
             }}

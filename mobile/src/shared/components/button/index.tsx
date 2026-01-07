@@ -10,18 +10,13 @@ import { buttonVariants, type ButtonVariantsProps } from "./button-variants"
 
 type ButtonProps = TouchableOpacityProps &
   ButtonVariantsProps & {
-    title?: string
+    text?: string
     leftIcon?: LinearIconName
     rightIcon?: LinearIconName
   }
 
-export const Button = ({
-  title,
-
-  className,
-  ...rest
-}: ButtonProps) => {
-  const styles = buttonVariants()
+export const Button = ({ text, variant, className, ...rest }: ButtonProps) => {
+  const styles = buttonVariants({ variant })
 
   return (
     <TouchableOpacity
@@ -29,7 +24,7 @@ export const Button = ({
       activeOpacity={0.7}
       {...rest}
     >
-      <Text>{title}</Text>
+      <Text className={styles.text()}>{text}</Text>
     </TouchableOpacity>
   )
 }

@@ -1,10 +1,5 @@
 import { tv, type VariantProps } from "tailwind-variants"
 
-export enum ButtonVariantsEnum {
-  SOLID = "solid",
-  OUTLINE = "outline",
-}
-
 export const buttonVariants = tv({
   slots: {
     container: "h-button w-full flex-row items-center gap-3 rounded-xl px-4",
@@ -21,13 +16,13 @@ export const buttonVariants = tv({
     },
     isLoading: {
       true: {
-        container: "opacity-50",
+        container: "justify-center opacity-60",
       },
       false: {},
     },
     isDisabled: {
       true: {
-        container: "opacity-50",
+        container: "opacity-60",
       },
       false: {},
     },
@@ -46,7 +41,7 @@ export const buttonVariants = tv({
     hasIcon: false,
     isLoading: false,
     isDisabled: false,
-    variant: ButtonVariantsEnum.SOLID,
+    variant: "solid",
   },
 })
 

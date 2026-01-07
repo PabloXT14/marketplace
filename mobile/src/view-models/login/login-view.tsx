@@ -47,25 +47,9 @@ export const LoginView = ({ control, onSubmit, errors }: LoginViewProps) => (
             />
           </View>
 
-          {/* <TouchableOpacity
-            className="mb-4 h-button w-full flex-row items-center justify-between rounded-xl bg-purple-base px-4"
-            activeOpacity={0.7}
-            onPress={() => {
-              onSubmit()
-            }}
-          >
-            <Text className="font-lato-bold text-base text-white">Acessar</Text>
-
-            <SolarIcon
-              name="ArrowRight"
-              type="linear"
-              size={24}
-              color={colors.white}
-            />
-          </TouchableOpacity> */}
-
           <Button
             text="Acessar"
+            rightIcon="ArrowRight"
             onPress={() => {
               onSubmit()
             }}

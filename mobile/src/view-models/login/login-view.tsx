@@ -10,6 +10,7 @@ import { AuthFormHeader } from "@/shared/components/auth-form-header"
 import { InputController } from "@/shared/components/input-controller"
 
 import type { useLoginViewModel } from "./use-login-view-model"
+import { Button } from "@/shared/components/button"
 
 type LoginViewProps = ReturnType<typeof useLoginViewModel>
 
@@ -46,7 +47,7 @@ export const LoginView = ({ control, onSubmit, errors }: LoginViewProps) => (
             />
           </View>
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             className="mb-4 h-button w-full flex-row items-center justify-between rounded-xl bg-purple-base px-4"
             activeOpacity={0.7}
             onPress={() => {
@@ -61,7 +62,14 @@ export const LoginView = ({ control, onSubmit, errors }: LoginViewProps) => (
               size={24}
               color={colors.white}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
+
+          <Button
+            title="Acessar"
+            onPress={() => {
+              onSubmit()
+            }}
+          />
         </View>
 
         {/* FOOTER */}

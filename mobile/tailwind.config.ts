@@ -16,7 +16,7 @@ export default {
         "lato-bold": [fontFamily.lato.bold],
       },
       height: {
-        button: "57px",
+        button: "56px",
       },
     },
   },

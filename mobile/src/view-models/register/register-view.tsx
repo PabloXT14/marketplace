@@ -1,14 +1,13 @@
-import { Text, TouchableOpacity, View } from "react-native"
+import { Text, View } from "react-native"
 import { router } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import { AuthFormHeader } from "@/shared/components/auth-form-header"
 import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 import { InputController } from "@/shared/components/input-controller"
+import { Button } from "@/shared/components/button"
 
 import type { useRegisterViewModel } from "./use-register-view-model"
-import { SolarIcon } from "react-native-solar-icons"
-import { colors } from "@/styles/colors"
 
 type RegisterViewProps = ReturnType<typeof useRegisterViewModel>
 
@@ -84,22 +83,11 @@ export const RegisterView = ({
             />
           </View>
 
-          <TouchableOpacity
-            className="mb-4 h-button w-full flex-row items-center justify-between rounded-xl bg-purple-base px-4"
-            activeOpacity={0.7}
+          <Button
+            text="Cadastrar"
+            rightIcon="ArrowRight"
             onPress={() => onSubmit()}
-          >
-            <Text className="font-lato-bold text-base text-white">
-              Cadastrar
-            </Text>
-
-            <SolarIcon
-              name="ArrowRight"
-              type="linear"
-              size={24}
-              color={colors.white}
-            />
-          </TouchableOpacity>
+          />
         </View>
 
         {/* FOOTER */}
@@ -108,24 +96,14 @@ export const RegisterView = ({
             Já tem uma conta?
           </Text>
 
-          <TouchableOpacity
-            className="h-button w-full flex-row items-center justify-between rounded-xl border border-purple-base px-4"
-            activeOpacity={0.7}
+          <Button
+            text="Acessar"
+            variant="outline"
+            rightIcon="ArrowRight"
             onPress={() => {
               router.back()
             }}
-          >
-            <Text className="font-lato-bold text-base text-purple-base">
-              Acessar
-            </Text>
-
-            <SolarIcon
-              name="ArrowRight"
-              type="linear"
-              size={24}
-              color={colors.purple.base}
-            />
-          </TouchableOpacity>
+          />
         </View>
       </View>
     </DismissKeyboardView>

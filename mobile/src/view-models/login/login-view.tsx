@@ -1,16 +1,13 @@
-import { Text, TouchableOpacity, View } from "react-native"
+import { Text, View } from "react-native"
 import { router } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { SolarIcon } from "react-native-solar-icons"
-
-import { colors } from "@/styles/colors"
 
 import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 import { AuthFormHeader } from "@/shared/components/auth-form-header"
 import { InputController } from "@/shared/components/input-controller"
+import { Button } from "@/shared/components/button"
 
 import type { useLoginViewModel } from "./use-login-view-model"
-import { Button } from "@/shared/components/button"
 
 type LoginViewProps = ReturnType<typeof useLoginViewModel>
 
@@ -62,24 +59,14 @@ export const LoginView = ({ control, onSubmit, errors }: LoginViewProps) => (
             Ainda não tem conta?
           </Text>
 
-          <TouchableOpacity
-            className="h-button w-full flex-row items-center justify-between rounded-xl border border-purple-base px-4"
-            activeOpacity={0.7}
+          <Button
+            text="Cadastrar"
+            variant="outline"
+            rightIcon="ArrowRight"
             onPress={() => {
               router.navigate("/register")
             }}
-          >
-            <Text className="font-lato-bold text-base text-purple-base">
-              Cadastrar
-            </Text>
-
-            <SolarIcon
-              name="ArrowRight"
-              type="linear"
-              size={24}
-              color={colors.purple.base}
-            />
-          </TouchableOpacity>
+          />
         </View>
       </View>
     </DismissKeyboardView>

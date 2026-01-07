@@ -4,11 +4,15 @@ import {
   type TouchableOpacityProps,
 } from "react-native"
 
+import type { LinearIconName } from "react-native-solar-icons/dist/icons"
+
 import { buttonVariants, type ButtonVariantsProps } from "./button-variants"
 
 type ButtonProps = TouchableOpacityProps &
   ButtonVariantsProps & {
     title?: string
+    leftIcon?: LinearIconName
+    rightIcon?: LinearIconName
   }
 
 export const Button = ({

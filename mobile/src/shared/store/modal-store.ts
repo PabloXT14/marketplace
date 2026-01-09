@@ -11,7 +11,7 @@ type ModalStore = {
   isOpen: boolean
   content: ReactNode
   config: ModalConfig
-  open: (content: ReactNode, config: ModalConfig) => void
+  open: (content: ReactNode, config?: ModalConfig) => void
   close: () => void
 }
 

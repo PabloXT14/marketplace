@@ -11,6 +11,8 @@ import "@/styles/global.css"
 
 import { queryClient } from "@/lib/query"
 
+import { Modal } from "@/shared/components/modal"
+
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     Lato_400Regular,
@@ -32,6 +34,8 @@ export default function RootLayout() {
         <Stack.Screen name="register" />
         <Stack.Screen name="(private)" />
       </Stack>
+
+      <Modal />
     </QueryClientProvider>
   )
 }

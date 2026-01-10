@@ -30,5 +30,6 @@
   "emmet.showExpandedAbbreviation": "always",
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit"
-  }
+  },
+  "tailwindCSS.classFunctions": ["clsx", "cn"]
 }

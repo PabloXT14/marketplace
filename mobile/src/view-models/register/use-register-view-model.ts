@@ -37,19 +37,19 @@ export const useRegisterViewModel = () => {
       message: "Escolha uma das opções abaixo",
       options: [
         {
+          text: "Câmera",
+          icon: "Camera",
+          variant: "secondary",
+          onPress: () => {
+            console.log("Camera")
+          },
+        },
+        {
           text: "Galeria",
           icon: "Gallery",
           variant: "primary",
           onPress: () => {
             console.log("Galeria")
-          },
-        },
-        {
-          text: "Câmera",
-          icon: "Camera",
-          variant: "primary",
-          onPress: () => {
-            console.log("Camera")
           },
         },
       ],

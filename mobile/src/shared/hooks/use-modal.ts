@@ -8,11 +8,13 @@ import {
   type SelectionModalProps,
 } from "../components/modals/selection-modal"
 
+export type SelectionVariant = "primary" | "secondary" | "tertiary" | "danger"
+
 export type SelectionOption = {
   text: string
   onPress: () => void
   icon?: LinearIconName
-  variant?: "primary" | "secondary" | "danger"
+  variant?: SelectionVariant
 }
 
 export const useModal = () => {

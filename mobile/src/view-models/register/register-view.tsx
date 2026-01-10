@@ -1,11 +1,14 @@
-import { Text, View } from "react-native"
+import { Text, TouchableOpacity, View } from "react-native"
 import { router } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { SolarIcon } from "react-native-solar-icons"
 
 import { AuthFormHeader } from "@/shared/components/auth-form-header"
 import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 import { InputController } from "@/shared/components/input-controller"
 import { Button } from "@/shared/components/button"
+
+import { colors } from "@/styles/colors"
 
 import type { useRegisterViewModel } from "./use-register-view-model"
 
@@ -15,10 +18,11 @@ export const RegisterView = ({
   onSubmit,
   control,
   errors,
+  handleSelectAvatar,
 }: RegisterViewProps) => (
   <SafeAreaView className="flex-1 py-0">
     <DismissKeyboardView>
-      <View className="flex-1 bg-zinc-100 px-10 py-9">
+      <View className="flex-1 bg-white px-10 py-9">
         <AuthFormHeader
           title="Crie sua conta"
           subtitle="Informe os seus dados pessoais e de acesso"
@@ -28,6 +32,20 @@ export const RegisterView = ({
         <View className="mb-16 w-full gap-10">
           {/* FIELD */}
           <View className="w-full gap-5">
+            {/* IMAGE */}
+            <TouchableOpacity
+              onPress={handleSelectAvatar}
+              activeOpacity={0.7}
+              className="mx-auto size-32 items-center justify-center rounded-xl bg-shape"
+            >
+              <SolarIcon
+                type="linear"
+                name="UploadMinimalistic"
+                size={32}
+                color={colors.purple.base}
+              />
+            </TouchableOpacity>
+
             <InputController
               control={control}
               name="name"

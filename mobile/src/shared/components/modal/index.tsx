@@ -31,7 +31,6 @@ export const Modal = () => {
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
-      {content}
     </RNModal>
   )
 }

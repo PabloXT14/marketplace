@@ -67,9 +67,9 @@ export const SelectionModal = ({
       </View>
 
       <View className={cn("gap-3", options.length <= 2 && "flex-row")}>
-        {options?.map((option) => (
+        {options?.map((option, index) => (
           <TouchableOpacity
-            key={option.text}
+            key={`selection-modal-option-${index + 1}`}
             activeOpacity={0.7}
             onPress={option.onPress}
             className={getButtonClass(option.variant || "primary")}

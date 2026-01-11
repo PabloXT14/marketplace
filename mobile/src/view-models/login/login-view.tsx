@@ -12,9 +12,9 @@ import type { useLoginViewModel } from "./use-login-view-model"
 type LoginViewProps = ReturnType<typeof useLoginViewModel>
 
 export const LoginView = ({ control, onSubmit, errors }: LoginViewProps) => (
-  <SafeAreaView className="flex-1">
+  <SafeAreaView className="flex-1 bg-white">
     <DismissKeyboardView>
-      <View className="flex-1 bg-white px-10 py-9">
+      <View className="flex-1 px-10 py-9">
         <AuthFormHeader
           title="Acesse sua conta"
           subtitle="Informe seu e-mail e senha para entrar"

@@ -20,9 +20,9 @@ export const RegisterView = ({
   errors,
   handleSelectAvatar,
 }: RegisterViewProps) => (
-  <SafeAreaView className="flex-1 py-0">
+  <SafeAreaView className="flex-1 bg-white">
     <DismissKeyboardView>
-      <View className="flex-1 bg-white px-10 py-9">
+      <View className="flex-1 px-10 py-9">
         <AuthFormHeader
           title="Crie sua conta"
           subtitle="Informe os seus dados pessoais e de acesso"

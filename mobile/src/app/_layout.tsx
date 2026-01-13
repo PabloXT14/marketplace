@@ -6,6 +6,8 @@ import {
   Lato_400Regular,
   Lato_700Bold,
 } from "@expo-google-fonts/lato"
+import { GestureHandlerRootView } from "react-native-gesture-handler"
+import { Toaster } from "sonner-native"
 
 import "@/styles/global.css"
 
@@ -25,17 +27,21 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <StatusBar style="dark" />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <StatusBar style="dark" />
 
-      <Stack
-        screenOptions={{ headerShown: false, animation: "slide_from_right" }}
-      >
-        <Stack.Screen name="login" />
-        <Stack.Screen name="register" />
-        <Stack.Screen name="(private)" />
-      </Stack>
+        <Stack
+          screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+        >
+          <Stack.Screen name="login" />
+          <Stack.Screen name="register" />
+          <Stack.Screen name="(private)" />
+        </Stack>
 
-      <Modal />
+        <Modal />
+
+        <Toaster theme="light" closeButton />
+      </GestureHandlerRootView>
     </QueryClientProvider>
   )
 }

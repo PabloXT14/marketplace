@@ -3,19 +3,9 @@ import { useCallback, useState } from "react"
 import * as ImagePicker from "expo-image-picker"
 import { toast } from "sonner-native"
 
-type UseCameraOptions = {
-  aspect?: [number, number]
-  quality?: number
-  allowsEditing?: boolean
-  exif?: boolean
-}
+type UseCameraOptions = ImagePicker.ImagePickerOptions
 
-export const useCamera = ({
-  aspect,
-  quality,
-  allowsEditing,
-  exif,
-}: UseCameraOptions) => {
+export const useCamera = (pickerOptions: UseCameraOptions) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const requestCameraPermission = useCallback(async () => {
@@ -48,10 +38,7 @@ export const useCamera = ({
 
       const result = await ImagePicker.launchCameraAsync({
         mediaTypes: ["images"],
-        allowsEditing,
-        aspect,
-        quality,
-        exif, // serve para retornar a orientação da imagem (ex: sensor vertical ou horizontal)
+        ...pickerOptions,
       })
 
       if (result.canceled || result.assets.length <= 0) {
@@ -61,8 +48,11 @@ export const useCamera = ({
 
       toast.success("Foto capturada com sucesso")
       return result.assets[0].uri
-    } catch (_error) {
+    } catch (error) {
       toast.error("Erro ao abrir a câmera")
+
+      console.error(error)
+
       return null
     } finally {
       setIsLoading(false)

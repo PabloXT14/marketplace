@@ -1,4 +1,5 @@
 import { Modal as RNModal, TouchableWithoutFeedback, View } from "react-native"
+import { Toaster } from "sonner-native"
 
 import { useModalStore } from "@/shared/store/modal-store"
 
@@ -31,6 +32,8 @@ export const Modal = () => {
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
+
+      <Toaster theme="light" closeButton richColors />
     </RNModal>
   )
 }

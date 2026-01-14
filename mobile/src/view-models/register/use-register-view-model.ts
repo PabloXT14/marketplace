@@ -6,11 +6,13 @@ import { type RegisterFormData, registerSchema } from "./register-schema"
 import { useRegisterMutation } from "@/shared/queries/auth/use-register-mutation"
 import { useModal } from "@/shared/hooks/use-modal"
 import { useCamera } from "@/shared/hooks/use-camera"
+import { useGallery } from "@/shared/hooks/use-gallery"
 
 export const useRegisterViewModel = () => {
   const { mutateAsync } = useRegisterMutation()
   const modals = useModal()
   const { openCamera } = useCamera({})
+  const { openGallery } = useGallery({})
 
   const {
     control,
@@ -42,14 +44,18 @@ export const useRegisterViewModel = () => {
           text: "Câmera",
           icon: "Camera",
           variant: "secondary",
-          onPress: openCamera,
+          onPress: async () => {
+            const photoUri = await openCamera()
+            console.log("FOTO URI: ", photoUri)
+          },
         },
         {
           text: "Galeria",
           icon: "Gallery",
           variant: "primary",
-          onPress: () => {
-            console.log("Galeria")
+          onPress: async () => {
+            const imageUri = await openGallery()
+            console.log("IMAGE URI: ", imageUri)
           },
         },
       ],

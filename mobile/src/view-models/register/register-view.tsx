@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native"
+import { Image, Text, TouchableOpacity, View } from "react-native"
 import { router } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { SolarIcon } from "react-native-solar-icons"
@@ -19,6 +19,7 @@ export const RegisterView = ({
   control,
   errors,
   handleSelectAvatar,
+  avatarUri,
 }: RegisterViewProps) => (
   <SafeAreaView className="flex-1 bg-white">
     <DismissKeyboardView>
@@ -38,12 +39,20 @@ export const RegisterView = ({
               activeOpacity={0.7}
               className="mx-auto size-32 items-center justify-center rounded-xl bg-shape"
             >
-              <SolarIcon
-                type="linear"
-                name="UploadMinimalistic"
-                size={32}
-                color={colors.purple.base}
-              />
+              {avatarUri ? (
+                <Image
+                  source={{ uri: avatarUri }}
+                  className="size-full rounded-xl"
+                  resizeMode="cover"
+                />
+              ) : (
+                <SolarIcon
+                  type="linear"
+                  name="UploadMinimalistic"
+                  size={32}
+                  color={colors.purple.base}
+                />
+              )}
             </TouchableOpacity>
 
             <InputController

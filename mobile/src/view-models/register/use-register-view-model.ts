@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { CameraType } from "expo-image-picker"
 
 import { type RegisterFormData, registerSchema } from "./register-schema"
 
@@ -15,6 +16,7 @@ export const useRegisterViewModel = () => {
     callback: (uri: string | null) => {
       setAvatarUri(uri)
     },
+    cameraType: CameraType.front,
   })
 
   const {
@@ -47,5 +49,6 @@ export const useRegisterViewModel = () => {
     onSubmit,
     errors,
     handleSelectAvatar,
+    avatarUri,
   }
 }

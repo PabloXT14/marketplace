@@ -3,10 +3,13 @@ import type { ImagePickerOptions } from "expo-image-picker"
 import { useCamera } from "./use-camera"
 import { useGallery } from "./use-gallery"
 import { useModal } from "./use-modal"
+import { useModalStore } from "../store/modal-store"
 
-type UseImageProps = ImagePickerOptions
+type UseImageProps = ImagePickerOptions & {
+  callback: (uri: string | null) => void
+}
 
-export const useImage = (pickerOptions: UseImageProps) => {
+export const useImage = ({ callback, ...pickerOptions }: UseImageProps) => {
   const modals = useModal()
   const { openCamera, isLoading: isCameraLoading } = useCamera({
     ...pickerOptions,
@@ -14,8 +17,14 @@ export const useImage = (pickerOptions: UseImageProps) => {
   const { openGallery, isLoading: isGalleryLoading } = useGallery({
     ...pickerOptions,
   })
+  const { close } = useModalStore()
 
   const isLoading = isCameraLoading || isGalleryLoading
+
+  const handleCallback = (uri: string | null) => {
+    close()
+    callback(uri)
+  }
 
   const handleSelectImage = () => {
     modals.showSelection({
@@ -28,7 +37,7 @@ export const useImage = (pickerOptions: UseImageProps) => {
           variant: "secondary",
           onPress: async () => {
             const photoUri = await openCamera()
-            console.log("FOTO URI: ", photoUri)
+            handleCallback(photoUri)
           },
         },
         {
@@ -37,7 +46,7 @@ export const useImage = (pickerOptions: UseImageProps) => {
           variant: "primary",
           onPress: async () => {
             const imageUri = await openGallery()
-            console.log("IMAGE URI: ", imageUri)
+            handleCallback(imageUri)
           },
         },
       ],

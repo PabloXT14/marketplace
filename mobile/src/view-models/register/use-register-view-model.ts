@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
@@ -7,8 +8,14 @@ import { useRegisterMutation } from "@/shared/queries/auth/use-register-mutation
 import { useImage } from "@/shared/hooks/use-image"
 
 export const useRegisterViewModel = () => {
+  const [avatarUri, setAvatarUri] = useState<string | null>(null)
+
   const { mutateAsync } = useRegisterMutation()
-  const { handleSelectImage } = useImage({})
+  const { handleSelectImage } = useImage({
+    callback: (uri: string | null) => {
+      setAvatarUri(uri)
+    },
+  })
 
   const {
     control,

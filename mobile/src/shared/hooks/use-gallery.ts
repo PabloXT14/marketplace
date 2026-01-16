@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react"
+import { Alert, Linking } from "react-native"
 // biome-ignore lint/performance/noNamespaceImport: needed for ImagePicker
 import * as ImagePicker from "expo-image-picker"
 import { toast } from "sonner-native"
@@ -14,10 +15,25 @@ export const useGallery = (pickerOptions: UseGalleryOptions) => {
         await ImagePicker.requestMediaLibraryPermissionsAsync()
 
       if (!permissionResult.granted) {
-        toast.error("Permissão negada", {
-          description:
-            "Por favor, habilite a permissão para acessar a sua galeria.",
-        })
+        // toast.error("Permissão negada", {
+        //   description:
+        //     "Por favor, habilite a permissão para acessar a sua galeria.",
+        // })
+
+        Alert.alert(
+          "Permissão negada",
+          "Por favor, habilite a permissão para acessar a sua galeria.",
+          [
+            { text: "Cancelar", style: "cancel" },
+            {
+              text: "Abrir configurações",
+              style: "default",
+              onPress: () => {
+                Linking.openSettings()
+              },
+            },
+          ]
+        )
       }
 
       return permissionResult.granted

@@ -8,7 +8,7 @@ const getBaseURL = () =>
     android: "http://192.168.2.123:3001",
   })
 
-const BASE_URL = getBaseURL()
+export const BASE_URL = getBaseURL()
 
 export class MarketplaceApiClient {
   private instance: AxiosInstance

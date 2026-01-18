@@ -53,7 +53,7 @@ export const uploadAvatarService = async (avatarUri: string) => {
 
   const { data } = response
 
-  data.url = `${BASE_URL}/${data.url}`
+  data.url = `${BASE_URL}${data.url}`
 
   return data
 }

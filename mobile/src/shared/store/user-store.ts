@@ -23,6 +23,7 @@ export type UserStore = {
   setSession: (params: SetSessionParams) => void
   logout: () => void
   updateTokens: (params: UpdateTokensParams) => void
+  updateUser: (updatedUser: Partial<User>) => void
 }
 
 export const useUserStore = create<UserStore>()(
@@ -42,6 +43,12 @@ export const useUserStore = create<UserStore>()(
 
       updateTokens: ({ token, refreshToken }) => {
         set({ token, refreshToken })
+      },
+
+      updateUser: (updatedUser) => {
+        set((state) => ({
+          user: state.user ? { ...state.user, ...updatedUser } : null,
+        }))
       },
     }),
     {

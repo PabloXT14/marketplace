@@ -5,9 +5,18 @@ import * as authService from "@/shared/services/auth-service"
 
 import { useUserStore } from "@/shared/store/user-store"
 
-import type { RegisterHttpRequest } from "@/shared/interfaces/http/register"
+import type {
+  RegisterHttpRequest,
+  RegisterHttpResponse,
+} from "@/shared/interfaces/http/register"
 
-export const useRegisterMutation = () => {
+type UseRegisterMutationProps = {
+  onSuccess?: (response: RegisterHttpResponse) => void
+}
+
+export const useRegisterMutation = ({
+  onSuccess,
+}: UseRegisterMutationProps = {}) => {
   const { setSession } = useUserStore()
 
   const mutation = useMutation({
@@ -19,6 +28,9 @@ export const useRegisterMutation = () => {
         token: response.token,
         refreshToken: response.refreshToken,
       })
+
+      // Callback of uploaded avatar, to add the avatarUrl after registration
+      onSuccess?.(response)
     },
     onError: (error) => {
       console.error("Registration failed:", error)

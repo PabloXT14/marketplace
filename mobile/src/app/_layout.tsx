@@ -11,7 +11,7 @@ import { Toaster } from "sonner-native"
 
 import "@/styles/global.css"
 
-import { queryClient } from "@/lib/query"
+import { queryClient } from "@/shared/lib/query"
 
 import { Modal } from "@/shared/components/modal"
 
@@ -33,11 +33,9 @@ export default function RootLayout() {
         <Stack
           screenOptions={{
             headerShown: false,
-            animation: "slide_from_right",
           }}
         >
-          <Stack.Screen name="login" />
-          <Stack.Screen name="register" />
+          <Stack.Screen name="(public)" />
           <Stack.Screen name="(private)" />
         </Stack>
 

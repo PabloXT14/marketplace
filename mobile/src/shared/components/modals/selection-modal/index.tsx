@@ -7,7 +7,7 @@ import type {
 } from "@/shared/hooks/use-modal"
 
 import { colors } from "@/styles/colors"
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/lib/utils"
 
 export type SelectionModalProps = {
   title: string

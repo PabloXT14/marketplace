@@ -64,7 +64,7 @@ export const LoginView = ({ control, onSubmit, errors }: LoginViewProps) => (
             variant="outline"
             rightIcon="ArrowRight"
             onPress={() => {
-              router.navigate("/register")
+              router.navigate("/(public)/register")
             }}
           />
         </View>

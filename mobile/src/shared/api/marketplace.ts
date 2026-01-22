@@ -55,8 +55,6 @@ export class MarketplaceApiClient {
           return Promise.reject(error)
         }
 
-        console.log("REACH REFRESH INTERCEPTOR")
-
         // Verifica se o erro é de token expirado
         if (
           error.response?.status === 401 &&

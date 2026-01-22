@@ -55,6 +55,8 @@ export class MarketplaceApiClient {
           return Promise.reject(error)
         }
 
+        console.log("REACH REFRESH INTERCEPTOR")
+
         // Verifica se o erro é de token expirado
         if (
           error.response?.status === 401 &&
@@ -85,6 +87,8 @@ export class MarketplaceApiClient {
 
             return this.instance(originalRequest)
           } catch (_error) {
+            await this.handleUnauthorized()
+
             return Promise.reject(
               new Error("Sessão expirada. Por favor, faça login novamente.")
             )
@@ -100,6 +104,15 @@ export class MarketplaceApiClient {
         return Promise.reject(new Error("Falha na requisição"))
       }
     )
+  }
+
+  private async handleUnauthorized() {
+    // Implementar lógica para lidar com 401 Unauthorized, se necessário
+
+    // biome-ignore lint/performance/noDelete: disabled
+    delete this.instance.defaults.headers.common.Authorization
+
+    await useUserStore.getState().logout()
   }
 }
 

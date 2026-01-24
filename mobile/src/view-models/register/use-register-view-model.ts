@@ -22,8 +22,6 @@ export const useRegisterViewModel = () => {
       if (avatarUri) {
         const { url } = await uploadAvatarMutation.mutateAsync(avatarUri)
 
-        console.log("Avatar uploaded to URL:", url)
-
         updateUser({
           avatarUrl: url,
         })

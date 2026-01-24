@@ -7,7 +7,6 @@ import * as authService from "@/shared/services/auth-service"
 import type { LoginHttpRequest } from "@/shared/interfaces/http/login"
 
 import { useUserStore } from "@/shared/store/user-store"
-import { BASE_URL } from "@/shared/api/marketplace"
 
 export const useLoginMutation = () => {
   const { setSession } = useUserStore()
@@ -17,10 +16,7 @@ export const useLoginMutation = () => {
       authService.loginService(userData),
     onSuccess: (response) => {
       setSession({
-        user: {
-          ...response.user,
-          avatarUrl: `${BASE_URL}${response.user.avatarUrl}`,
-        },
+        user: response.user,
         token: response.token,
         refreshToken: response.refreshToken,
       })

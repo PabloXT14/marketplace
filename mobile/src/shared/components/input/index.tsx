@@ -66,7 +66,7 @@ export const Input = ({
 
   return (
     <View className={styles.container({ className: containerClassName })}>
-      <Text className={styles.label()}>{label}</Text>
+      {label && <Text className={styles.label()}>{label}</Text>}
 
       <View className={styles.content()}>
         {leftIcon ? (

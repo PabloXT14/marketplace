@@ -8,7 +8,7 @@ export const HomeHeader = () => {
   const { user } = useUserStore()
 
   return (
-    <TouchableOpacity className="w-full flex-row items-center gap-5">
+    <TouchableOpacity className="mb-8 w-full flex-row items-center gap-5">
       {user?.avatarUrl ? (
         <Image
           source={{ uri: user?.avatarUrl }}

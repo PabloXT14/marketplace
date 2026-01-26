@@ -8,7 +8,7 @@ import { colors } from "@/styles/colors"
 type SearchInputProps = InputProps
 
 export const SearchInput = (props: SearchInputProps) => (
-  <View className="gap-1">
+  <View className="mb-6 gap-1">
     <Text className="font-lato-bold text-base text-gray-500 leading-tight">
       Explore produtos
     </Text>

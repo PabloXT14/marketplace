@@ -9,28 +9,41 @@ type ProductCardViewProps = ReturnType<typeof useProductCardViewModel>
 
 export const ProductCardView = ({ product }: ProductCardViewProps) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity className="relative flex-1 justify-between gap-2 overflow-hidden rounded-xl bg-white p-2">
       <Image
         source={{ uri: product.photo }}
         alt={product.name}
-        className="h-24 w-full"
+        className="h-[96px] w-full rounded-lg"
         resizeMode="cover"
       />
 
       {/* INFO */}
-      <View>
-        <Text>{product.name}</Text>
+      <View className="gap-1 p-1">
+        <Text
+          className="font-lato text-gray-400 text-sm leading-snug"
+          numberOfLines={2}
+        >
+          {product.name}
+        </Text>
+
         {/* PRICE */}
-        <View>
-          <Text>R$</Text>
-          <Text>{product.value}</Text>
+        <View className="flex-row items-center gap-1">
+          <Text className="font-lato-bold text-gray-500 text-xs leading-tight">
+            R$
+          </Text>
+          <Text className="font-lato-bold text-gray-500 text-sm leading-tight">
+            {product.value}
+          </Text>
         </View>
       </View>
 
       {/* RATING */}
-      <View>
-        <SolarIcon type="bold" name="Star" size={10} color={colors.blue.base} />
-        <Text>4.5</Text>
+      <View className="absolute top-0 right-0 flex-row items-center gap-1 rounded-bl-lg bg-white py-2 pr-3 pl-2">
+        <SolarIcon type="bold" name="Star" size={16} color={colors.blue.base} />
+
+        <Text className="font-lato-bold text-gray-500 text-xs leading-tight">
+          4.5
+        </Text>
       </View>
     </TouchableOpacity>
   )

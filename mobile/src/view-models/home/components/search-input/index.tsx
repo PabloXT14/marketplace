@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity, View } from "react-native"
-import { SolarIcon } from "react-native-solar-icons"
+import { AppIcon } from "@/shared/components/app-icon"
 
 import { Input, type InputProps } from "@/shared/components/input"
 
@@ -22,12 +22,7 @@ export const SearchInput = (props: SearchInputProps) => (
       />
 
       <TouchableOpacity className="size-12 items-center justify-center rounded-xl border border-purple-base">
-        <SolarIcon
-          type="linear"
-          name="Filter"
-          size={20}
-          color={colors.purple.base}
-        />
+        <AppIcon name="Filter" size={20} color={colors.purple.base} />
       </TouchableOpacity>
     </View>
   </View>

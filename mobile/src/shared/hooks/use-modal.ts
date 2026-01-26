@@ -1,5 +1,5 @@
 import { createElement } from "react"
-import type { LinearIconName } from "react-native-solar-icons/dist/icons"
+import type { IconName } from "../components/app-icon"
 
 import { useModalStore } from "../store/modal-store"
 
@@ -13,7 +13,7 @@ export type SelectionVariant = "primary" | "secondary" | "tertiary" | "danger"
 export type SelectionOption = {
   text: string
   onPress: () => void
-  icon?: LinearIconName
+  icon?: IconName
   variant?: SelectionVariant
 }
 

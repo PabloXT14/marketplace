@@ -1,5 +1,5 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
-import { SolarIcon } from "react-native-solar-icons"
+import { AppIcon } from "@/shared/components/app-icon"
 
 import type { useProductCardViewModel } from "./use-product-card-view-model"
 
@@ -39,7 +39,7 @@ export const ProductCardView = ({ product }: ProductCardViewProps) => {
 
       {/* RATING */}
       <View className="absolute top-0 right-0 flex-row items-center gap-1 rounded-bl-lg bg-white py-2 pr-3 pl-2">
-        <SolarIcon type="bold" name="Star" size={16} color={colors.blue.base} />
+        <AppIcon type="bold" name="Star" size={12} color={colors.blue.base} />
 
         <Text className="font-lato-bold text-gray-500 text-xs leading-tight">
           4.5

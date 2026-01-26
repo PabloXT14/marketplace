@@ -1,9 +1,10 @@
 import { Tabs } from "expo-router"
-import { SolarIcon } from "react-native-solar-icons"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { colors } from "@/styles/colors"
 import { fontFamily } from "@/styles/font-family"
+
+import { AppIcon } from "@/shared/components/app-icon"
 
 export default function PrivateTabsLayout() {
   const insets = useSafeAreaInsets()
@@ -36,7 +37,7 @@ export default function PrivateTabsLayout() {
         options={{
           title: "Produtos",
           tabBarIcon: ({ color }) => (
-            <SolarIcon type="linear" name="Shop2" size={20} color={color} />
+            <AppIcon name="Shop2" size={20} color={color} />
           ),
         }}
       />
@@ -46,12 +47,7 @@ export default function PrivateTabsLayout() {
         options={{
           title: "Pedidos",
           tabBarIcon: ({ color }) => (
-            <SolarIcon
-              type="linear"
-              name="ClipboardText"
-              size={20}
-              color={color}
-            />
+            <AppIcon name="ClipboardText" size={20} color={color} />
           ),
         }}
       />
@@ -61,12 +57,7 @@ export default function PrivateTabsLayout() {
         options={{
           title: "Carrinho",
           tabBarIcon: ({ color }) => (
-            <SolarIcon
-              type="linear"
-              name="CartLarge2"
-              size={20}
-              color={color}
-            />
+            <AppIcon name="CartLarge2" size={20} color={color} />
           ),
         }}
       />

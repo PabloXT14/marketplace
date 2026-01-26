@@ -5,8 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-import { SolarIcon } from "react-native-solar-icons"
-import type { LinearIconName } from "react-native-solar-icons/dist/icons"
+import { AppIcon, type IconName } from "../app-icon"
 
 import { colors } from "@/styles/colors"
 
@@ -16,8 +15,8 @@ import { useInputViewModel } from "./use-input-view-model"
 export type InputProps = TextInputProps &
   InputVariantsProps & {
     label?: string
-    leftIcon?: LinearIconName
-    rightIcon?: LinearIconName
+    leftIcon?: IconName
+    rightIcon?: IconName
     containerClassName?: string
     mask?: (value: string) => string | undefined
     errorMessage?: string
@@ -70,12 +69,7 @@ export const Input = ({
 
       <View className={styles.content()}>
         {leftIcon ? (
-          <SolarIcon
-            name={leftIcon}
-            size={24}
-            color={getIconColor()}
-            type="linear"
-          />
+          <AppIcon name={leftIcon} size={24} color={getIconColor()} />
         ) : null}
 
         <TextInput
@@ -99,11 +93,10 @@ export const Input = ({
 
         {secureTextEntry ? (
           <TouchableOpacity onPress={handleTogglePassword} activeOpacity={0.7}>
-            <SolarIcon
+            <AppIcon
               name={showPassword ? "Eye" : "EyeClosed"}
               size={24}
               color={colors.gray[300]}
-              type="linear"
             />
           </TouchableOpacity>
         ) : null}
@@ -111,12 +104,7 @@ export const Input = ({
 
       {errorMessage ? (
         <View className={styles.errorContainer()}>
-          <SolarIcon
-            name="InfoCircle"
-            type="linear"
-            size={16}
-            color={colors.danger}
-          />
+          <AppIcon name="InfoCircle" size={16} color={colors.danger} />
 
           <Text className={styles.errorMessage()}>{errorMessage}</Text>
         </View>

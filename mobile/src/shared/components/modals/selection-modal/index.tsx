@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity, View } from "react-native"
-import { SolarIcon } from "react-native-solar-icons"
+import { AppIcon } from "../../app-icon"
 
 import type {
   SelectionOption,
@@ -75,8 +75,7 @@ export const SelectionModal = ({
             className={getButtonClass(option.variant || "primary")}
           >
             {option.icon && (
-              <SolarIcon
-                type="linear"
+              <AppIcon
                 name={option.icon}
                 size={20}
                 color={getIconColor(option.variant || "primary")}

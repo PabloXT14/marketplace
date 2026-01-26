@@ -1,5 +1,5 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
-import { SolarIcon } from "react-native-solar-icons"
+import { AppIcon } from "@/shared/components/app-icon"
 
 import { useUserStore } from "@/shared/store/user-store"
 import { colors } from "@/styles/colors"
@@ -17,12 +17,7 @@ export const HomeHeader = () => {
         />
       ) : (
         <View className="size-16 items-center justify-center rounded-xl border border-shape bg-shape">
-          <SolarIcon
-            type="linear"
-            name="User"
-            size={24}
-            color={colors.gray[300]}
-          />
+          <AppIcon name="User" size={24} color={colors.gray[300]} />
         </View>
       )}
 
@@ -36,12 +31,7 @@ export const HomeHeader = () => {
             Ver perfil
           </Text>
 
-          <SolarIcon
-            type="linear"
-            name="ArrowRight"
-            size={20}
-            color={colors.purple.base}
-          />
+          <AppIcon name="ArrowRight" size={20} color={colors.purple.base} />
         </View>
       </View>
     </TouchableOpacity>

@@ -1,7 +1,7 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
 import { router } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { SolarIcon } from "react-native-solar-icons"
+import { AppIcon } from "@/shared/components/app-icon"
 
 import { AuthFormHeader } from "@/shared/components/auth-form-header"
 import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
@@ -46,8 +46,7 @@ export const RegisterView = ({
                   resizeMode="cover"
                 />
               ) : (
-                <SolarIcon
-                  type="linear"
+                <AppIcon
                   name="UploadMinimalistic"
                   size={32}
                   color={colors.purple.base}

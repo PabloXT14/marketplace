@@ -4,9 +4,7 @@ import {
   TouchableOpacity,
   type TouchableOpacityProps,
 } from "react-native"
-import { SolarIcon } from "react-native-solar-icons"
-
-import type { LinearIconName } from "react-native-solar-icons/dist/icons"
+import { AppIcon, type IconName } from "../app-icon"
 
 import { buttonVariants, type ButtonVariantsProps } from "./button-variants"
 import { colors } from "@/styles/colors"
@@ -14,8 +12,8 @@ import { colors } from "@/styles/colors"
 type ButtonProps = TouchableOpacityProps &
   ButtonVariantsProps & {
     text?: string
-    leftIcon?: LinearIconName
-    rightIcon?: LinearIconName
+    leftIcon?: IconName
+    rightIcon?: IconName
   }
 
 export const Button = ({
@@ -58,13 +56,13 @@ export const Button = ({
       {...rest}
     >
       {leftIcon ? (
-        <SolarIcon name={leftIcon} type="linear" size={24} color={iconColor} />
+        <AppIcon name={leftIcon} size={24} color={iconColor} />
       ) : null}
 
       <Text className={styles.text()}>{text}</Text>
 
       {rightIcon ? (
-        <SolarIcon name={rightIcon} type="linear" size={24} color={iconColor} />
+        <AppIcon name={rightIcon} size={24} color={iconColor} />
       ) : null}
     </TouchableOpacity>
   )

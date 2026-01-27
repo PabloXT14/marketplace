@@ -5,7 +5,7 @@ export type ProductHttpRequest = {
     page: number
     perPage: number
   }
-  filters: {
+  filters?: {
     from: string
     to: string
     categoryIds: number[]
@@ -13,7 +13,7 @@ export type ProductHttpRequest = {
     minValue: number
     maxValue: number
   }
-  sort: {
+  sort?: {
     averageRating: string
   }
 }

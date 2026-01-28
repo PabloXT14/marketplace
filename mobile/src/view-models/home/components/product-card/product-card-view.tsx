@@ -9,7 +9,10 @@ type ProductCardViewProps = ReturnType<typeof useProductCardViewModel>
 
 export const ProductCardView = ({ product }: ProductCardViewProps) => {
   return (
-    <TouchableOpacity className="relative flex-1 justify-between gap-2 overflow-hidden rounded-xl bg-white p-2">
+    <TouchableOpacity
+      className="relative flex-1 justify-between gap-2 overflow-hidden rounded-xl bg-white p-2"
+      activeOpacity={0.7}
+    >
       <Image
         source={{ uri: product.photo }}
         alt={product.name}

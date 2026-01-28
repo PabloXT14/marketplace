@@ -6,11 +6,9 @@ import type {
 } from "../interfaces/http/product"
 
 export const getProductsService = async (params: ProductHttpRequest) => {
-  const response = await marketplaceApiClient.get<ProductHttpResponse>(
+  const response = await marketplaceApiClient.post<ProductHttpResponse>(
     "/products",
-    {
-      params,
-    }
+    params
   )
 
   const { data } = response

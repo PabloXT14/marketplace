@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
 
 import { getProductsService } from "@/shared/services/product-service"
+import { buildImageUrl } from "@/shared/helpers/build-image-url"
 
 export const useProductInfinityQuery = () => {
   const query = useInfiniteQuery({
@@ -25,5 +26,17 @@ export const useProductInfinityQuery = () => {
     initialPageParam: 1,
   })
 
-  return query
+  // Concatenate the data from all pages into a single array
+  const products =
+    query.data?.pages
+      .flatMap((page) => page.data)
+      .map((product) => ({
+        ...product,
+        photo: buildImageUrl(product.photo),
+      })) || []
+
+  return {
+    ...query,
+    data: products,
+  }
 }

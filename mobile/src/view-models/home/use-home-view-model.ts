@@ -29,6 +29,9 @@ export const useHomeViewModel = () => {
 
   return {
     products,
+    isLoading,
+    hasNextPage,
+    isFetchingNextPage,
     handleLoadMore,
     handleRefresh,
     handleEndReached,

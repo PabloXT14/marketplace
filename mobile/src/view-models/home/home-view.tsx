@@ -6,12 +6,19 @@ import { SearchInput } from "./components/search-input"
 import { ProductCard } from "./components/product-card"
 
 import type { useHomeViewModel } from "./use-home-view-model"
+import { Footer } from "./components/footer"
 
 type HomeViewProps = ReturnType<typeof useHomeViewModel>
 
 const NUMBER_OF_COLUMNS = 2
 
-export const HomeView = ({ products, handleEndReached }: HomeViewProps) => (
+export const HomeView = ({
+  products,
+  isLoading,
+  isFetchingNextPage,
+  hasNextPage,
+  handleEndReached,
+}: HomeViewProps) => (
   <SafeAreaView edges={["top"]} className="flex-1 bg-background px-4 pt-9">
     <FlatList
       data={products}
@@ -23,7 +30,7 @@ export const HomeView = ({ products, handleEndReached }: HomeViewProps) => (
       )}
       numColumns={NUMBER_OF_COLUMNS}
       columnWrapperStyle={{ gap: 8, justifyContent: "space-between" }}
-      contentContainerStyle={{ gap: 8, paddingBottom: 20 }}
+      contentContainerStyle={{ gap: 8, paddingBottom: 120 }}
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={() => (
         <>
@@ -31,6 +38,11 @@ export const HomeView = ({ products, handleEndReached }: HomeViewProps) => (
           <SearchInput />
         </>
       )}
+      ListFooterComponent={
+        <Footer
+          isLoading={hasNextPage && Boolean(isLoading || isFetchingNextPage)}
+        />
+      }
       onEndReached={handleEndReached}
     />
   </SafeAreaView>

@@ -23,9 +23,14 @@ export const useHomeViewModel = () => {
     }
   }
 
+  const handleEndReached = () => {
+    handleLoadMore()
+  }
+
   return {
+    products,
     handleLoadMore,
     handleRefresh,
-    products,
+    handleEndReached,
   }
 }

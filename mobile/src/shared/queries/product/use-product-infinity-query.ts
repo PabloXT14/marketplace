@@ -24,6 +24,7 @@ export const useProductInfinityQuery = () => {
     getNextPageParam: (lastPage) =>
       lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
     initialPageParam: 1,
+    staleTime: 1000 * 60 * 1, // Tempo de expiração do cache em milissegundos
   })
 
   // Concatenate the data from all pages into a single array

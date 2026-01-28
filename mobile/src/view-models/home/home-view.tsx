@@ -11,8 +11,8 @@ type HomeViewProps = ReturnType<typeof useHomeViewModel>
 
 const NUMBER_OF_COLUMNS = 2
 
-export const HomeView = ({ products }: HomeViewProps) => (
-  <SafeAreaView edges={["top"]} className="flex-1 bg-background px-4 py-9">
+export const HomeView = ({ products, handleEndReached }: HomeViewProps) => (
+  <SafeAreaView edges={["top"]} className="flex-1 bg-background px-4 pt-9">
     <FlatList
       data={products}
       keyExtractor={(item) => `product-${item.id}`}
@@ -23,7 +23,7 @@ export const HomeView = ({ products }: HomeViewProps) => (
       )}
       numColumns={NUMBER_OF_COLUMNS}
       columnWrapperStyle={{ gap: 8, justifyContent: "space-between" }}
-      contentContainerStyle={{ gap: 8 }}
+      contentContainerStyle={{ gap: 8, paddingBottom: 20 }}
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={() => (
         <>
@@ -31,6 +31,7 @@ export const HomeView = ({ products }: HomeViewProps) => (
           <SearchInput />
         </>
       )}
+      onEndReached={handleEndReached}
     />
   </SafeAreaView>
 )

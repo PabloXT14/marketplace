@@ -18,9 +18,7 @@ export const useHomeViewModel = () => {
   }
 
   const handleRefresh = async () => {
-    if (!(isLoading || isRefetching)) {
-      await refetch()
-    }
+    await refetch()
   }
 
   const handleEndReached = () => {
@@ -32,6 +30,7 @@ export const useHomeViewModel = () => {
     isLoading,
     hasNextPage,
     isFetchingNextPage,
+    isRefetching,
     handleLoadMore,
     handleRefresh,
     handleEndReached,

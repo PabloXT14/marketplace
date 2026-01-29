@@ -1,4 +1,4 @@
-import { FlatList, View } from "react-native"
+import { FlatList, View, RefreshControl } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import { HomeHeader } from "./components/header"
@@ -7,6 +7,7 @@ import { ProductCard } from "./components/product-card"
 
 import type { useHomeViewModel } from "./use-home-view-model"
 import { Footer } from "./components/footer"
+import { colors } from "@/styles/colors"
 
 type HomeViewProps = ReturnType<typeof useHomeViewModel>
 
@@ -14,10 +15,12 @@ const NUMBER_OF_COLUMNS = 2
 
 export const HomeView = ({
   products,
+  hasNextPage,
   isLoading,
   isFetchingNextPage,
-  hasNextPage,
+  isRefetching,
   handleEndReached,
+  handleRefresh,
 }: HomeViewProps) => (
   <SafeAreaView edges={["top"]} className="flex-1 bg-background px-4 pt-9">
     <FlatList
@@ -44,6 +47,14 @@ export const HomeView = ({
         />
       }
       onEndReached={handleEndReached}
+      refreshControl={
+        <RefreshControl
+          refreshing={isRefetching}
+          colors={[colors.purple.base]}
+          tintColor={colors.purple.base}
+          onRefresh={handleRefresh}
+        />
+      }
     />
   </SafeAreaView>
 )

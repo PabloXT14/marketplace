@@ -26,8 +26,8 @@ export default function RootLayout() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView className="flex-1">
+      <QueryClientProvider client={queryClient}>
         <StatusBar style="dark" />
 
         <Stack
@@ -42,7 +42,7 @@ export default function RootLayout() {
         <Modal />
 
         <Toaster theme="light" closeButton richColors />
-      </GestureHandlerRootView>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   )
 }

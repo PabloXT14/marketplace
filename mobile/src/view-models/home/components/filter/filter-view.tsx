@@ -1,11 +1,76 @@
-import { Text, View } from "react-native"
+import { Text, TouchableOpacity, View } from "react-native"
+
+import { AppIcon } from "@/shared/components/app-icon"
+import { Input } from "@/shared/components/input"
+import { Button } from "@/shared/components/button"
+
+import { colors } from "@/styles/colors"
 
 import type { useFilterViewModel } from "./use-filter-view-model"
+import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 
 type FilterViewProps = ReturnType<typeof useFilterViewModel>
 
-export const FilterView = (_props: FilterViewProps) => (
-  <View>
-    <Text>Filtro</Text>
-  </View>
-)
+export const FilterView = (_props: FilterViewProps) => {
+  return (
+    <DismissKeyboardView>
+      <View className="gap-10 px-6 py-8">
+        {/* ITEMS */}
+        <View className="gap-6">
+          {/* HEADER */}
+          <View className="item-center flex-row justify-between">
+            <Text className="font-lato-bold text-base text-gray-500 leading-tight">
+              Filtrar anúncios
+            </Text>
+
+            <TouchableOpacity>
+              <AppIcon name="CloseSquare" size={24} color={colors.gray[300]} />
+            </TouchableOpacity>
+          </View>
+
+          {/* VALUE */}
+          <View>
+            <Text className="font-lato-bold text-gray-300 text-xs uppercase leading-tight">
+              Valor
+            </Text>
+
+            {/* OPTIONS */}
+            <View className="flex-row gap-5">
+              <Input
+                placeholder="De"
+                keyboardType="numeric"
+                containerClassName="flex-1"
+              />
+              <Input
+                placeholder="Até"
+                keyboardType="numeric"
+                containerClassName="flex-1"
+              />
+            </View>
+          </View>
+
+          {/* CATEGORY */}
+          <View className="gap-5">
+            <Text className="font-lato-bold text-gray-300 text-xs uppercase leading-tight">
+              Categoria
+            </Text>
+
+            {/* OPTIONS */}
+            <View className="gap-3">
+              <Text className="font-lato text-base text-gray-400 leading-snug">
+                Brinquedo
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* ACTIONS */}
+        <View className="flex-row items-center gap-3">
+          <Button text="Limpar filtro" variant="outline" className="flex-1" />
+
+          <Button text="Filtrar" className="flex-1" />
+        </View>
+      </View>
+    </DismissKeyboardView>
+  )
+}

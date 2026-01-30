@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View } from "react-native"
 import { AppIcon } from "@/shared/components/app-icon"
-
+import { Filter } from "../filter"
 import { Input, type InputProps } from "@/shared/components/input"
 
 import { colors } from "@/styles/colors"
@@ -28,8 +28,7 @@ export const SearchInput = (props: SearchInputProps) => {
         <TouchableOpacity
           onPress={() =>
             open({
-              content: <Text>Teste</Text>,
-              config: {},
+              content: <Filter />,
             })
           }
           className="size-12 items-center justify-center rounded-xl border border-purple-base"

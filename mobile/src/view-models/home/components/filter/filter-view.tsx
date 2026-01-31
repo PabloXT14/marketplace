@@ -11,7 +11,9 @@ import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 
 type FilterViewProps = ReturnType<typeof useFilterViewModel>
 
-export const FilterView = (_props: FilterViewProps) => {
+export const FilterView = ({ categories }: FilterViewProps) => {
+  console.log(JSON.stringify(categories, null, 2))
+
   return (
     <DismissKeyboardView>
       <View className="gap-10 px-6 py-8">

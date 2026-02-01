@@ -1,19 +1,23 @@
 import { Text, TouchableOpacity, View } from "react-native"
+import { Checkbox } from "expo-checkbox"
 
 import { AppIcon } from "@/shared/components/app-icon"
 import { Input } from "@/shared/components/input"
 import { Button } from "@/shared/components/button"
+import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 
 import { colors } from "@/styles/colors"
 
 import type { useFilterViewModel } from "./use-filter-view-model"
-import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 
 type FilterViewProps = ReturnType<typeof useFilterViewModel>
 
-export const FilterView = ({ categories }: FilterViewProps) => {
-  console.log(JSON.stringify(categories, null, 2))
-
+export const FilterView = ({
+  categories,
+  isLoading,
+  selectedCategories,
+  handleSelectCategory,
+}: FilterViewProps) => {
   return (
     <DismissKeyboardView>
       <View className="gap-10 px-6 py-8">
@@ -59,9 +63,33 @@ export const FilterView = ({ categories }: FilterViewProps) => {
 
             {/* OPTIONS */}
             <View className="gap-3">
-              <Text className="font-lato text-base text-gray-400 leading-snug">
-                Brinquedo
-              </Text>
+              {isLoading && (
+                <Text className="font-lato text-base text-gray-400 leading-snug">
+                  Carregando categorias...
+                </Text>
+              )}
+              {categories?.map((category) => (
+                <TouchableOpacity
+                  key={`product-category-${category.id}`}
+                  className="flex-row items-center gap-2"
+                  onPress={() => handleSelectCategory(category)}
+                >
+                  <Checkbox
+                    value={selectedCategories.includes(category)}
+                    onValueChange={() => handleSelectCategory(category)}
+                    color={
+                      selectedCategories.includes(category)
+                        ? colors.purple.base
+                        : colors.gray[100]
+                    }
+                    style={{ borderRadius: 4, borderWidth: 1 }}
+                  />
+
+                  <Text className="font-lato text-base text-gray-400 leading-snug">
+                    {category.name}
+                  </Text>
+                </TouchableOpacity>
+              ))}
             </View>
           </View>
         </View>

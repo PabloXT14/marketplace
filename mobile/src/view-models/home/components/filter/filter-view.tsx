@@ -16,7 +16,9 @@ export const FilterView = ({
   categories,
   isLoading,
   selectedCategories,
-  handleSelectCategory,
+  handleCategoryToggle,
+  handleValueMaxChange,
+  handleValueMinChange,
 }: FilterViewProps) => {
   return (
     <DismissKeyboardView>
@@ -46,11 +48,13 @@ export const FilterView = ({
                 placeholder="De"
                 keyboardType="numeric"
                 containerClassName="flex-1"
+                onChangeText={(value) => handleValueMinChange(Number(value))}
               />
               <Input
                 placeholder="Até"
                 keyboardType="numeric"
                 containerClassName="flex-1"
+                onChangeText={(value) => handleValueMaxChange(Number(value))}
               />
             </View>
           </View>
@@ -72,13 +76,13 @@ export const FilterView = ({
                 <TouchableOpacity
                   key={`product-category-${category.id}`}
                   className="flex-row items-center gap-2"
-                  onPress={() => handleSelectCategory(category)}
+                  onPress={() => handleCategoryToggle(category.id)}
                 >
                   <Checkbox
-                    value={selectedCategories.includes(category)}
-                    onValueChange={() => handleSelectCategory(category)}
+                    value={selectedCategories.includes(category.id)}
+                    onValueChange={() => handleCategoryToggle(category.id)}
                     color={
-                      selectedCategories.includes(category)
+                      selectedCategories.includes(category.id)
                         ? colors.purple.base
                         : colors.gray[100]
                     }

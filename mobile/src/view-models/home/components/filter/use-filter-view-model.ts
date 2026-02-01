@@ -1,8 +1,5 @@
-import { useState } from "react"
-
 import { useGetProductCategoriesQuery } from "@/shared/queries/product/use-get-product-categories-query"
-
-import type { ProductCategory } from "@/shared/interfaces/product"
+import { useFilterStore } from "@/shared/store/use-filter-store"
 
 export const useFilterViewModel = () => {
   const {
@@ -11,16 +8,30 @@ export const useFilterViewModel = () => {
     error,
     refetch,
   } = useGetProductCategoriesQuery()
+  const { updateFilter, filterState } = useFilterStore()
 
-  const [selectedCategories, setSelectedCategories] = useState<
-    ProductCategory[]
-  >([])
+  const handleValueMaxChange = (value: number) => {
+    updateFilter({ key: "valueMax", value })
+  }
 
-  const handleSelectCategory = (category: ProductCategory) => {
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== category))
+  const handleValueMinChange = (value: number) => {
+    updateFilter({ key: "valueMin", value })
+  }
+
+  const handleCategoryToggle = (categoryId: number) => {
+    const isCategorySelected =
+      filterState.selectedCategories.includes(categoryId)
+
+    if (isCategorySelected) {
+      updateFilter({
+        key: "selectedCategories",
+        value: filterState.selectedCategories.filter((id) => id !== categoryId),
+      })
     } else {
-      setSelectedCategories([...selectedCategories, category])
+      updateFilter({
+        key: "selectedCategories",
+        value: [...filterState.selectedCategories, categoryId],
+      })
     }
   }
 
@@ -28,8 +39,10 @@ export const useFilterViewModel = () => {
     categories,
     isLoading,
     error,
+    selectedCategories: filterState.selectedCategories,
     refetch,
-    selectedCategories,
-    handleSelectCategory,
+    handleValueMaxChange,
+    handleValueMinChange,
+    handleCategoryToggle,
   }
 }

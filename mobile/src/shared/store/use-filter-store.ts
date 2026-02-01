@@ -9,13 +9,14 @@ export type FilterState = {
 
 type FilterStore = {
   appliedFilterState: FilterState
+  filterState: FilterState
 
-  updateFilterState: (props: {
+  updateFilter: (props: {
     key: keyof FilterState
     value: FilterState[keyof FilterState]
   }) => void
-
-  resetFilterState: () => void
+  resetFilter: () => void
+  applyFilters: () => void
 }
 
 const DEFAULT_FILTER_STATE: FilterState = {
@@ -27,18 +28,27 @@ const DEFAULT_FILTER_STATE: FilterState = {
 
 export const useFilterStore = create<FilterStore>((set, get) => ({
   appliedFilterState: DEFAULT_FILTER_STATE,
-  updateFilterState: ({ key, value }) => {
+  filterState: DEFAULT_FILTER_STATE,
+
+  updateFilter: ({ key, value }) => {
     set({
-      appliedFilterState: {
-        ...get().appliedFilterState,
+      filterState: {
+        ...get().filterState,
         [key]: value,
       },
     })
   },
 
-  resetFilterState: () => {
+  resetFilter: () => {
     set({
       appliedFilterState: DEFAULT_FILTER_STATE,
+      filterState: DEFAULT_FILTER_STATE,
+    })
+  },
+
+  applyFilters: () => {
+    set({
+      appliedFilterState: get().filterState,
     })
   },
 }))

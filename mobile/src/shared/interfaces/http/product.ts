@@ -6,12 +6,12 @@ export type ProductHttpRequest = {
     perPage: number
   }
   filters?: {
-    from: string
-    to: string
-    categoryIds: number[]
-    searchText: string
-    minValue: number
-    maxValue: number
+    from?: string
+    to?: string
+    categoryIds?: number[]
+    searchText?: string
+    minValue?: number
+    maxValue?: number
   }
   sort?: {
     averageRating: string

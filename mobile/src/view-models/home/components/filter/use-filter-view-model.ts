@@ -1,4 +1,6 @@
 import { useGetProductCategoriesQuery } from "@/shared/queries/product/use-get-product-categories-query"
+
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
 import { useFilterStore } from "@/shared/store/use-filter-store"
 
 export const useFilterViewModel = () => {
@@ -8,7 +10,10 @@ export const useFilterViewModel = () => {
     error,
     refetch,
   } = useGetProductCategoriesQuery()
-  const { updateFilter, filterState } = useFilterStore()
+
+  const { updateFilter, filterState, applyFilters, resetFilter } =
+    useFilterStore()
+  const { close } = useBottomSheetStore()
 
   const handleValueMaxChange = (value: number) => {
     updateFilter({ key: "valueMax", value })
@@ -35,6 +40,16 @@ export const useFilterViewModel = () => {
     }
   }
 
+  const handleApplyFilters = () => {
+    applyFilters()
+    close()
+  }
+
+  const handleResetFilters = () => {
+    resetFilter()
+    close()
+  }
+
   return {
     categories,
     isLoading,
@@ -44,5 +59,7 @@ export const useFilterViewModel = () => {
     handleValueMaxChange,
     handleValueMinChange,
     handleCategoryToggle,
+    handleApplyFilters,
+    handleResetFilters,
   }
 }

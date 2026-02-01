@@ -1,6 +1,9 @@
 import { useProductInfinityQuery } from "@/shared/queries/product/use-product-infinity-query"
+import { useFilterStore } from "@/shared/store/use-filter-store"
 
 export const useHomeViewModel = () => {
+  const { appliedFilterState } = useFilterStore()
+
   const {
     data: products,
     fetchNextPage,
@@ -9,7 +12,9 @@ export const useHomeViewModel = () => {
     isLoading,
     isRefetching,
     refetch,
-  } = useProductInfinityQuery()
+  } = useProductInfinityQuery({
+    filters: appliedFilterState,
+  })
 
   const handleLoadMore = () => {
     if (hasNextPage && !isFetchingNextPage && !isLoading && !isRefetching) {

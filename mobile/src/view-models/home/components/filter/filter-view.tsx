@@ -19,6 +19,8 @@ export const FilterView = ({
   handleCategoryToggle,
   handleValueMaxChange,
   handleValueMinChange,
+  handleApplyFilters,
+  handleResetFilters,
 }: FilterViewProps) => {
   return (
     <DismissKeyboardView>
@@ -100,9 +102,18 @@ export const FilterView = ({
 
         {/* ACTIONS */}
         <View className="flex-row items-center gap-3">
-          <Button text="Limpar filtro" variant="outline" className="flex-1" />
+          <Button
+            text="Limpar filtro"
+            variant="outline"
+            className="flex-1"
+            onPress={handleResetFilters}
+          />
 
-          <Button text="Filtrar" className="flex-1" />
+          <Button
+            text="Filtrar"
+            className="flex-1"
+            onPress={handleApplyFilters}
+          />
         </View>
       </View>
     </DismissKeyboardView>

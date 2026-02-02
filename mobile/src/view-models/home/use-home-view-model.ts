@@ -1,8 +1,14 @@
+import { useState } from "react"
+
 import { useProductInfinityQuery } from "@/shared/queries/product/use-product-infinity-query"
 import { useFilterStore } from "@/shared/store/use-filter-store"
+import { useDebounce } from "@/shared/hooks/use-debounce"
 
 export const useHomeViewModel = () => {
   const { appliedFilterState } = useFilterStore()
+
+  const [searchText, setSearchText] = useState("")
+  const currentSearchText = useDebounce({ value: searchText, delay: 500 })
 
   const {
     data: products,
@@ -13,7 +19,10 @@ export const useHomeViewModel = () => {
     isRefetching,
     refetch,
   } = useProductInfinityQuery({
-    filters: appliedFilterState,
+    filters: {
+      ...appliedFilterState,
+      searchText: currentSearchText,
+    },
   })
 
   const handleLoadMore = () => {
@@ -39,5 +48,7 @@ export const useHomeViewModel = () => {
     handleLoadMore,
     handleRefresh,
     handleEndReached,
+    searchText,
+    setSearchText,
   }
 }

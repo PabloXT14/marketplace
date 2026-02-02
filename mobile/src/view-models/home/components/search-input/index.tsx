@@ -1,9 +1,11 @@
 import { Text, TouchableOpacity, View } from "react-native"
+
 import { AppIcon } from "@/shared/components/app-icon"
-import { Filter } from "../filter"
 import { Input, type InputProps } from "@/shared/components/input"
+import { Filter } from "../filter"
 
 import { colors } from "@/styles/colors"
+
 import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
 
 type SearchInputProps = InputProps

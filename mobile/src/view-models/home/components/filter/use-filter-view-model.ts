@@ -61,5 +61,6 @@ export const useFilterViewModel = () => {
     handleCategoryToggle,
     handleApplyFilters,
     handleResetFilters,
+    close,
   }
 }

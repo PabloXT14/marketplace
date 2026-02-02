@@ -21,6 +21,7 @@ export const FilterView = ({
   handleValueMinChange,
   handleApplyFilters,
   handleResetFilters,
+  close,
 }: FilterViewProps) => {
   return (
     <DismissKeyboardView>
@@ -33,7 +34,7 @@ export const FilterView = ({
               Filtrar anúncios
             </Text>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={close}>
               <AppIcon name="CloseSquare" size={24} color={colors.gray[300]} />
             </TouchableOpacity>
           </View>

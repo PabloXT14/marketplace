@@ -1,5 +1,7 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
+
 import { AppIcon } from "@/shared/components/app-icon"
+import { PriceText } from "@/shared/components/price-text"
 
 import type { useProductCardViewModel } from "./use-product-card-view-model"
 
@@ -33,14 +35,15 @@ export const ProductCardView = ({
         </Text>
 
         {/* PRICE */}
-        <View className="flex-row items-center gap-1">
+        {/* <View className="flex-row items-center gap-1">
           <Text className="font-lato-bold text-gray-500 text-xs leading-tight">
             R$
           </Text>
           <Text className="font-lato-bold text-gray-500 text-sm leading-tight">
             {product.value}
           </Text>
-        </View>
+        </View> */}
+        <PriceText value={Number(product.value)} />
       </View>
 
       {/* RATING */}

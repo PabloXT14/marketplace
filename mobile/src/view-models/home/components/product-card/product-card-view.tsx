@@ -7,7 +7,10 @@ import { colors } from "@/styles/colors"
 
 type ProductCardViewProps = ReturnType<typeof useProductCardViewModel>
 
-export const ProductCardView = ({ product }: ProductCardViewProps) => {
+export const ProductCardView = ({
+  product,
+  formattedRating,
+}: ProductCardViewProps) => {
   return (
     <TouchableOpacity
       className="relative flex-1 justify-between gap-2 overflow-hidden rounded-xl bg-white p-2"
@@ -21,7 +24,7 @@ export const ProductCardView = ({ product }: ProductCardViewProps) => {
       />
 
       {/* INFO */}
-      <View className="gap-1 p-1">
+      <View className="flex-grow justify-between gap-1 p-1">
         <Text
           className="font-lato text-gray-400 text-sm leading-snug"
           numberOfLines={2}
@@ -45,7 +48,7 @@ export const ProductCardView = ({ product }: ProductCardViewProps) => {
         <AppIcon type="bold" name="Star" size={12} color={colors.blue.base} />
 
         <Text className="font-lato-bold text-gray-500 text-xs leading-tight">
-          4.5
+          {formattedRating}
         </Text>
       </View>
     </TouchableOpacity>

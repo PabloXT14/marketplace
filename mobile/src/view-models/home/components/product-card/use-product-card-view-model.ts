@@ -6,4 +6,11 @@ type UseProductCardViewModelProps = {
 
 export const useProductCardViewModel = ({
   product,
-}: UseProductCardViewModelProps) => ({ product })
+}: UseProductCardViewModelProps) => {
+  const formattedRating = product.ratingCount.toFixed(1)
+
+  return {
+    product,
+    formattedRating,
+  }
+}

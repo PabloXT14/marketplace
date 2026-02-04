@@ -4,7 +4,7 @@ import type {
   ProductHttpRequest,
   ProductHttpResponse,
 } from "../interfaces/http/product"
-import type { ProductCategory } from "../interfaces/product"
+import type { Product, ProductCategory } from "../interfaces/product"
 
 export const getProductsService = async (params: ProductHttpRequest) => {
   const response = await marketplaceApiClient.post<ProductHttpResponse>(
@@ -21,6 +21,14 @@ export const getProductsCategoriesService = async () => {
   const response = await marketplaceApiClient.get<ProductCategory[]>(
     "/products/categories"
   )
+
+  const { data } = response
+
+  return data
+}
+
+export const getProductDetailsService = async (id: number) => {
+  const response = await marketplaceApiClient.get<Product>(`/products/${id}`)
 
   const { data } = response
 

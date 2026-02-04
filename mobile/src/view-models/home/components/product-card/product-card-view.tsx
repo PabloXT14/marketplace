@@ -1,4 +1,5 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
+import { router } from "expo-router"
 
 import { AppIcon } from "@/shared/components/app-icon"
 import { PriceText } from "@/shared/components/price-text"
@@ -17,6 +18,9 @@ export const ProductCardView = ({
     <TouchableOpacity
       className="relative flex-1 justify-between gap-2 overflow-hidden rounded-xl bg-white p-2"
       activeOpacity={0.7}
+      onPress={() => {
+        router.push(`/product/${product.id}`)
+      }}
     >
       <Image
         source={{ uri: product.photo }}
@@ -34,15 +38,6 @@ export const ProductCardView = ({
           {product.name}
         </Text>
 
-        {/* PRICE */}
-        {/* <View className="flex-row items-center gap-1">
-          <Text className="font-lato-bold text-gray-500 text-xs leading-tight">
-            R$
-          </Text>
-          <Text className="font-lato-bold text-gray-500 text-sm leading-tight">
-            {product.value}
-          </Text>
-        </View> */}
         <PriceText value={Number(product.value)} />
       </View>
 

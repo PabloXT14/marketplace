@@ -17,6 +17,7 @@ export default function PrivateLayout() {
         screenOptions={{ headerShown: false, animation: "slide_from_right" }}
       >
         <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="product/[id]" />
       </Stack>
 
       <BottomSheet />

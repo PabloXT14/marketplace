@@ -1,6 +1,7 @@
-import { Text, View } from "react-native"
-
 import { useLocalSearchParams } from "expo-router"
+
+import { ProductView } from "@/view-models/product/product-view"
+import { useProductViewModel } from "@/view-models/product/use-product-view-model"
 
 type ProductDetailsParams = {
   id: string
@@ -8,12 +9,7 @@ type ProductDetailsParams = {
 
 export default function ProductDetails() {
   const { id } = useLocalSearchParams<ProductDetailsParams>()
+  const props = useProductViewModel({ id: Number(id) })
 
-  return (
-    <View className="flex-1 items-center justify-center bg-background px-10 py-9">
-      <Text className="mb-4 font-lato-bold text-2xl text-zinc-950">
-        Product Details - {id}
-      </Text>
-    </View>
-  )
+  return <ProductView {...props} />
 }

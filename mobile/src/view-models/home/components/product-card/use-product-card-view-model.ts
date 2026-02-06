@@ -7,7 +7,7 @@ type UseProductCardViewModelProps = {
 export const useProductCardViewModel = ({
   product,
 }: UseProductCardViewModelProps) => {
-  const formattedRating = product.ratingCount.toFixed(1)
+  const formattedRating = product.averageRating.toFixed(1)
 
   return {
     product,

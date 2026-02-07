@@ -26,8 +26,9 @@ export const ProductView = ({ product, error }: ProductViewProps) => {
     <SafeAreaView className="flex-1 bg-background pt-9">
       <FlatList
         data={[]}
-        renderItem={<></>}
+        renderItem={() => <View />}
         className="px-6"
+        contentContainerStyle={{ paddingBottom: 120 }}
         ListHeaderComponent={<Header product={product} />}
       />
     </SafeAreaView>

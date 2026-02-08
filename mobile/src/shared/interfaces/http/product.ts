@@ -1,4 +1,6 @@
 import type { Product } from "../product"
+import type { ProductComment } from "../product-comment"
+import type { PaginationResponse } from "./pagination"
 
 export type ProductHttpRequest = {
   pagination: {
@@ -18,10 +20,14 @@ export type ProductHttpRequest = {
   }
 }
 
-export type ProductHttpResponse = {
-  data: Product[]
-  page: number
-  perPage: number
-  total: number
-  totalPages: number
+export type ProductHttpResponse = PaginationResponse<Product>
+
+export type ProductCommentsHttpRequest = {
+  productId: number
+  pagination: {
+    page: number
+    perPage: number
+  }
 }
+
+export type ProductCommentsHttpResponse = PaginationResponse<ProductComment>

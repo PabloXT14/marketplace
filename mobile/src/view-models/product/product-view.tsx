@@ -23,11 +23,11 @@ export const ProductView = ({ product, error }: ProductViewProps) => {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-background pt-9">
+    <SafeAreaView className="flex-1 bg-background">
       <FlatList
         data={[]}
         renderItem={() => <View />}
-        className="px-6"
+        className="px-6 pt-9"
         contentContainerStyle={{ paddingBottom: 120 }}
         ListHeaderComponent={<Header product={product} />}
       />

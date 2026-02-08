@@ -24,7 +24,7 @@ export const HomeView = ({
   setSearchText,
   searchText,
 }: HomeViewProps) => (
-  <SafeAreaView edges={["top"]} className="flex-1 bg-background px-4 pt-9">
+  <SafeAreaView edges={["top"]} className="flex-1 bg-background">
     <FlatList
       data={products}
       keyExtractor={(item) => `product-${item.id}`}
@@ -35,6 +35,7 @@ export const HomeView = ({
       )}
       numColumns={NUMBER_OF_COLUMNS}
       columnWrapperStyle={{ gap: 8, justifyContent: "space-between" }}
+      className="px-4 pt-9"
       contentContainerStyle={{ gap: 8, paddingBottom: 120 }}
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={

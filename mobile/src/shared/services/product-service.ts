@@ -1,6 +1,8 @@
 import { marketplaceApiClient } from "../api/marketplace"
 
 import type {
+  ProductCommentsHttpRequest,
+  ProductCommentsHttpResponse,
   ProductHttpRequest,
   ProductHttpResponse,
 } from "../interfaces/http/product"
@@ -29,6 +31,19 @@ export const getProductsCategoriesService = async () => {
 
 export const getProductDetailsService = async (id: number) => {
   const response = await marketplaceApiClient.get<Product>(`/products/${id}`)
+
+  const { data } = response
+
+  return data
+}
+
+export const getProductCommentsService = async (
+  params: ProductCommentsHttpRequest
+) => {
+  const response = await marketplaceApiClient.post<ProductCommentsHttpResponse>(
+    "/products/comments",
+    params
+  )
 
   const { data } = response
 

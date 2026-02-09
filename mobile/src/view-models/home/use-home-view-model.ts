@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import { useProductInfinityQuery } from "@/shared/queries/product/use-product-infinity-query"
+import { useProductInfiniteQuery } from "@/shared/queries/product/use-product-infinite-query"
 import { useFilterStore } from "@/shared/store/use-filter-store"
 import { useDebounce } from "@/shared/hooks/use-debounce"
 
@@ -18,7 +18,7 @@ export const useHomeViewModel = () => {
     isLoading,
     isRefetching,
     refetch,
-  } = useProductInfinityQuery({
+  } = useProductInfiniteQuery({
     filters: {
       ...appliedFilterState,
       searchText: currentSearchText,

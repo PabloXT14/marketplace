@@ -5,13 +5,13 @@ import { buildImageUrl } from "@/shared/helpers/build-image-url"
 
 import type { FilterState } from "@/shared/store/use-filter-store"
 
-type UseProductInfinityQueryProps = {
+type UseProductInfiniteQueryProps = {
   filters?: FilterState
 }
 
-export const useProductInfinityQuery = ({
+export const useProductInfiniteQuery = ({
   filters,
-}: UseProductInfinityQueryProps) => {
+}: UseProductInfiniteQueryProps) => {
   const query = useInfiniteQuery({
     queryKey: ["products-infinity", filters],
     queryFn: async ({ pageParam = 1 }) => {

@@ -37,7 +37,7 @@ export const useGetCommentsInfiniteQuery = ({
         user: {
           ...comment.user,
           avatar: {
-            url: buildImageUrl(comment.user.avatar.url),
+            url: buildImageUrl(comment.user.avatar.url ?? ""),
           },
         },
       })) ?? []

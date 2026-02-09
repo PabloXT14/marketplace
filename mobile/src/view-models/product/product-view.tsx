@@ -7,7 +7,7 @@ import type { useProductViewModel } from "./use-product-view-model"
 
 type ProductViewProps = ReturnType<typeof useProductViewModel>
 
-export const ProductView = ({ product, error }: ProductViewProps) => {
+export const ProductView = ({ product, error, comments }: ProductViewProps) => {
   if (error) {
     return (
       <View className="flex-1 items-center justify-center bg-background px-10 py-9">
@@ -21,6 +21,8 @@ export const ProductView = ({ product, error }: ProductViewProps) => {
   if (!product) {
     return null
   }
+
+  console.log("COMMENTS", JSON.stringify(comments, null, 2))
 
   return (
     <SafeAreaView className="flex-1 bg-background">

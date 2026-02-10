@@ -2,6 +2,7 @@ import { FlatList, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import { Header } from "./components/header"
+import { CommentItem } from "./components/comment-item"
 
 import type { useProductViewModel } from "./use-product-view-model"
 
@@ -22,15 +23,14 @@ export const ProductView = ({ product, error, comments }: ProductViewProps) => {
     return null
   }
 
-  console.log("COMMENTS", JSON.stringify(comments, null, 2))
-
   return (
     <SafeAreaView className="flex-1 bg-background">
       <FlatList
-        data={[]}
-        renderItem={() => <View />}
+        data={comments}
+        keyExtractor={(comment) => `comment-${comment.id}`}
+        renderItem={({ item }) => <CommentItem comment={item} />}
         className="px-6 pt-9"
-        contentContainerStyle={{ paddingBottom: 120 }}
+        contentContainerStyle={{ paddingBottom: 120, gap: 8 }}
         ListHeaderComponent={<Header product={product} />}
       />
     </SafeAreaView>

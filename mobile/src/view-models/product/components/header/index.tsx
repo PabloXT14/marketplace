@@ -131,8 +131,8 @@ export const Header = ({ product }: HeaderProps) => {
         {/* DIVIDER */}
         <View className="h-px w-full bg-gray-100" />
 
-        {/* REVIEWS */}
-        <View className="gap-3">
+        {/* COMMENTS */}
+        <View className="mb-3">
           {/* TITLE */}
           <View className="flex-row items-center justify-between">
             <Text className="font-lato-bold text-base text-gray-500 leading-tight">
@@ -146,8 +146,7 @@ export const Header = ({ product }: HeaderProps) => {
             </TouchableOpacity>
           </View>
 
-          {/* REVIEWS LIST */}
-          <View />
+          {/* LIST IS LOADED ON THE FLATLIST THAT WRAPS THIS COMPONENT */}
         </View>
       </View>
     </View>

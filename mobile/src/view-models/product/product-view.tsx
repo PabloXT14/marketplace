@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native"
+import { FlatList } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import { Header } from "./components/header"
@@ -6,6 +6,7 @@ import { CommentItem } from "./components/comment-item"
 import { ListFooter } from "./components/list-footer"
 import { EmptyList } from "./components/empty-list"
 import { Loading } from "./components/loading"
+import { ProductError } from "./components/product-error"
 
 import type { useProductViewModel } from "./use-product-view-model"
 
@@ -23,20 +24,10 @@ export const ProductView = ({
   handleRefresh,
 }: ProductViewProps) => {
   if (error) {
-    return (
-      <View className="flex-1 items-center justify-center bg-background px-10 py-9">
-        <Text className="text-center font-lato-bold text-xl text-zinc-950">
-          Houve um erro ao carregar os detalhes do produto
-        </Text>
-      </View>
-    )
+    return <ProductError />
   }
 
-  if (!product) {
-    return null
-  }
-
-  if (isLoading) {
+  if (isLoading || !product) {
     return <Loading />
   }
 

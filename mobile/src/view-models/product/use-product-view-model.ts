@@ -43,6 +43,8 @@ export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
   return {
     product,
     isLoading,
+    isRefetching,
+    isFetchingNextPage,
     error,
     comments,
     commentsLoading,

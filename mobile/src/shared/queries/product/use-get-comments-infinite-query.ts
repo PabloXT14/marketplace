@@ -17,7 +17,7 @@ export const useGetCommentsInfiniteQuery = ({
         productId,
         pagination: {
           page: pageParam,
-          perPage: 20,
+          perPage: 10,
         },
       })
 

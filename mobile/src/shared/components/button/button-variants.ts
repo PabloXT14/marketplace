@@ -2,7 +2,8 @@ import { tv, type VariantProps } from "tailwind-variants"
 
 export const buttonVariants = tv({
   slots: {
-    container: "h-button w-full flex-row items-center gap-3 rounded-xl px-4",
+    container:
+      "h-button w-full flex-row items-center gap-3 rounded-xl px-[16px]",
     text: "font-lato-bold text-base",
   },
   variants: {

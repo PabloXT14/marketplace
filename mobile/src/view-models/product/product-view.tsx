@@ -9,6 +9,7 @@ import { Loading } from "./components/loading"
 import { ProductError } from "./components/product-error"
 
 import type { useProductViewModel } from "./use-product-view-model"
+import { AddToCArtFooter } from "./components/add-to-cart-footer"
 
 type ProductViewProps = ReturnType<typeof useProductViewModel>
 
@@ -47,6 +48,8 @@ export const ProductView = ({
         onRefresh={handleRefresh}
         refreshing={isRefetching}
       />
+
+      <AddToCArtFooter product={product} />
     </SafeAreaView>
   )
 }

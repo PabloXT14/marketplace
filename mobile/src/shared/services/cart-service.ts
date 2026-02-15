@@ -15,19 +15,38 @@ export const cartService = {
       newProduct.id
     )
 
+    let updatedProducts: CartProduct[] = []
+
     if (productAlreadyExists) {
-      return products.map((product) =>
+      updatedProducts = products.map((product) =>
         product.id === newProduct.id
           ? { ...product, quantity: product.quantity + 1 }
           : product
       )
+    } else {
+      updatedProducts = [...products, { ...newProduct, quantity: 1 }]
     }
 
-    return [...products, { ...newProduct, quantity: 1 }]
+    const newTotalPrice = cartService.calculateTotalPrice(updatedProducts)
+
+    return { products: updatedProducts, totalPrice: newTotalPrice }
   },
   calculateTotalPrice: (products: CartProduct[]) =>
     products.reduce((acc, product) => {
       const productPrice = Number(product.price) * product.quantity
       return acc + productPrice
     }, 0),
+
+  removeProductFromCart: (products: CartProduct[], productId: number) => {
+    const updatedProducts = products.filter(
+      (product) => product.id !== productId
+    )
+
+    const newTotalPrice = cartService.calculateTotalPrice(updatedProducts)
+
+    return {
+      products: updatedProducts,
+      totalPrice: newTotalPrice,
+    }
+  },
 }

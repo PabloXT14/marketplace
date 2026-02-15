@@ -16,7 +16,7 @@ export type CartProductWithoutQuantity = Omit<CartProduct, "quantity">
 
 type CartStore = {
   products: CartProduct[]
-  total: number
+  totalPrice: number
   addProduct: (product: CartProductWithoutQuantity) => void
   removeProduct: (id: number) => void
   updateQuantity: (params: { id: number; quantity: number }) => void
@@ -28,7 +28,7 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       products: [],
-      total: 0,
+      totalPrice: 0,
 
       addProduct: (newProduct) => {
         const updatedProducts = cartService.addProductToCart(
@@ -36,9 +36,11 @@ export const useCartStore = create<CartStore>()(
           newProduct
         )
 
+        const newTotalPrice = cartService.calculateTotalPrice(updatedProducts)
+
         set({
           products: updatedProducts,
-          total: 1, // TODO: create a function to calculate total
+          totalPrice: newTotalPrice
         })
       },
       removeProduct: (id) => null,

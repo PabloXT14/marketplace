@@ -25,4 +25,9 @@ export const cartService = {
 
     return [...products, { ...newProduct, quantity: 1 }]
   },
+  calculateTotalPrice: (products: CartProduct[]) =>
+    products.reduce((acc, product) => {
+      const productPrice = Number(product.price) * product.quantity
+      return acc + productPrice
+    }, 0),
 }

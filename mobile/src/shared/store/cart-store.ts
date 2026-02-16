@@ -52,9 +52,25 @@ export const useCartStore = create<CartStore>()(
           totalPrice,
         })
       },
-      updateQuantity: (params) => null,
-      clearCart: () => null,
-      getItemsCount: () => 0,
+      updateQuantity: ({ id, quantity }) => {
+        const { products, totalPrice } = cartService.updateProductQuantity({
+          products: get().products,
+          productId: id,
+          quantity,
+        })
+
+        set({
+          products,
+          totalPrice,
+        })
+      },
+      clearCart: () => {
+        set({
+          products: [],
+          totalPrice: 0,
+        })
+      },
+      getItemsCount: () => cartService.getItemsCount(get().products),
     }),
     {
       name: "cart-storage",

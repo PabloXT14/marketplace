@@ -6,6 +6,7 @@ import type {
 export const cartService = {
   findExistingProduct: (products: CartProduct[], productId: number) =>
     products.some((product) => product.id === productId),
+
   addProductToCart: (
     products: CartProduct[],
     newProduct: CartProductWithoutQuantity
@@ -31,6 +32,7 @@ export const cartService = {
 
     return { products: updatedProducts, totalPrice: newTotalPrice }
   },
+
   calculateTotalPrice: (products: CartProduct[]) =>
     products.reduce((acc, product) => {
       const productPrice = Number(product.price) * product.quantity
@@ -49,4 +51,36 @@ export const cartService = {
       totalPrice: newTotalPrice,
     }
   },
+
+  updateProductQuantity: ({
+    products,
+    productId,
+    quantity,
+  }: {
+    products: CartProduct[]
+    productId: number
+    quantity: number
+  }) => {
+    if (quantity <= 0) {
+      return cartService.removeProductFromCart(products, productId)
+    }
+
+    const updatedProducts = products.map((product) => {
+      if (product.id === productId) {
+        return { ...product, quantity }
+      }
+
+      return product
+    })
+
+    const newTotalPrice = cartService.calculateTotalPrice(updatedProducts)
+
+    return {
+      products: updatedProducts,
+      totalPrice: newTotalPrice,
+    }
+  },
+
+  getItemsCount: (products: CartProduct[]) =>
+    products.reduce((acc, product) => acc + product.quantity, 0),
 }

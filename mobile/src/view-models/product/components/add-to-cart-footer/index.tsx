@@ -7,9 +7,13 @@ import type { Product } from "@/shared/interfaces/product"
 
 type AddToCArtFooterProps = {
   product: Product
+  handleAddToCart: () => void
 }
 
-export const AddToCArtFooter = ({ product }: AddToCArtFooterProps) => (
+export const AddToCArtFooter = ({
+  product,
+  handleAddToCart,
+}: AddToCArtFooterProps) => (
   <View className="fixed bottom-0 left-0 w-full flex-row items-center justify-between bg-white p-6">
     <PriceText
       value={Number(product.value)}
@@ -18,7 +22,12 @@ export const AddToCArtFooter = ({ product }: AddToCArtFooterProps) => (
     />
 
     <View className="">
-      <Button leftIcon="CartLarge2" text="Adicionar" className="w-auto" />
+      <Button
+        leftIcon="CartLarge2"
+        text="Adicionar"
+        className="w-auto"
+        onPress={handleAddToCart}
+      />
     </View>
   </View>
 )

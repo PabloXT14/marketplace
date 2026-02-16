@@ -23,6 +23,7 @@ export const ProductView = ({
   isFetchingNextPage,
   handleEndReached,
   handleRefresh,
+  handleAddToCart,
 }: ProductViewProps) => {
   if (error) {
     return <ProductError />
@@ -49,7 +50,7 @@ export const ProductView = ({
         refreshing={isRefetching}
       />
 
-      <AddToCArtFooter product={product} />
+      <AddToCArtFooter product={product} handleAddToCart={handleAddToCart} />
     </SafeAreaView>
   )
 }

@@ -14,7 +14,7 @@ type UseProductViewModelProps = {
 
 export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
   const { data: product, isLoading, error } = useGetProductDetailsQuery({ id })
-  const { addProduct, products } = useCartStore()
+  const { addProduct } = useCartStore()
   const { open, close } = useModalStore()
 
   const {
@@ -70,8 +70,6 @@ export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
       price: product.value,
       image: product.photo,
     })
-
-    console.log("PRODUCTS IN CART:", products)
 
     open(
       createElement(AddToCartSuccessModal, {

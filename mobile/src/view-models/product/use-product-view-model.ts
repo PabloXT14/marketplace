@@ -49,6 +49,16 @@ export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
     handleLoadMore()
   }
 
+  const onGoToCart = () => {
+    router.push("/(private)/(tabs)/cart")
+    close()
+  }
+
+  const onContinueShopping = () => {
+    router.back()
+    close()
+  }
+
   const handleAddToCart = () => {
     if (!product) {
       return
@@ -66,15 +76,8 @@ export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
     open(
       createElement(AddToCartSuccessModal, {
         productName: product.name,
-        onGoToCart: () => {
-          router.push("/(private)/(tabs)/cart")
-        },
-        onContinueShopping: () => {
-          router.back()
-        },
-        onClose: () => {
-          close()
-        },
+        onGoToCart,
+        onContinueShopping,
       }),
       {}
     )

@@ -5,8 +5,10 @@ import { useGetCommentsInfiniteQuery } from "@/shared/queries/product/use-get-co
 import { useGetProductDetailsQuery } from "@/shared/queries/product/use-get-product-details-query"
 import { useCartStore } from "@/shared/store/cart-store"
 import { useModalStore } from "@/shared/store/modal-store"
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
 
 import { AddToCartSuccessModal } from "./components/add-to-cart-success-modal"
+import { ReviewBottomSheet } from "./components/review-bottom-sheet"
 
 type UseProductViewModelProps = {
   id: number
@@ -14,8 +16,10 @@ type UseProductViewModelProps = {
 
 export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
   const { data: product, isLoading, error } = useGetProductDetailsQuery({ id })
+
   const { addProduct } = useCartStore()
   const { open, close } = useModalStore()
+  const { open: openBottomSheet } = useBottomSheetStore()
 
   const {
     data: comments,
@@ -81,6 +85,15 @@ export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
     )
   }
 
+  const handleOpenReview = () => {
+    openBottomSheet({
+      content: createElement(ReviewBottomSheet, { productId: id }),
+      config: {
+        snapPoints: ["50%"],
+      },
+    })
+  }
+
   return {
     product,
     isLoading,
@@ -94,5 +107,6 @@ export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
     handleRefresh,
     handleEndReached,
     handleAddToCart,
+    handleOpenReview,
   }
 }

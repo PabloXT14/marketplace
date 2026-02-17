@@ -11,9 +11,10 @@ import type { Product } from "@/shared/interfaces/product"
 
 type HeaderProps = {
   product: Product
+  onOpenReview: () => void
 }
 
-export const Header = ({ product }: HeaderProps) => {
+export const Header = ({ product, onOpenReview }: HeaderProps) => {
   if (!product) {
     return null
   }
@@ -139,7 +140,7 @@ export const Header = ({ product }: HeaderProps) => {
               Avaliações
             </Text>
 
-            <TouchableOpacity activeOpacity={0.7}>
+            <TouchableOpacity activeOpacity={0.7} onPress={onOpenReview}>
               <Text className="font-lato-bold text-base text-purple-base leading-tight">
                 Avaliar
               </Text>

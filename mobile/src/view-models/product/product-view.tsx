@@ -24,6 +24,7 @@ export const ProductView = ({
   handleEndReached,
   handleRefresh,
   handleAddToCart,
+  handleOpenReview,
 }: ProductViewProps) => {
   if (error) {
     return <ProductError />
@@ -41,7 +42,9 @@ export const ProductView = ({
         renderItem={({ item }) => <CommentItem comment={item} />}
         className="px-6 pt-9"
         contentContainerStyle={{ paddingBottom: 120, gap: 8 }}
-        ListHeaderComponent={<Header product={product} />}
+        ListHeaderComponent={
+          <Header product={product} onOpenReview={handleOpenReview} />
+        }
         ListFooterComponent={<ListFooter isLoading={isFetchingNextPage} />}
         ListEmptyComponent={<EmptyList isLoadingComments={commentsLoading} />}
         showsVerticalScrollIndicator={false}

@@ -31,3 +31,40 @@ export type ProductCommentsHttpRequest = {
 }
 
 export type ProductCommentsHttpResponse = PaginationResponse<ProductComment>
+
+export type CreateCommentHttpRequest = {
+  productId: number
+  rating: number
+  comment: string
+}
+
+export type CreateCommentHttpResponse = {
+  message: string
+  ratingApplied: boolean
+}
+
+export type UserCommentHttpRequest = {
+  productId: number
+}
+
+export type UserCommentHttpResponse = {
+  content: string
+  rating: number
+}
+
+export type UpdateUserCommentHttpRequest = {
+  commentId: number
+  content: string
+  rating: number
+}
+
+export type UpdateUserCommentHttpResponse = {
+  message: string
+  ratingApplied: boolean
+  comment: {
+    id: number
+    content: string
+    createdAt: Date
+    updatedAt: Date
+  }
+}

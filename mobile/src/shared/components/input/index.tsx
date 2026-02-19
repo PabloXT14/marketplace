@@ -26,6 +26,7 @@ export const Input = ({
   label,
   leftIcon,
   rightIcon,
+  className,
   containerClassName,
   isError,
   isDisabled,
@@ -86,7 +87,7 @@ export const Input = ({
             textAlignVertical: "center",
             includeFontPadding: false, // Remove extra padding on Android
           }}
-          className={styles.input()}
+          className={styles.input({ className })}
           secureTextEntry={showPassword}
           {...textInputProps}
         />

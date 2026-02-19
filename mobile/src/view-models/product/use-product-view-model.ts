@@ -88,9 +88,7 @@ export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
   const handleOpenReview = () => {
     openBottomSheet({
       content: createElement(ReviewBottomSheet, { productId: id }),
-      config: {
-        snapPoints: ["50%"],
-      },
+      config: {},
     })
   }
 

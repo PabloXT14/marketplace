@@ -4,12 +4,12 @@ import type { useReviewBottomSheetViewModel } from "./use-review-bottom-sheet-vi
 
 import { AppIcon } from "@/shared/components/app-icon"
 import { Button } from "@/shared/components/button"
-
-import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
-
-import { colors } from "@/styles/colors"
 import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 import { Input } from "@/shared/components/input"
+import { Stars } from "./components/stars"
+
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
+import { colors } from "@/styles/colors"
 
 type ReviewBottomSheetViewProps = ReturnType<
   typeof useReviewBottomSheetViewModel
@@ -40,18 +40,8 @@ export const ReviewBottomSheetView = ({
             <Text className="font-lato-bold text-gray-300 text-xs uppercase">
               Nota
             </Text>
-            <View className="flex-row gap-2">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <TouchableOpacity key={`star-${index + 1}`}>
-                  <AppIcon
-                    key={`star-${index + 1}`}
-                    name="Star"
-                    size={28}
-                    color={colors.gray[200]}
-                  />
-                </TouchableOpacity>
-              ))}
-            </View>
+
+            <Stars rating={3} />
           </View>
 
           <Input
@@ -70,10 +60,16 @@ export const ReviewBottomSheetView = ({
             text="Cancelar"
             variant="outline"
             className="flex-1"
-            onPress={() => {}}
+            onPress={() => close()}
           />
 
-          <Button text="Enviar" className="flex-1" onPress={() => {}} />
+          <Button
+            text="Enviar"
+            className="flex-1"
+            onPress={() => {
+              /* TODO */
+            }}
+          />
         </View>
       </View>
     </DismissKeyboardView>

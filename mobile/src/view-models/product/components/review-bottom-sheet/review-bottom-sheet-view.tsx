@@ -16,7 +16,9 @@ type ReviewBottomSheetViewProps = ReturnType<
 >
 
 export const ReviewBottomSheetView = ({
-  productId,
+  handleRatingChange,
+  handleCommentChange,
+  ratingForm,
 }: ReviewBottomSheetViewProps) => {
   const { close } = useBottomSheetStore()
 
@@ -28,7 +30,7 @@ export const ReviewBottomSheetView = ({
           {/* HEADER */}
           <View className="item-center flex-row justify-between">
             <Text className="font-lato-bold text-base text-gray-500 leading-tight">
-              Avaliar produto
+              {ratingForm.isEditing ? "Editar avaliação" : "Avaliar produto"}
             </Text>
 
             <TouchableOpacity onPress={close}>
@@ -41,10 +43,15 @@ export const ReviewBottomSheetView = ({
               Nota
             </Text>
 
-            <Stars rating={3} />
+            <Stars
+              rating={ratingForm.rating}
+              onRatingChange={handleRatingChange}
+            />
           </View>
 
           <Input
+            value={ratingForm.comment}
+            onChangeText={handleCommentChange}
             label="Comentário"
             placeholder="Descreva sua avaliação"
             multiline
@@ -64,7 +71,7 @@ export const ReviewBottomSheetView = ({
           />
 
           <Button
-            text="Enviar"
+            text={ratingForm.isEditing ? "Atualizar" : "Enviar"}
             className="flex-1"
             onPress={() => {
               /* TODO */

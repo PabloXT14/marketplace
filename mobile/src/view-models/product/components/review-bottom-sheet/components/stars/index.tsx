@@ -6,16 +6,20 @@ import { AppIcon } from "@/shared/components/app-icon"
 
 type StarsProps = {
   rating: number
+  onRatingChange?: (rating: number) => void
 }
 
-export const Stars = ({ rating }: StarsProps) => (
+export const Stars = ({ rating, onRatingChange }: StarsProps) => (
   <View className="flex-row gap-2">
     {Array.from({ length: 5 }).map((_, index) => {
       const starNumber = index + 1
       const isSelected = starNumber <= rating
 
       return (
-        <TouchableOpacity key={`star-${starNumber}`}>
+        <TouchableOpacity
+          key={`star-${starNumber}`}
+          onPress={() => onRatingChange?.(starNumber)}
+        >
           <AppIcon
             name="Star"
             size={28}

@@ -35,7 +35,7 @@ export type ProductCommentsHttpResponse = PaginationResponse<ProductComment>
 export type CreateCommentHttpRequest = {
   productId: number
   rating: number
-  comment: string
+  content: string
 }
 
 export type CreateCommentHttpResponse = {
@@ -48,7 +48,15 @@ export type UserCommentHttpRequest = {
 }
 
 export type UserCommentHttpResponse = {
-  content: string
+  comment: {
+    id: number
+    content: string
+    createdAt: Date
+    user: {
+      id: number
+      name: string
+    }
+  }
   rating: number
 }
 

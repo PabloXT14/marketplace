@@ -60,7 +60,7 @@ export const createCommentService = async (
   params: CreateCommentHttpRequest
 ) => {
   const response = await marketplaceApiClient.post<CreateCommentHttpResponse>(
-    "/products/comments/create",
+    "/products/create/comments",
     params
   )
 

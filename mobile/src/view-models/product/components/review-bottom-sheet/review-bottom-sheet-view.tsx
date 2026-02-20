@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native"
 
 import type { useReviewBottomSheetViewModel } from "./use-review-bottom-sheet-view-model"
 
@@ -16,69 +16,88 @@ type ReviewBottomSheetViewProps = ReturnType<
 >
 
 export const ReviewBottomSheetView = ({
+  ratingForm,
+  isLoading,
+  userCommentLoading,
   handleRatingChange,
   handleCommentChange,
-  ratingForm,
+  handleSubmit,
 }: ReviewBottomSheetViewProps) => {
   const { close } = useBottomSheetStore()
 
   return (
     <DismissKeyboardView>
-      <View className="gap-10 px-6 py-8">
-        {/* ITEMS */}
-        <View className="gap-6">
-          {/* HEADER */}
-          <View className="item-center flex-row justify-between">
-            <Text className="font-lato-bold text-base text-gray-500 leading-tight">
-              {ratingForm.isEditing ? "Editar avaliação" : "Avaliar produto"}
-            </Text>
+      {userCommentLoading ? (
+        <View className="min-h-[400px] flex-1 items-center justify-center gap-2 bg-background">
+          <ActivityIndicator size="large" color={colors.purple.base} />
 
-            <TouchableOpacity onPress={close}>
-              <AppIcon name="CloseSquare" size={24} color={colors.gray[300]} />
-            </TouchableOpacity>
-          </View>
+          <Text className="text-center font-lato text-base text-gray-500">
+            Verificando avaliação existente...
+          </Text>
+        </View>
+      ) : (
+        <View className="gap-10 px-6 py-8">
+          {/* ITEMS */}
+          <View className="gap-6">
+            {/* HEADER */}
+            <View className="item-center flex-row justify-between">
+              <Text className="font-lato-bold text-base text-gray-500 leading-tight">
+                {ratingForm.isEditing ? "Editar avaliação" : "Avaliar produto"}
+              </Text>
 
-          <View className="gap-3">
-            <Text className="font-lato-bold text-gray-300 text-xs uppercase">
-              Nota
-            </Text>
+              <TouchableOpacity onPress={close}>
+                <AppIcon
+                  name="CloseSquare"
+                  size={24}
+                  color={colors.gray[300]}
+                />
+              </TouchableOpacity>
+            </View>
 
-            <Stars
-              rating={ratingForm.rating}
-              onRatingChange={handleRatingChange}
+            <View className="gap-3">
+              <Text className="font-lato-bold text-gray-300 text-xs uppercase">
+                Nota
+              </Text>
+
+              <Stars
+                rating={ratingForm.rating}
+                onRatingChange={handleRatingChange}
+              />
+            </View>
+
+            <Input
+              value={ratingForm.comment}
+              onChangeText={handleCommentChange}
+              label="Comentário"
+              placeholder="Descreva sua avaliação"
+              multiline
+              numberOfLines={8}
+              textAlignVertical="top"
+              className="h-[150px]"
             />
           </View>
 
-          <Input
-            value={ratingForm.comment}
-            onChangeText={handleCommentChange}
-            label="Comentário"
-            placeholder="Descreva sua avaliação"
-            multiline
-            numberOfLines={8}
-            textAlignVertical="top"
-            className="h-[150px]"
-          />
-        </View>
+          {/* ACTIONS */}
+          <View className="flex-row items-center gap-3">
+            <Button
+              text="Cancelar"
+              variant="outline"
+              className="flex-1"
+              onPress={() => close()}
+            />
 
-        {/* ACTIONS */}
-        <View className="flex-row items-center gap-3">
-          <Button
-            text="Cancelar"
-            variant="outline"
-            className="flex-1"
-            onPress={() => close()}
-          />
-
-          <Button
-            text={ratingForm.isEditing ? "Atualizar" : "Enviar"}
-            className="flex-1"
-            onPress={() => {
-              /* TODO */
-            }}
-          />
+            <Button
+              onPress={() => {
+                handleSubmit()
+              }}
+              isLoading={isLoading}
+              disabled={isLoading}
+              text={ratingForm.isEditing ? "Atualizar" : "Enviar"}
+              className="flex-1"
+            />
+          </View>
         </View>
-      </View>
+      )}
     </DismissKeyboardView>
   )
 }

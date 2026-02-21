@@ -4,6 +4,7 @@ import { toast } from "sonner-native"
 import { useGetUserCommentQuery } from "@/shared/queries/comment/use-get-user-comment-query"
 import { useCreateCommentMutation } from "@/shared/queries/comment/use-create-comment-mutation"
 import { useUpdateUserCommentMutation } from "@/shared/queries/comment/use-update-user-comment-mutation"
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
 
 type UseReviewBottomSheetViewModel = {
   productId: number
@@ -34,6 +35,8 @@ export const useReviewBottomSheetViewModel = ({
     useGetUserCommentQuery({ productId })
   const createCommentMutation = useCreateCommentMutation({ productId })
   const updateCommentMutation = useUpdateUserCommentMutation({ productId })
+
+  const { close: closeBottomSheet } = useBottomSheetStore()
 
   const handleRatingChange = (rating: number) => {
     setRatingForm((prev) => ({ ...prev, rating }))
@@ -66,6 +69,8 @@ export const useReviewBottomSheetViewModel = ({
         content: ratingForm.comment,
       })
     }
+
+    closeBottomSheet()
   }
 
   useEffect(() => {

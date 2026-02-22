@@ -1,15 +1,20 @@
-import { Text, View } from "react-native"
+import { FlatList } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 import type { useCartViewModel } from "./use-cart-view-model"
 
+import { ProductCard } from "./components/product-card"
+
 type CartViewProps = ReturnType<typeof useCartViewModel>
 
-export const CartView = ({ products }: CartViewProps) => {
-  console.log("CART: ", JSON.stringify(products, null, 2))
-
-  return (
-    <View className="flex-1 items-center justify-center bg-background px-10 py-9">
-      <Text className="mb-4 font-lato-bold text-2xl text-zinc-950">Cart</Text>
-    </View>
-  )
-}
+export const CartView = ({ products }: CartViewProps) => (
+  <SafeAreaView edges={["top"]} className="flex-1 bg-background">
+    <FlatList
+      data={products}
+      keyExtractor={(item) => `cart-item-${item.id}`}
+      renderItem={({ item }) => <ProductCard product={item} />}
+      className="px-6 pt-9"
+      contentContainerStyle={{ gap: 8, paddingBottom: 20 }}
+    />
+  </SafeAreaView>
+)

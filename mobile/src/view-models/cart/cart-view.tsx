@@ -20,7 +20,7 @@ export const CartView = ({ products }: CartViewProps) => (
       contentContainerStyle={{ gap: 8, paddingBottom: 20 }}
       ListHeaderComponent={<CartHeader />}
       ListEmptyComponent={<EmptyList />}
-      ListFooterComponent={<CartFooter />}
+      ListFooterComponent={() => products.length > 0 && <CartFooter />}
     />
   </SafeAreaView>
 )

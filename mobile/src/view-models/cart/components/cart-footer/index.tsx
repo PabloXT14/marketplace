@@ -8,7 +8,11 @@ import { Button } from "@/shared/components/button"
 import { PriceText } from "@/shared/components/price-text"
 import { AppIcon } from "@/shared/components/app-icon"
 
-export const CartFooter = () => {
+type CartFooterProps = {
+  openAddCardBottomSheet: () => void
+}
+
+export const CartFooter = ({ openAddCardBottomSheet }: CartFooterProps) => {
   const { totalPrice } = useCartStore()
 
   return (
@@ -35,6 +39,7 @@ export const CartFooter = () => {
           </Text>
 
           <TouchableOpacity
+            onPress={openAddCardBottomSheet}
             className="flex-row items-center justify-center gap-2 p-0.5"
             activeOpacity={0.7}
           >

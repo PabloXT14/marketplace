@@ -10,7 +10,10 @@ import { CartFooter } from "./components/cart-footer"
 
 type CartViewProps = ReturnType<typeof useCartViewModel>
 
-export const CartView = ({ products }: CartViewProps) => (
+export const CartView = ({
+  products,
+  openAddCardBottomSheet,
+}: CartViewProps) => (
   <SafeAreaView edges={["top"]} className="flex-1 bg-background">
     <FlatList
       data={products}
@@ -20,7 +23,11 @@ export const CartView = ({ products }: CartViewProps) => (
       contentContainerStyle={{ gap: 8, paddingBottom: 20 }}
       ListHeaderComponent={<CartHeader />}
       ListEmptyComponent={<EmptyList />}
-      ListFooterComponent={() => products.length > 0 && <CartFooter />}
+      ListFooterComponent={() =>
+        products.length > 0 && (
+          <CartFooter openAddCardBottomSheet={openAddCardBottomSheet} />
+        )
+      }
     />
   </SafeAreaView>
 )

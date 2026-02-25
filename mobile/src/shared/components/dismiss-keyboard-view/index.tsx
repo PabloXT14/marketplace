@@ -14,7 +14,7 @@ export const DismissKeyboardView = ({ children }: DismissKeyboardViewProps) => (
       keyboardShouldPersistTaps="handled"
       enableOnAndroid
       enableAutomaticScroll
-      extraScrollHeight={20}
+      extraScrollHeight={40}
     >
       {children}
     </KeyboardAwareScrollView>

@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native"
 
 import { colors } from "@/styles/colors"
 
@@ -8,11 +8,20 @@ import { Button } from "@/shared/components/button"
 import { PriceText } from "@/shared/components/price-text"
 import { AppIcon } from "@/shared/components/app-icon"
 
+import type { CreditCard } from "@/shared/interfaces/credit-card"
+import { FlatList } from "react-native-gesture-handler"
+
 type CartFooterProps = {
   openAddCardBottomSheet: () => void
+  creditCards: CreditCard[]
+  isLoadingCreditCards: boolean
 }
 
-export const CartFooter = ({ openAddCardBottomSheet }: CartFooterProps) => {
+export const CartFooter = ({
+  openAddCardBottomSheet,
+  creditCards,
+  isLoadingCreditCards,
+}: CartFooterProps) => {
   const { totalPrice } = useCartStore()
 
   return (
@@ -51,6 +60,43 @@ export const CartFooter = ({ openAddCardBottomSheet }: CartFooterProps) => {
           </TouchableOpacity>
         </View>
       </View>
+
+      {isLoadingCreditCards ? (
+        <View className="items-center justify-center gap-2">
+          <ActivityIndicator color={colors.purple.base} size="small" />
+
+          <Text className="text-center font-lato text-gray-300 text-sm leading-snug">
+            Carregando cartões de crédito...
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          data={creditCards}
+          keyExtractor={(item) => `credit-card-${item.id}`}
+          renderItem={({ item }) => (
+            <View className="flex-row items-center justify-between gap-3">
+              <View className="flex-row items-center gap-2">
+                <AppIcon name="Card" size={20} color={colors.purple.base} />
+
+                <Text className="font-lato text-gray-400 text-sm leading-snug">
+                  {item.titularName}
+                </Text>
+              </View>
+
+              <Text className="font-lato text-gray-400 text-sm leading-snug">
+                {item.number}
+              </Text>
+            </View>
+          )}
+          className="mt-2"
+          contentContainerStyle={{ gap: 4 }}
+          ListEmptyComponent={
+            <Text className="text-center font-lato text-gray-300 text-sm leading-snug">
+              Nenhum cartão de crédito cadastrado
+            </Text>
+          }
+        />
+      )}
 
       <Button text="Confirmar compra" />
     </View>

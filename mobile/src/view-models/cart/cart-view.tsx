@@ -13,6 +13,8 @@ type CartViewProps = ReturnType<typeof useCartViewModel>
 export const CartView = ({
   products,
   openAddCardBottomSheet,
+  creditCards,
+  isLoadingCreditCards,
 }: CartViewProps) => (
   <SafeAreaView edges={["top"]} className="flex-1 bg-background">
     <FlatList
@@ -25,7 +27,11 @@ export const CartView = ({
       ListEmptyComponent={<EmptyList />}
       ListFooterComponent={() =>
         products.length > 0 && (
-          <CartFooter openAddCardBottomSheet={openAddCardBottomSheet} />
+          <CartFooter
+            openAddCardBottomSheet={openAddCardBottomSheet}
+            creditCards={creditCards}
+            isLoadingCreditCards={isLoadingCreditCards}
+          />
         )
       }
     />

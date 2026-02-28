@@ -9,13 +9,16 @@ import { colors } from "@/styles/colors"
 import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 import { AppIcon } from "@/shared/components/app-icon"
 import { Button } from "@/shared/components/button"
-import { Input } from "@/shared/components/input"
+import { InputController } from "@/shared/components/input-controller"
 
 type AddCardBottomSheetViewProps = ReturnType<
   typeof useAddCardBottomSheetViewModel
 >
 
-export const AddCardBottomSheetView = (_props: AddCardBottomSheetViewProps) => {
+export const AddCardBottomSheetView = ({
+  handleCreateCreditCard,
+  control,
+}: AddCardBottomSheetViewProps) => {
   const { close } = useBottomSheetStore()
 
   return (
@@ -40,10 +43,17 @@ export const AddCardBottomSheetView = (_props: AddCardBottomSheetViewProps) => {
           </View>
 
           {/* NAME INPUT */}
-          <Input label="Nome" placeholder="Nome do titular" />
+          <InputController
+            control={control}
+            name="titularName"
+            label="Nome"
+            placeholder="Nome do titular"
+          />
 
           {/* NUMBER INPUT */}
-          <Input
+          <InputController
+            control={control}
+            name="number"
             label="Número"
             placeholder="Número do cartão"
             keyboardType="numeric"
@@ -52,14 +62,18 @@ export const AddCardBottomSheetView = (_props: AddCardBottomSheetViewProps) => {
 
           {/* EXPIRATION AND CVV INPUTS */}
           <View className="flex-row gap-4">
-            <Input
+            <InputController
+              control={control}
+              name="expirationDate"
               label="Vencimento"
-              placeholder="MM/AAAA"
+              placeholder="MM/AA"
               keyboardType="numeric"
-              maxLength={7}
+              maxLength={5}
               containerClassName="flex-1"
             />
-            <Input
+            <InputController
+              control={control}
+              name="CVV"
               label="CVV"
               placeholder="Código de 3 dígitos"
               keyboardType="numeric"
@@ -78,7 +92,11 @@ export const AddCardBottomSheetView = (_props: AddCardBottomSheetViewProps) => {
             onPress={() => close()}
           />
 
-          <Button text="Salvar" className="flex-1" />
+          <Button
+            text="Salvar"
+            className="flex-1"
+            onPress={handleCreateCreditCard}
+          />
         </View>
       </View>
     </DismissKeyboardView>

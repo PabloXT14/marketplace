@@ -16,8 +16,10 @@ type AddCardBottomSheetViewProps = ReturnType<
 >
 
 export const AddCardBottomSheetView = ({
-  handleCreateCreditCard,
   control,
+  expirationDateMask,
+  cardNumberMask,
+  handleCreateCreditCard,
 }: AddCardBottomSheetViewProps) => {
   const { close } = useBottomSheetStore()
 
@@ -57,7 +59,8 @@ export const AddCardBottomSheetView = ({
             label="Número"
             placeholder="Número do cartão"
             keyboardType="numeric"
-            maxLength={16}
+            maxLength={19} // 16 + 3 espacos
+            mask={cardNumberMask}
           />
 
           {/* EXPIRATION AND CVV INPUTS */}
@@ -69,6 +72,7 @@ export const AddCardBottomSheetView = ({
               placeholder="MM/AA"
               keyboardType="numeric"
               maxLength={5}
+              mask={expirationDateMask}
               containerClassName="flex-1"
             />
             <InputController

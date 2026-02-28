@@ -28,8 +28,37 @@ export const useAddCardBottomSheetViewModel = () => {
     })
   }
 
+  const expirationDateMask = (value: string) => {
+    const dateCleaned = value.replace(/\D/g, "") // remove espacos e letras/caracteres especiais
+
+    if (dateCleaned.length < 2) {
+      return dateCleaned
+    }
+
+    const month = dateCleaned.slice(0, 2)
+    const year = dateCleaned.slice(2)
+
+    if (year.length > 0) {
+      return `${month}/${year}`
+    }
+
+    return month
+  }
+
+  const cardNumberMask = (value: string) => {
+    const cardNumberCleaned = value.replace(/\D/g, "") // remove espacos e letras/caracteres especiais
+
+    const cardNumberFormatted = cardNumberCleaned
+      .replace(/(\d{4})(?=\d)/g, "$1 ") // adiciona espaco a cada 4 digitos
+      .trim()
+
+    return cardNumberFormatted
+  }
+
   return {
-    handleCreateCreditCard,
     control,
+    expirationDateMask,
+    cardNumberMask,
+    handleCreateCreditCard,
   }
 }

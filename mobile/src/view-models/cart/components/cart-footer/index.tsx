@@ -88,7 +88,6 @@ export const CartFooter = ({
               </Text>
             </View>
           )}
-          className="mt-2"
           contentContainerStyle={{ gap: 4 }}
           ListEmptyComponent={
             <Text className="text-center font-lato text-gray-300 text-sm leading-snug">

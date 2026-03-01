@@ -16,12 +16,12 @@ export const creditCardSchema = z.object({
     ),
   expirationDate: z
     .string()
-    .nonempty("Data de vencimento é obrigatória")
+    .nonempty("Data obrigatória")
     .refine(
       (value) => {
         const expirationDate = value.replace(/\s/g, "") // remove espacos
         // biome-ignore lint/performance/useTopLevelRegex: for option
-        return expirationDate.match(/^d{2}\/\d{2}$/) // MM/AA
+        return expirationDate.match(/^\d{2}\/\d{2}$/) // MM/AA
       },
       {
         error: "Formato deve ser MM/AA",

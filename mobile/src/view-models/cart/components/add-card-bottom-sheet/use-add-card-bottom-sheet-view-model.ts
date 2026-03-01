@@ -2,8 +2,34 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { useCreateCreditCardMutation } from "@/shared/queries/credit-card/use-create-credit-card-mutation"
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
 
 import { creditCardSchema, type CreditCardFormData } from "./credit-card-schema"
+
+const formatExpirationDateForApi = (
+  expirationDate: string,
+  setError: (message: string) => void
+) => {
+  const [month, year] = expirationDate.split("/").map(Number)
+
+  if (month < 1 || month > 12) {
+    setError("Mês inválido")
+    throw new Error("Mês inválido")
+  }
+
+  if (year < 0 || year > 99) {
+    setError("Ano inválido")
+    throw new Error("Ano inválido")
+  }
+
+  const fullYear = 2000 + year
+
+  const formattedDate = new Date(fullYear, month, 0) // 0 = ultimo dia do mes
+
+  const isoDateString = formattedDate.toISOString().split("T")[0]
+
+  return isoDateString
+}
 
 const DEFAULT_VALUES: CreditCardFormData = {
   titularName: "",
@@ -15,18 +41,35 @@ const DEFAULT_VALUES: CreditCardFormData = {
 export const useAddCardBottomSheetViewModel = () => {
   const createCreditCardMutation = useCreateCreditCardMutation()
 
-  const { control } = useForm<CreditCardFormData>({
+  const {
+    control,
+    handleSubmit,
+    formState: { isLoading },
+    setError,
+  } = useForm<CreditCardFormData>({
     resolver: zodResolver(creditCardSchema),
     defaultValues: DEFAULT_VALUES,
   })
 
-  const handleCreateCreditCard = async () => {
-    await createCreditCardMutation.mutateAsync({
-      number: "1234 1234 1234 1234",
-      expirationDate: "01/01/2023",
-      CVV: 123,
-    })
-  }
+  const { close: closeBottomSheet } = useBottomSheetStore()
+
+  const handleCreateCreditCard = handleSubmit(
+    async ({ number, expirationDate, CVV }: CreditCardFormData) => {
+      const formattedExpirationDate = formatExpirationDateForApi(
+        expirationDate,
+        (message) => setError("expirationDate", { message })
+      )
+      const formattedNumber = number.replace(/\s/g, "")
+
+      await createCreditCardMutation.mutateAsync({
+        number: formattedNumber,
+        expirationDate: formattedExpirationDate,
+        CVV: Number(CVV),
+      })
+
+      closeBottomSheet()
+    }
+  )
 
   const expirationDateMask = (value: string) => {
     const dateCleaned = value.replace(/\D/g, "") // remove espacos e letras/caracteres especiais
@@ -59,6 +102,7 @@ export const useAddCardBottomSheetViewModel = () => {
     control,
     expirationDateMask,
     cardNumberMask,
+    isLoading,
     handleCreateCreditCard,
   }
 }

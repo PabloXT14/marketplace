@@ -19,6 +19,7 @@ export const AddCardBottomSheetView = ({
   control,
   expirationDateMask,
   cardNumberMask,
+  isLoading,
   handleCreateCreditCard,
 }: AddCardBottomSheetViewProps) => {
   const { close } = useBottomSheetStore()
@@ -75,6 +76,7 @@ export const AddCardBottomSheetView = ({
               mask={expirationDateMask}
               containerClassName="flex-1"
             />
+
             <InputController
               control={control}
               name="CVV"
@@ -99,6 +101,8 @@ export const AddCardBottomSheetView = ({
           <Button
             text="Salvar"
             className="flex-1"
+            isLoading={isLoading}
+            disabled={isLoading}
             onPress={handleCreateCreditCard}
           />
         </View>

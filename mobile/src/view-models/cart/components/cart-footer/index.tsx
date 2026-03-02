@@ -1,4 +1,10 @@
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native"
+import {
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+  View,
+  FlatList,
+} from "react-native"
 
 import { colors } from "@/styles/colors"
 
@@ -7,9 +13,9 @@ import { useCartStore } from "@/shared/store/cart-store"
 import { Button } from "@/shared/components/button"
 import { PriceText } from "@/shared/components/price-text"
 import { AppIcon } from "@/shared/components/app-icon"
+import { CreditCardItem } from "../credit-card-item"
 
 import type { CreditCard } from "@/shared/interfaces/credit-card"
-import { FlatList } from "react-native-gesture-handler"
 
 type CartFooterProps = {
   openAddCardBottomSheet: () => void
@@ -73,22 +79,8 @@ export const CartFooter = ({
         <FlatList
           data={creditCards}
           keyExtractor={(item) => `credit-card-${item.id}`}
-          renderItem={({ item }) => (
-            <View className="flex-row items-center justify-between gap-3">
-              <View className="flex-row items-center gap-2">
-                <AppIcon name="Card" size={20} color={colors.purple.base} />
-
-                <Text className="font-lato text-gray-400 text-sm leading-snug">
-                  {item.titularName}
-                </Text>
-              </View>
-
-              <Text className="font-lato text-gray-400 text-sm leading-snug">
-                {item.number}
-              </Text>
-            </View>
-          )}
-          contentContainerStyle={{ gap: 4 }}
+          renderItem={({ item }) => <CreditCardItem creditCard={item} />}
+          className="gap-2"
           ListEmptyComponent={
             <Text className="text-center font-lato text-gray-300 text-sm leading-snug">
               Nenhum cartão de crédito cadastrado

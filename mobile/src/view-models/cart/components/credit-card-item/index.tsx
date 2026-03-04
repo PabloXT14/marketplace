@@ -1,16 +1,13 @@
-import type { CreditCard } from "@/shared/interfaces/credit-card"
-
 import { CreditCardItemView } from "./credit-card-item-view"
-import { useCreditCardViewModel } from "./use-credit-card-view-model"
+import {
+  type UseCreditCardItemViewModelProps,
+  useCreditCardViewModel,
+} from "./use-credit-card-view-model"
 
-type CreditCardItemProps = {
-  creditCard: CreditCard
-}
+type CreditCardItemProps = UseCreditCardItemViewModelProps
 
-export const CreditCardItem = ({ creditCard }: CreditCardItemProps) => {
-  const props = useCreditCardViewModel({
-    creditCard,
-  })
+export const CreditCardItem = (props: CreditCardItemProps) => {
+  const viewModel = useCreditCardViewModel(props)
 
-  return <CreditCardItemView {...props} />
+  return <CreditCardItemView {...viewModel} />
 }

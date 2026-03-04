@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity, View } from "react-native"
 
 import { colors } from "@/styles/colors"
+import { cn } from "@/shared/lib/utils"
 
 import { AppIcon } from "@/shared/components/app-icon"
 
@@ -11,10 +12,16 @@ type CreditCardItemViewProps = ReturnType<typeof useCreditCardViewModel>
 export const CreditCardItemView = ({
   formattedExpirationDate,
   formattedCardNumber,
+  isSelected,
+  setSelectedCreditCard,
+  creditCard,
 }: CreditCardItemViewProps) => (
   <TouchableOpacity
-    onPress={() => console.log("Selected card")}
-    className="flex-row items-start gap-4 rounded-lg border border-shape bg-white p-4"
+    onPress={() => setSelectedCreditCard(creditCard)}
+    className={cn(
+      "flex-row items-start gap-4 rounded-lg border border-shape bg-white p-4",
+      isSelected && "border-purple-base"
+    )}
   >
     <AppIcon name="Card" size={24} color={colors.gray[300]} />
 

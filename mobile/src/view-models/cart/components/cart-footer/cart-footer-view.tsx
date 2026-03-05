@@ -21,9 +21,11 @@ export const CartFooterView = ({
   totalPrice,
   creditCards,
   isLoadingCreditCards,
+  isLoadingOrder,
   openAddCardBottomSheet,
   selectedCreditCard,
   handleSelectCreditCard,
+  handleCreateOrder,
 }: CartFooterViewProps) => {
   return (
     <View className="mt-5 gap-4 rounded-lg bg-white p-4">
@@ -90,7 +92,11 @@ export const CartFooterView = ({
         />
       )}
 
-      <Button text="Confirmar compra" />
+      <Button
+        text="Confirmar compra"
+        onPress={handleCreateOrder}
+        isLoading={isLoadingOrder}
+      />
     </View>
   )
 }

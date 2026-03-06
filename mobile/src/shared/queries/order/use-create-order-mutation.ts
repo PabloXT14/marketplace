@@ -8,9 +8,7 @@ export const useCreateOrderMutation = () => {
 
   const mutation = useMutation({
     mutationFn: createOrderService,
-    onSuccess: (response) => {
-      toast.success(response.message || "Pedido criado com sucesso!")
-
+    onSuccess: (_response) => {
       queryClient.invalidateQueries({ queryKey: ["orders"] })
     },
     onError: (error) => {

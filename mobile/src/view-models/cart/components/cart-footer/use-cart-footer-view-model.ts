@@ -1,10 +1,11 @@
 import { useState } from "react"
+import { router } from "expo-router"
 
 import { useCartStore } from "@/shared/store/cart-store"
 import { useCreateOrderMutation } from "@/shared/queries/order/use-create-order-mutation"
+import { useModal } from "@/shared/hooks/use-modal"
 
 import type { CreditCard } from "@/shared/interfaces/credit-card"
-import { router } from "expo-router"
 
 export type UseCartFooterViewModelProps = {
   openAddCardBottomSheet: () => void
@@ -21,6 +22,7 @@ export const useCartFooterViewModel = ({
     useState<CreditCard | null>(null)
 
   const { totalPrice, products, clearCart } = useCartStore()
+  const { showSuccess } = useModal()
 
   const createOrderMutation = useCreateOrderMutation()
 
@@ -43,7 +45,14 @@ export const useCartFooterViewModel = ({
 
     clearCart()
 
-    router.push("/(private)/(tabs)/orders")
+    showSuccess({
+      title: "Sucesso!",
+      message: "Pedido realizado com sucesso",
+      buttonText: "Ver pedidos",
+      onButtonPress: () => {
+        router.push("/(private)/(tabs)/orders")
+      },
+    })
   }
 
   return {

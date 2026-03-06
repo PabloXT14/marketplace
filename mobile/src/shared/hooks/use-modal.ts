@@ -7,6 +7,10 @@ import {
   SelectionModal,
   type SelectionModalProps,
 } from "../components/modals/selection-modal"
+import {
+  SuccessModal,
+  type SuccessModalProps,
+} from "../components/modals/success-modal"
 
 export type SelectionVariant = "primary" | "secondary" | "tertiary" | "danger"
 
@@ -18,17 +22,29 @@ export type SelectionOption = {
 }
 
 export const useModal = () => {
-  const { open } = useModalStore()
+  const { open, close } = useModalStore()
 
-  const showSelection = (config: {
-    title: string
-    message?: string
-    options: SelectionOption[]
-  }) => {
-    open(createElement(SelectionModal, config as SelectionModalProps))
+  const showSelection = (config: SelectionModalProps) => {
+    open(createElement(SelectionModal, config))
+  }
+
+  const showSuccess = (config: SuccessModalProps) => {
+    open(
+      createElement(SuccessModal, {
+        ...config,
+        onButtonPress: () => {
+          if (config.onButtonPress) {
+            config.onButtonPress()
+          }
+
+          close()
+        },
+      })
+    )
   }
 
   return {
     showSelection,
+    showSuccess,
   }
 }

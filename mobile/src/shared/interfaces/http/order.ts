@@ -13,3 +13,8 @@ export type CreateOrderHttpResponse = {
   ordersCount: number
   orders: Order[]
 }
+
+export type GetOrdersHttpResponse = {
+  orders: Order[]
+  totalOrders: number
+}

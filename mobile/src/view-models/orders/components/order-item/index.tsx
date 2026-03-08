@@ -3,6 +3,8 @@ import dayjs from "dayjs"
 
 import { buildImageUrl } from "@/shared/helpers/build-image-url"
 
+import { PriceText } from "@/shared/components/price-text"
+
 import type { Order } from "@/shared/interfaces/order"
 
 type OrderItemProps = {
@@ -36,10 +38,19 @@ export const OrderItem = ({ order }: OrderItemProps) => (
 
       {/* INFO */}
       <View className="gap-0.5">
-        <Text className="font-lato text-gray-400 text-xs leading-snug">
-          {order.quantity} {order.quantity > 1 ? "unidades" : "unidade"}{" "}
-          <Text className="text-gray-200">•</Text> R$ {order.totalPrice}
-        </Text>
+        <View className="flex-row items-center">
+          <Text className="font-lato text-gray-400 text-xs leading-snug">
+            {order.quantity} {order.quantity > 1 ? "unidades" : "unidade"}
+          </Text>
+
+          <Text className="text-gray-200"> • </Text>
+
+          <PriceText
+            value={order.totalPrice}
+            currencyClassName="font-lato text-gray-400 text-xs leading-snug"
+            valueClassName="font-lato text-gray-400 text-xs leading-snug"
+          />
+        </View>
 
         <Text className="font-lato text-gray-400 text-xs leading-snug">
           Cartão final {order.creditCard.maskedNumber.slice(-4)}

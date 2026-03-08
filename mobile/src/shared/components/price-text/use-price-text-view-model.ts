@@ -1,11 +1,13 @@
 export type UsePriceTextViewModelProps = {
+  value: number
+  containerClassName?: string
   currencyClassName?: string
   valueClassName?: string
-  value: number
 }
 
 export const usePriceTextViewModel = ({
   value,
+  containerClassName,
   currencyClassName,
   valueClassName,
 }: UsePriceTextViewModelProps) => {
@@ -21,5 +23,11 @@ export const usePriceTextViewModel = ({
   const currencySymbol = parts[0]
   const valueText = parts[1]
 
-  return { currencySymbol, valueText, currencyClassName, valueClassName }
+  return {
+    currencySymbol,
+    valueText,
+    currencyClassName,
+    valueClassName,
+    containerClassName,
+  }
 }

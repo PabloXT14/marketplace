@@ -7,12 +7,13 @@ import { cn } from "@/shared/lib/utils"
 type PriceTextViewProps = ReturnType<typeof usePriceTextViewModel>
 
 export const PriceTextView = ({
+  containerClassName,
   currencyClassName,
   valueClassName,
   currencySymbol,
   valueText,
 }: PriceTextViewProps) => (
-  <View className="flex-row items-baseline gap-1">
+  <View className={cn("flex-row items-baseline gap-1", containerClassName)}>
     <Text
       className={cn(
         "font-lato-bold text-gray-500 text-xs leading-tight",

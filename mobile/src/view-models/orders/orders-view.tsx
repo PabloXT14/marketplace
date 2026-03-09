@@ -4,6 +4,7 @@ import { FlatList } from "react-native"
 import type { useOrdersViewModel } from "./use-orders-view-model"
 
 import { OrderItem } from "./components/order-item"
+import { EmptyList } from "./components/empty-list"
 
 type OrdersViewProps = ReturnType<typeof useOrdersViewModel>
 
@@ -15,6 +16,7 @@ export const OrdersView = ({ orders }: OrdersViewProps) => (
       renderItem={({ item }) => <OrderItem order={item} />}
       className="px-6 pt-9"
       contentContainerStyle={{ gap: 8, paddingBottom: 120 }}
+      ListEmptyComponent={<EmptyList />}
     />
   </SafeAreaView>
 )

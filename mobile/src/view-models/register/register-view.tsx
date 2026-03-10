@@ -37,7 +37,7 @@ export const RegisterView = ({
             <TouchableOpacity
               onPress={handleSelectAvatar}
               activeOpacity={0.7}
-              className="mx-auto size-32 items-center justify-center rounded-xl bg-shape"
+              className="mx-auto size-[120px] items-center justify-center rounded-xl bg-shape"
             >
               {avatarUri ? (
                 <Image

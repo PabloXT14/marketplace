@@ -9,6 +9,7 @@ import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 import { AppIcon } from "@/shared/components/app-icon"
 import { InputController } from "@/shared/components/input-controller"
 import { Button } from "@/shared/components/button"
+import { Header } from "./header"
 
 type ProfileViewProps = ReturnType<typeof useProfileViewModel>
 
@@ -20,9 +21,11 @@ export const ProfileView = ({
 }: ProfileViewProps) => (
   <SafeAreaView className="flex-1 bg-background">
     <DismissKeyboardView>
-      <View className="flex-1 px-6 py-9">
+      <View className="flex-1 gap-6 px-6 py-9">
+        <Header />
+
         {/* FORM */}
-        <View className="mb-16 w-full gap-10">
+        <View className="w-full gap-10">
           {/* IMAGE FIELD */}
           <View className="w-full gap-5">
             {/* IMAGE */}
@@ -31,7 +34,7 @@ export const ProfileView = ({
                 /*  */
               }}
               activeOpacity={0.7}
-              className="mx-auto size-32 items-center justify-center rounded-xl bg-shape"
+              className="mx-auto size-[120px] items-center justify-center rounded-xl bg-shape"
             >
               {avatarUri ? (
                 <Image

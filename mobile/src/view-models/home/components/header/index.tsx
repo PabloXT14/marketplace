@@ -1,14 +1,19 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
-import { AppIcon } from "@/shared/components/app-icon"
+import { router } from "expo-router"
 
 import { useUserStore } from "@/shared/store/user-store"
 import { colors } from "@/styles/colors"
+
+import { AppIcon } from "@/shared/components/app-icon"
 
 export const HomeHeader = () => {
   const { user } = useUserStore()
 
   return (
-    <TouchableOpacity className="mb-8 w-full flex-row items-center gap-5">
+    <TouchableOpacity
+      onPress={() => router.navigate("/(private)/profile")}
+      className="mb-8 w-full flex-row items-center gap-5"
+    >
       {user?.avatarUrl ? (
         <Image
           source={{ uri: user?.avatarUrl }}

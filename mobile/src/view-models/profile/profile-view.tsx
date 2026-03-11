@@ -18,6 +18,7 @@ export const ProfileView = ({
   control,
   onSubmit,
   errors,
+  isSubmitting,
 }: ProfileViewProps) => (
   <SafeAreaView className="flex-1 bg-background">
     <DismissKeyboardView>
@@ -113,7 +114,11 @@ export const ProfileView = ({
             />
           </View>
 
-          <Button text="Atualizar cadastro" onPress={() => onSubmit()} />
+          <Button
+            text="Atualizar cadastro"
+            onPress={() => onSubmit()}
+            isLoading={isSubmitting}
+          />
         </View>
       </View>
     </DismissKeyboardView>

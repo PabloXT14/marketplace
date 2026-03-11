@@ -5,4 +5,6 @@ export type User = {
   avatarUrl: string
   phone: string
   createdAt: string
+  updatedAt: string
+  deletedAt: string
 }

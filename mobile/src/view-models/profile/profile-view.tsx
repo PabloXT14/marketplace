@@ -19,11 +19,12 @@ export const ProfileView = ({
   onSubmit,
   errors,
   isSubmitting,
+  handleLogout,
 }: ProfileViewProps) => (
   <SafeAreaView className="flex-1 bg-background">
     <DismissKeyboardView>
       <View className="flex-1 gap-6 px-6 py-9">
-        <Header />
+        <Header onLogout={handleLogout} />
 
         {/* FORM */}
         <View className="w-full gap-10">

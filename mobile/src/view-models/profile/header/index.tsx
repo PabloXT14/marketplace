@@ -4,11 +4,12 @@ import { router } from "expo-router"
 import { AppIcon } from "@/shared/components/app-icon"
 
 import { colors } from "@/styles/colors"
-import { useUserStore } from "@/shared/store/user-store"
 
-export const Header = () => {
-  const { logout } = useUserStore()
+type HeaderProps = {
+  onLogout: () => void
+}
 
+export const Header = ({ onLogout }: HeaderProps) => {
   return (
     <View className="flex-row items-center justify-between">
       {/* BACK BUTTON */}
@@ -28,7 +29,7 @@ export const Header = () => {
       <TouchableOpacity
         className="flex-row items-center gap-2 p-0.5"
         activeOpacity={0.7}
-        onPress={() => logout()}
+        onPress={onLogout}
       >
         <AppIcon name="Logout3" size={20} color={colors.danger} />
 

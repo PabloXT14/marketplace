@@ -6,9 +6,15 @@ import { profileSchema, type ProfileFormData } from "./profile-schema"
 
 import { useUserStore } from "@/shared/store/user-store"
 import { useUpdateProfileMutation } from "@/shared/queries/profile/use-update-profile-mutation"
+import { useModal } from "@/shared/hooks/use-modal"
+import { useModalStore } from "@/shared/store/modal-store"
+import { useCartStore } from "@/shared/store/cart-store"
 
 export const useProfileViewModel = () => {
-  const { user } = useUserStore()
+  const { user, logout } = useUserStore()
+  const { showSelection } = useModal()
+  const { close: closeModal } = useModalStore()
+  const { clearCart } = useCartStore()
 
   const updateProfileMutation = useUpdateProfileMutation()
 
@@ -31,17 +37,6 @@ export const useProfileViewModel = () => {
     },
   })
 
-  // const validatePasswords = (newUserData: ProfileFormData) => {
-  //   if (
-  //     newUserData.password === newUserData.newPassword &&
-  //     newUserData.password.length > 0
-  //   ) {
-  //     return false
-  //   }
-
-  //   return true
-  // }
-
   const onSubmit = handleSubmit(async (data) => {
     await updateProfileMutation.mutateAsync({
       name: data.name,
@@ -52,11 +47,34 @@ export const useProfileViewModel = () => {
     })
   })
 
+  const handleLogout = () => {
+    showSelection({
+      title: "Sair",
+      message: "Tem certeza que deseja sair?",
+      options: [
+        {
+          variant: "danger",
+          text: "Sim",
+          onPress: () => {
+            clearCart()
+            logout()
+            closeModal()
+          },
+        },
+        {
+          text: "Cancelar",
+          onPress: closeModal,
+        },
+      ],
+    })
+  }
+
   return {
     avatarUri,
     control,
     onSubmit,
     errors,
     isSubmitting,
+    handleLogout,
   }
 }

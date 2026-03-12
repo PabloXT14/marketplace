@@ -8,7 +8,7 @@ import type {
 } from "../interfaces/http/login"
 import type { UploadAvatarHttpResponse } from "../interfaces/http/upload-avatar"
 
-import { BASE_URL, marketplaceApiClient } from "../api/marketplace"
+import { marketplaceApiClient } from "../api/marketplace"
 
 export const registerService = async (userData: RegisterHttpRequest) => {
   const response = await marketplaceApiClient.post<RegisterHttpResponse>(
@@ -52,8 +52,6 @@ export const uploadAvatarService = async (avatarUri: string) => {
   )
 
   const { data } = response
-
-  data.url = `${BASE_URL}${data.url}`
 
   return data
 }

@@ -8,6 +8,10 @@ export const buildImageUrl = (originalUrl: string) => {
     return originalUrl
   }
 
+  if (!originalUrl.startsWith("http")) {
+    return `${BASE_URL}${originalUrl}`
+  }
+
   return Platform.select({
     android: originalUrl.replace(
       "http://localhost:3001",

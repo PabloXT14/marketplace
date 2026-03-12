@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { CameraType } from "expo-image-picker"
 
 import { profileSchema, type ProfileFormData } from "./profile-schema"
+import { buildImageUrl } from "@/shared/helpers/build-image-url"
 
 import { useUserStore } from "@/shared/store/user-store"
 import { useUpdateProfileMutation } from "@/shared/queries/profile/use-update-profile-mutation"
@@ -81,7 +82,7 @@ export const useProfileViewModel = () => {
   }
 
   return {
-    avatarUri: user?.avatarUrl,
+    avatarUri: buildImageUrl(user?.avatarUrl ?? ""),
     control,
     onSubmit,
     errors,

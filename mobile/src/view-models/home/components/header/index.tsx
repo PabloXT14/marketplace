@@ -1,8 +1,10 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
 import { router } from "expo-router"
 
-import { useUserStore } from "@/shared/store/user-store"
 import { colors } from "@/styles/colors"
+import { buildImageUrl } from "@/shared/helpers/build-image-url"
+
+import { useUserStore } from "@/shared/store/user-store"
 
 import { AppIcon } from "@/shared/components/app-icon"
 
@@ -16,7 +18,7 @@ export const HomeHeader = () => {
     >
       {user?.avatarUrl ? (
         <Image
-          source={{ uri: user?.avatarUrl }}
+          source={{ uri: buildImageUrl(user?.avatarUrl) }}
           alt={user?.name}
           className="size-16 rounded-xl border border-shape"
         />

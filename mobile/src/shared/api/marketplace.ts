@@ -96,7 +96,7 @@ export class MarketplaceApiClient {
         }
 
         if (error.response?.data) {
-          return Promise.reject(error.response.data.message)
+          return Promise.reject(new Error(error.response.data.message))
         }
 
         return Promise.reject(new Error("Falha na requisição"))

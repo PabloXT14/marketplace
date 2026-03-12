@@ -1,26 +1,37 @@
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { CameraType } from "expo-image-picker"
 
 import { profileSchema, type ProfileFormData } from "./profile-schema"
 
 import { useUserStore } from "@/shared/store/user-store"
 import { useUpdateProfileMutation } from "@/shared/queries/profile/use-update-profile-mutation"
+import { useUploadAvatarMutation } from "@/shared/queries/auth/use-upload-avatar-mutation"
 import { useModal } from "@/shared/hooks/use-modal"
 import { useModalStore } from "@/shared/store/modal-store"
 import { useCartStore } from "@/shared/store/cart-store"
+import { useImage } from "@/shared/hooks/use-image"
 
 export const useProfileViewModel = () => {
   const { user, logout } = useUserStore()
+
   const { showSelection } = useModal()
   const { close: closeModal } = useModalStore()
   const { clearCart } = useCartStore()
 
   const updateProfileMutation = useUpdateProfileMutation()
+  const uploadAvatarMutation = useUploadAvatarMutation()
 
-  const [avatarUri, setAvatarUri] = useState<string | null>(
-    user?.avatarUrl ?? null
-  )
+  const { handleSelectImage } = useImage({
+    callback: async (uri) => {
+      if (!uri) {
+        return
+      }
+
+      await uploadAvatarMutation.mutateAsync(uri)
+    },
+    cameraType: CameraType.front,
+  })
 
   const {
     control,
@@ -70,11 +81,12 @@ export const useProfileViewModel = () => {
   }
 
   return {
-    avatarUri,
+    avatarUri: user?.avatarUrl,
     control,
     onSubmit,
     errors,
     isSubmitting,
     handleLogout,
+    handleSelectImage,
   }
 }

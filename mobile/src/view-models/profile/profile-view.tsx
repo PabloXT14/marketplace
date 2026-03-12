@@ -20,6 +20,7 @@ export const ProfileView = ({
   errors,
   isSubmitting,
   handleLogout,
+  handleSelectImage,
 }: ProfileViewProps) => (
   <SafeAreaView className="flex-1 bg-background">
     <DismissKeyboardView>
@@ -32,9 +33,7 @@ export const ProfileView = ({
           <View className="w-full gap-5">
             {/* IMAGE */}
             <TouchableOpacity
-              onPress={() => {
-                /*  */
-              }}
+              onPress={handleSelectImage}
               activeOpacity={0.7}
               className="mx-auto size-[120px] items-center justify-center rounded-xl bg-shape"
             >
@@ -98,7 +97,7 @@ export const ProfileView = ({
               control={control}
               name="password"
               errors={errors}
-              label="Senha"
+              label="Senha atual"
               leftIcon="KeyMinimalisticSquare2"
               placeholder="Sua senha"
               secureTextEntry
@@ -117,7 +116,7 @@ export const ProfileView = ({
 
           <Button
             text="Atualizar cadastro"
-            onPress={() => onSubmit()}
+            onPress={onSubmit}
             isLoading={isSubmitting}
           />
         </View>

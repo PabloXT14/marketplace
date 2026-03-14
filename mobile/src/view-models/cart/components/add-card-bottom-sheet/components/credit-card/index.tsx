@@ -1,8 +1,13 @@
 import { CreditCardView } from "./credit-card-view"
-import { useCreditCardViewModel } from "./use-credit-card-view-model"
+import {
+  useCreditCardViewModel,
+  type UseCreditCardViewModelProps,
+} from "./use-credit-card-view-model"
 
-export const CreditCard = () => {
-  const props = useCreditCardViewModel()
+type CreditCardProps = UseCreditCardViewModelProps
 
-  return <CreditCardView {...props} />
+export const CreditCard = (props: CreditCardProps) => {
+  const viewModel = useCreditCardViewModel(props)
+
+  return <CreditCardView {...viewModel} />
 }

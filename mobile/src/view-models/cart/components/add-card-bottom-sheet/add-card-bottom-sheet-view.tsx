@@ -22,6 +22,10 @@ export const AddCardBottomSheetView = ({
   cardNumberMask,
   isLoading,
   handleCreateCreditCard,
+  handleFieldFocus,
+  handleFieldBlur,
+  isFlipped,
+  focusedField,
 }: AddCardBottomSheetViewProps) => {
   const { close } = useBottomSheetStore()
 
@@ -42,7 +46,7 @@ export const AddCardBottomSheetView = ({
           </View>
 
           {/* CREDIT CARD */}
-          <CreditCard />
+          <CreditCard isFlipped={isFlipped} focusedField={focusedField} />
 
           {/* NAME INPUT */}
           <InputController
@@ -50,6 +54,8 @@ export const AddCardBottomSheetView = ({
             name="titularName"
             label="Nome"
             placeholder="Nome do titular"
+            onFocus={() => handleFieldFocus("name")}
+            onBlur={handleFieldBlur}
           />
 
           {/* NUMBER INPUT */}
@@ -61,6 +67,8 @@ export const AddCardBottomSheetView = ({
             keyboardType="numeric"
             maxLength={19} // 16 + 3 espacos
             mask={cardNumberMask}
+            onFocus={() => handleFieldFocus("number")}
+            onBlur={handleFieldBlur}
           />
 
           {/* EXPIRATION AND CVV INPUTS */}
@@ -74,6 +82,8 @@ export const AddCardBottomSheetView = ({
               maxLength={5}
               mask={expirationDateMask}
               containerClassName="flex-1"
+              onFocus={() => handleFieldFocus("expiry")}
+              onBlur={handleFieldBlur}
             />
 
             <InputController
@@ -84,6 +94,8 @@ export const AddCardBottomSheetView = ({
               keyboardType="numeric"
               maxLength={3}
               containerClassName="flex-1"
+              onFocus={() => handleFieldFocus("cvv")}
+              onBlur={handleFieldBlur}
             />
           </View>
         </View>

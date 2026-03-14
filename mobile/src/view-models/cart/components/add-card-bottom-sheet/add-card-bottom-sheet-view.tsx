@@ -10,6 +10,7 @@ import { DismissKeyboardView } from "@/shared/components/dismiss-keyboard-view"
 import { AppIcon } from "@/shared/components/app-icon"
 import { Button } from "@/shared/components/button"
 import { InputController } from "@/shared/components/input-controller"
+import { CreditCard } from "./components/credit-card"
 
 type AddCardBottomSheetViewProps = ReturnType<
   typeof useAddCardBottomSheetViewModel
@@ -41,9 +42,7 @@ export const AddCardBottomSheetView = ({
           </View>
 
           {/* CREDIT CARD */}
-          <View className="self-center">
-            <View className="h-[168px] w-[280px] rounded-2xl bg-gray-100" />
-          </View>
+          <CreditCard />
 
           {/* NAME INPUT */}
           <InputController

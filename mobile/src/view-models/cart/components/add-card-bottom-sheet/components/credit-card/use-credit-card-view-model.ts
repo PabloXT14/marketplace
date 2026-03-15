@@ -9,7 +9,7 @@ export const useCreditCardViewModel = ({
   isFlipped,
   focusedField,
 }: UseCreditCardViewModelProps) => {
-  console.log("FOCUSED FIELD: ", isFlipped)
+  console.log("FOCUSED FIELD: ", focusedField)
 
   return {
     isFlipped,

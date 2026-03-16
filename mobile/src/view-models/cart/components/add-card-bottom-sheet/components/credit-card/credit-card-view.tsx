@@ -1,14 +1,11 @@
 import { Text, View } from "react-native"
 import Animated from "react-native-reanimated"
 import { LinearGradient } from "expo-linear-gradient"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 import { colors } from "@/styles/colors"
-import { cn } from "@/shared/lib/utils"
-
-import { AppIcon } from "@/shared/components/app-icon"
 
 import type { useCreditCardViewModel } from "./use-credit-card-view-model"
+import { cn } from "@/shared/lib/utils"
 
 type CreditCardViewProps = ReturnType<typeof useCreditCardViewModel>
 
@@ -23,7 +20,7 @@ const CARD_NUMBER = "4716 8039 02•• ••••"
 export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
   <View className="h-[192px] w-full self-center rounded-2xl bg-gray-100">
     {/* FRONT */}
-    <Animated.View
+    {/* <Animated.View
       style={{
         position: "absolute",
         height: 192,
@@ -41,7 +38,7 @@ export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
           padding: 20,
         }}
       >
-        {/* TOP */}
+        // TOP
         <View className="mb-10 flex-row items-center justify-between">
           <AppIcon name="Card" size={32} color={colors.background} />
           <MaterialCommunityIcons
@@ -51,11 +48,11 @@ export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
           />
         </View>
 
-        {/* CARD NUMBER */}
+        // CARD NUMBER
         <View
           className={cn(
             "flex-row items-center justify-between px-2 py-1",
-            focusedField === "number" && " bg-white/20 rounded-md"
+            focusedField === "number" && "rounded-md bg-white/20"
           )}
         >
           {CARD_NUMBER.split(" ").map((group) => (
@@ -68,12 +65,12 @@ export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
           ))}
         </View>
 
-        {/* BOTTOM */}
+        // BOTTOM
         <View className="mt-auto flex-row items-center justify-between gap-4">
           <View
             className={cn(
               "px-2 py-1",
-              focusedField === "name" && "bg-white/20 rounded-md"
+              focusedField === "name" && "rounded-md bg-white/20"
             )}
           >
             <Text className="font-lato text-background text-base uppercase leading-snug">
@@ -81,7 +78,12 @@ export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
             </Text>
           </View>
 
-          <View className={cn("flex-row items-center gap-1.5 px-2 py-1", focusedField === "expiry" && "bg-white/20 rounded-md")}>
+          <View
+            className={cn(
+              "flex-row items-center gap-1.5 px-2 py-1",
+              focusedField === "expiry" && "rounded-md bg-white/20"
+            )}
+          >
             <Text className="font-lato text-background text-base leading-snug">
               ••
             </Text>
@@ -96,9 +98,48 @@ export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
           </View>
         </View>
       </LinearGradient>
-    </Animated.View>
+    </Animated.View> */}
 
     {/* BACK */}
-    <Animated.View />
+    <Animated.View
+      style={{
+        position: "absolute",
+        height: 192,
+        width: "100%",
+        backfaceVisibility: "hidden",
+      }}
+    >
+      <LinearGradient
+        colors={PURPLE_GRADIENT}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{
+          flex: 1,
+          borderRadius: 16,
+          paddingVertical: 20,
+        }}
+      >
+        {/* MAGNET STRIPE */}
+        <View className="mb-14 h-[40px] w-full bg-gray-500" />
+
+        {/* CVV */}
+        <View className="mx-6 flex-row items-center gap-3">
+          <View
+            className={cn(
+              "flex-1 items-end gap-1 rounded-lg bg-shape px-3 py-4",
+              focusedField === "cvv" && "bg-blue-light"
+            )}
+          >
+            <Text className="font-lato-bold text-gray-500/50 text-sm tracking-[4px]">
+              •••
+            </Text>
+          </View>
+
+          <Text className="font-lato text-shape text-sm leading-tight">
+            CVV
+          </Text>
+        </View>
+      </LinearGradient>
+    </Animated.View>
   </View>
 )

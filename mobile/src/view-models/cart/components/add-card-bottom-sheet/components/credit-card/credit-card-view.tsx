@@ -18,10 +18,11 @@ const PURPLE_GRADIENT: readonly [string, string, string] = [
   colors.purple.light,
 ]
 
-const CARD_NUMBER = "4716 8039 02•• ••••"
+// const CARD_NUMBER = "4716 8039 02•• ••••"
 
 export const CreditCardView = ({
   focusedField,
+  cardData,
   frontAnimatedStyle,
   backAnimatedStyle,
 }: CreditCardViewProps) => (
@@ -65,9 +66,9 @@ export const CreditCardView = ({
             focusedField === "number" && "rounded-md bg-white/20"
           )}
         >
-          {CARD_NUMBER.split(" ").map((group) => (
+          {cardData.number.split(" ").map((group, index) => (
             <Text
-              key={group}
+              key={`group-${index + 1}`}
               className="font-lato-bold text-background text-base leading-tight tracking-[4px]"
             >
               {group}
@@ -84,7 +85,7 @@ export const CreditCardView = ({
             )}
           >
             <Text className="font-lato text-background text-base uppercase leading-snug">
-              Nome do titular
+              {cardData.titularName || "Nome do titular"}
             </Text>
           </View>
 
@@ -95,7 +96,7 @@ export const CreditCardView = ({
             )}
           >
             <Text className="font-lato text-background text-base leading-snug">
-              ••
+              {cardData.expirationDate.split("/")[0]}
             </Text>
 
             <Text className="font-lato text-background text-base leading-snug">
@@ -103,7 +104,7 @@ export const CreditCardView = ({
             </Text>
 
             <Text className="font-lato text-background text-base leading-snug">
-              ••
+              {cardData.expirationDate.split("/")[1]}
             </Text>
           </View>
         </View>
@@ -144,7 +145,7 @@ export const CreditCardView = ({
             )}
           >
             <Text className="font-lato-bold text-gray-500/50 text-sm tracking-[4px]">
-              •••
+              {cardData.CVV}
             </Text>
           </View>
 

@@ -26,6 +26,7 @@ export const AddCardBottomSheetView = ({
   handleFieldBlur,
   isFlipped,
   focusedField,
+  cardData,
 }: AddCardBottomSheetViewProps) => {
   const { close } = useBottomSheetStore()
 
@@ -46,7 +47,11 @@ export const AddCardBottomSheetView = ({
           </View>
 
           {/* CREDIT CARD */}
-          <CreditCard isFlipped={isFlipped} focusedField={focusedField} />
+          <CreditCard
+            isFlipped={isFlipped}
+            focusedField={focusedField}
+            cardData={cardData}
+          />
 
           {/* NAME INPUT */}
           <InputController

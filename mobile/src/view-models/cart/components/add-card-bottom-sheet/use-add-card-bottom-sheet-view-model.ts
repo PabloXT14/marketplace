@@ -53,6 +53,7 @@ export const useAddCardBottomSheetViewModel = () => {
     handleSubmit,
     formState: { isLoading },
     setError,
+    watch,
   } = useForm<CreditCardFormData>({
     resolver: zodResolver(creditCardSchema),
     defaultValues: DEFAULT_VALUES,
@@ -121,6 +122,8 @@ export const useAddCardBottomSheetViewModel = () => {
 
   const isFlipped = focusedField === "cvv"
 
+  const watchedValues = watch()
+
   return {
     control,
     expirationDateMask,
@@ -128,6 +131,12 @@ export const useAddCardBottomSheetViewModel = () => {
     isLoading,
     isFlipped,
     focusedField,
+    cardData: {
+      titularName: watchedValues.titularName,
+      number: watchedValues.number,
+      expirationDate: watchedValues.expirationDate,
+      CVV: watchedValues.CVV,
+    },
     handleCreateCreditCard,
     handleFieldFocus,
     handleFieldBlur,

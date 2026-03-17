@@ -1,4 +1,12 @@
+import {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated"
+
 import type { FocusedField } from "../../use-add-card-bottom-sheet-view-model"
+import { useEffect } from "react"
 
 export type UseCreditCardViewModelProps = {
   isFlipped: boolean
@@ -9,10 +17,34 @@ export const useCreditCardViewModel = ({
   isFlipped,
   focusedField,
 }: UseCreditCardViewModelProps) => {
-  console.log("FOCUSED FIELD: ", focusedField)
+  const flipValue = useSharedValue(0)
+
+  const frontAnimatedStyle = useAnimatedStyle(() => {
+    const rotateValue = interpolate(flipValue.value, [0, 1], [0, 180])
+
+    return {
+      transform: [{ rotateY: `${rotateValue}deg` }],
+    }
+  })
+
+  const backAnimatedStyle = useAnimatedStyle(() => {
+    const rotateValue = interpolate(flipValue.value, [0, 1], [180, 360])
+
+    return {
+      transform: [{ rotateY: `${rotateValue}deg` }],
+    }
+  })
+
+  useEffect(() => {
+    flipValue.value = withTiming(isFlipped ? 1 : 0, {
+      duration: 600,
+    })
+  }, [isFlipped])
 
   return {
     isFlipped,
     focusedField,
+    frontAnimatedStyle,
+    backAnimatedStyle,
   }
 }

@@ -1,11 +1,14 @@
 import { Text, View } from "react-native"
 import Animated from "react-native-reanimated"
 import { LinearGradient } from "expo-linear-gradient"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 import { colors } from "@/styles/colors"
+import { cn } from "@/shared/lib/utils"
+
+import { AppIcon } from "@/shared/components/app-icon"
 
 import type { useCreditCardViewModel } from "./use-credit-card-view-model"
-import { cn } from "@/shared/lib/utils"
 
 type CreditCardViewProps = ReturnType<typeof useCreditCardViewModel>
 
@@ -17,16 +20,23 @@ const PURPLE_GRADIENT: readonly [string, string, string] = [
 
 const CARD_NUMBER = "4716 8039 02•• ••••"
 
-export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
-  <View className="h-[192px] w-full self-center rounded-2xl bg-gray-100">
+export const CreditCardView = ({
+  focusedField,
+  frontAnimatedStyle,
+  backAnimatedStyle,
+}: CreditCardViewProps) => (
+  <View className="h-[192px] w-full self-center">
     {/* FRONT */}
-    {/* <Animated.View
-      style={{
-        position: "absolute",
-        height: 192,
-        width: "100%",
-        backfaceVisibility: "hidden",
-      }}
+    <Animated.View
+      style={[
+        frontAnimatedStyle,
+        {
+          position: "absolute",
+          height: 192,
+          width: "100%",
+          backfaceVisibility: "hidden",
+        },
+      ]}
     >
       <LinearGradient
         colors={PURPLE_GRADIENT}
@@ -38,7 +48,7 @@ export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
           padding: 20,
         }}
       >
-        // TOP
+        {/* TOP */}
         <View className="mb-10 flex-row items-center justify-between">
           <AppIcon name="Card" size={32} color={colors.background} />
           <MaterialCommunityIcons
@@ -48,7 +58,7 @@ export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
           />
         </View>
 
-        // CARD NUMBER
+        {/* CARD NUMBER */}
         <View
           className={cn(
             "flex-row items-center justify-between px-2 py-1",
@@ -65,7 +75,7 @@ export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
           ))}
         </View>
 
-        // BOTTOM
+        {/* BOTTOM */}
         <View className="mt-auto flex-row items-center justify-between gap-4">
           <View
             className={cn(
@@ -98,16 +108,19 @@ export const CreditCardView = ({ focusedField }: CreditCardViewProps) => (
           </View>
         </View>
       </LinearGradient>
-    </Animated.View> */}
+    </Animated.View>
 
     {/* BACK */}
     <Animated.View
-      style={{
-        position: "absolute",
-        height: 192,
-        width: "100%",
-        backfaceVisibility: "hidden",
-      }}
+      style={[
+        backAnimatedStyle,
+        {
+          position: "absolute",
+          height: 192,
+          width: "100%",
+          backfaceVisibility: "hidden",
+        },
+      ]}
     >
       <LinearGradient
         colors={PURPLE_GRADIENT}

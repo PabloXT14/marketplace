@@ -12,9 +12,10 @@ type CreditCardItemViewProps = ReturnType<typeof useCreditCardViewModel>
 export const CreditCardItemView = ({
   formattedExpirationDate,
   formattedCardNumber,
+  creditCard,
   isSelected,
   setSelectedCreditCard,
-  creditCard,
+  handleDeleteCreditCard,
 }: CreditCardItemViewProps) => (
   <TouchableOpacity
     onPress={() => setSelectedCreditCard(creditCard)}
@@ -35,8 +36,8 @@ export const CreditCardItemView = ({
       </Text>
     </View>
 
-    <TouchableOpacity onPress={() => console.log("Edit card")}>
-      <AppIcon name="Pen2" size={24} color={colors.purple.base} />
+    <TouchableOpacity onPress={handleDeleteCreditCard}>
+      <AppIcon name="TrashBin2" size={24} color={colors.purple.base} />
     </TouchableOpacity>
   </TouchableOpacity>
 )

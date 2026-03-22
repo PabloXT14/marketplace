@@ -4,6 +4,7 @@ import type {
   GetCreditCardsHttpResponse,
   CreateCreditCardHttpRequest,
   CreateCreditCardHttpResponse,
+  DeleteCreditCardHttpRequest,
 } from "../interfaces/http/credit-card"
 
 export const getCreditCardsService = async () => {
@@ -25,4 +26,10 @@ export const createCreditCardService = async (
   const { data } = response
 
   return data
+}
+
+export const deleteCreditCardService = async ({
+  creditCardId,
+}: DeleteCreditCardHttpRequest) => {
+  await marketplaceApiClient.delete(`/credit-cards/${creditCardId}`)
 }

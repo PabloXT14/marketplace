@@ -13,3 +13,7 @@ export type CreateCreditCardHttpResponse = {
   message: string
   data: CreditCard
 }
+
+export type DeleteCreditCardHttpRequest = {
+  creditCardId: number
+}

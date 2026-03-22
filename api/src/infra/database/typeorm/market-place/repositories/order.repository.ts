@@ -34,11 +34,26 @@ export class OrderRepository implements OrderRepositoryInterface {
 
   async findOrdersByUserId(userId: number): Promise<Order[]> {
     try {
-      return await this.repository.find({
-        where: { userId },
-        relations: ["product", "creditCard"],
-        order: { createdAt: "DESC" },
-      });
+      // return await this.repository.find({
+      //   where: { userId, deletedAt: null },
+      //   relations: ["product", "creditCard"],
+      //   withDeleted: true,
+      //   order: { createdAt: "DESC" },
+      // });
+
+      return await this.repository.createQueryBuilder('orders')
+        .leftJoinAndSelect('orders.product', 'product')
+        .leftJoinAndSelect(
+          'orders.creditCard',
+          'creditCard',
+          'creditCard.deletedAt IS NOT NULL OR creditCard.deletedAt IS NULL'
+        )
+        .where('orders.userId = :userId', { userId })
+        .andWhere('orders.deletedAt IS NULL')
+        .orderBy('orders.createdAt', 'DESC')
+        .getMany();
+
+
     } catch (error) {
       throw new DatabaseError("Falha ao buscar pedidos do usuário", error);
     }

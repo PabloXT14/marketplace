@@ -14,7 +14,7 @@ type OrderItemProps = {
 export const OrderItem = ({ order }: OrderItemProps) => (
   <View className="flex-row gap-2 rounded-lg bg-white p-2">
     <Image
-      source={{ uri: buildImageUrl(order.productPhoto) }}
+      source={{ uri: buildImageUrl(order.productPhoto ?? "") }}
       alt={order.productName}
       className="h-full w-[88px] rounded-md"
       resizeMode="cover"
@@ -53,7 +53,7 @@ export const OrderItem = ({ order }: OrderItemProps) => (
         </View>
 
         <Text className="font-lato text-gray-400 text-xs leading-snug">
-          Cartão final {order.creditCard.maskedNumber.slice(-4)}
+          Cartão final {order.creditCard?.maskedNumber?.slice(-4)}
         </Text>
       </View>
     </View>

@@ -1,7 +1,7 @@
 import { Text, View } from "react-native"
+import { Image } from "expo-image"
 import Animated from "react-native-reanimated"
 import { LinearGradient } from "expo-linear-gradient"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 import { colors } from "@/styles/colors"
 import { cn } from "@/shared/lib/utils"
@@ -25,6 +25,7 @@ export const CreditCardView = ({
   cardData,
   frontAnimatedStyle,
   backAnimatedStyle,
+  cardBrandIcon,
 }: CreditCardViewProps) => (
   <View className="h-[192px] w-full self-center">
     {/* FRONT */}
@@ -46,16 +47,32 @@ export const CreditCardView = ({
         style={{
           flex: 1,
           borderRadius: 16,
-          padding: 20,
+          paddingVertical: 20,
+          paddingHorizontal: 16,
         }}
       >
         {/* TOP */}
-        <View className="mb-10 flex-row items-center justify-between">
-          <AppIcon name="Card" size={32} color={colors.background} />
-          <MaterialCommunityIcons
-            name="contactless-payment-circle-outline"
-            size={24}
-            color={colors.background}
+        <View className="mb-10 flex-row items-center justify-between px-2">
+          {cardBrandIcon ? (
+            <Image
+              source={cardBrandIcon}
+              style={{
+                width: 32,
+                height: 32,
+              }}
+              contentFit="contain"
+            />
+          ) : (
+            <AppIcon name="Card" size={32} color={colors.background} />
+          )}
+
+          <Image
+            source={require("@/shared/assets/icons/contactless-payment-icon.svg")}
+            style={{
+              width: 32,
+              height: 32,
+            }}
+            contentFit="contain"
           />
         </View>
 

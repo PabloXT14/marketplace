@@ -5,6 +5,7 @@ import {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated"
+import creditCardType from "credit-card-type"
 
 import type { FocusedField } from "../../use-add-card-bottom-sheet-view-model"
 import type { CreditCardFormData } from "../../credit-card-schema"
@@ -13,6 +14,12 @@ export type UseCreditCardViewModelProps = {
   isFlipped: boolean
   focusedField: FocusedField | null
   cardData: CreditCardFormData
+}
+
+const CREDIT_CARD_BRAND_ICONS: Record<string, string> = {
+  Visa: require("@/shared/assets/icons/visa-icon.svg"),
+  Mastercard: require("@/shared/assets/icons/mastercard-icon.svg"),
+  Elo: require("@/shared/assets/icons/elo-icon.svg"),
 }
 
 export const useCreditCardViewModel = ({
@@ -75,11 +82,30 @@ export const useCreditCardViewModel = ({
     return maskedCVV
   }
 
+  const getCardType = (cardNumber: string) => {
+    if (cardNumber.length === 0) {
+      return null
+    }
+
+    const results = creditCardType(cardNumber)
+
+    if (results.length === 0) {
+      return null
+    }
+
+    return results[0].niceType // Ex: 'Visa', 'Mastercard', 'Elo', etc.
+  }
+
   useEffect(() => {
     flipValue.value = withTiming(isFlipped ? 1 : 0, {
       duration: 600,
     })
   }, [isFlipped])
+
+  const creditCardBrand = getCardType(cardData.number)
+  const cardBrandIcon = creditCardBrand
+    ? (CREDIT_CARD_BRAND_ICONS[creditCardBrand] ?? null)
+    : null
 
   return {
     isFlipped,
@@ -94,5 +120,6 @@ export const useCreditCardViewModel = ({
     backAnimatedStyle,
     formatCardNumber,
     formatExpirationDate,
+    cardBrandIcon,
   }
 }

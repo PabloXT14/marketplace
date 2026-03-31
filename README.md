@@ -44,6 +44,7 @@
 O **Marketplace** é um aplicativo mobile construído com React Native + Expo que simula um e-commerce completo. Os usuários podem se autenticar, explorar anúncios de produtos com filtros avançados, visualizar detalhes dos produtos, adicionar itens ao carrinho, escolher cartões de crédito e finalizar pedidos. O app também permite acompanhar o histórico de compras e avaliar produtos através de comentários.
 
 Principais pontos de aprendizagem e implementação:
+- Aplicação da arquitetura `MVVM` na construção de aplicações mobile (mantendo uma ótima estrutura que permite a manutenção e implementação de novas features de forma organizada)
 - Consumo de uma API própria (`fastify` + `type-orm`) com `axios` e interceptors para refresh de token;
 - Organização de navegação com `expo-router` (fluxos público e privado + tabs);
 - Estado global com `zustand` (sessão, carrinho e filtros) e `react-query` para cache de requisições;

@@ -66,5 +66,6 @@ export const useRegisterViewModel = () => {
     errors,
     handleSelectAvatar,
     avatarUri,
+    isPending: registerMutation.isPending,
   }
 }

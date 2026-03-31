@@ -20,6 +20,7 @@ export const RegisterView = ({
   errors,
   handleSelectAvatar,
   avatarUri,
+  isPending,
 }: RegisterViewProps) => (
   <SafeAreaView className="flex-1 bg-white">
     <DismissKeyboardView>
@@ -113,6 +114,7 @@ export const RegisterView = ({
             text="Cadastrar"
             rightIcon="ArrowRight"
             onPress={() => onSubmit()}
+            isLoading={isPending}
           />
         </View>
 

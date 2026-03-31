@@ -6,7 +6,7 @@ import { type LoginFormData, loginSchema } from "./login-schema"
 import { useLoginMutation } from "@/shared/queries/auth/use-login-mutation"
 
 export const useLoginViewModel = () => {
-  const { mutateAsync } = useLoginMutation()
+  const { mutateAsync, isPending } = useLoginMutation()
 
   const {
     control,
@@ -28,5 +28,6 @@ export const useLoginViewModel = () => {
     control,
     onSubmit,
     errors,
+    isPending,
   }
 }

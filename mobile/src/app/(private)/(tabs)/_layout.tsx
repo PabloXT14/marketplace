@@ -1,13 +1,17 @@
+import { Text, View } from "react-native"
 import { Tabs } from "expo-router"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { colors } from "@/styles/colors"
 import { fontFamily } from "@/styles/font-family"
 
+import { useCartStore } from "@/shared/store/cart-store"
+
 import { AppIcon } from "@/shared/components/app-icon"
 
 export default function PrivateTabsLayout() {
   const insets = useSafeAreaInsets()
+  const itemsCount = useCartStore((state) => state.products.length)
 
   return (
     <Tabs
@@ -57,7 +61,17 @@ export default function PrivateTabsLayout() {
         options={{
           title: "Carrinho",
           tabBarIcon: ({ color }) => (
-            <AppIcon name="CartLarge2" size={20} color={color} />
+            <>
+              <AppIcon name="CartLarge2" size={20} color={color} />
+
+              {itemsCount > 0 && (
+                <View className="-top-3 -right-3 absolute size-6 items-center justify-center rounded-full bg-blue-dark">
+                  <Text className="font-lato-bold text-white text-xxs">
+                    {itemsCount}
+                  </Text>
+                </View>
+              )}
+            </>
           ),
         }}
       />

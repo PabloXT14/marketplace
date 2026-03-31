@@ -1,5 +1,6 @@
+import { StatusBar } from "react-native"
 import { Stack } from "expo-router"
-import { StatusBar } from "expo-status-bar"
+// import { StatusBar } from "expo-status-bar"
 import { QueryClientProvider } from "@tanstack/react-query"
 import {
   useFonts,
@@ -28,7 +29,7 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView className="flex-1">
       <QueryClientProvider client={queryClient}>
-        <StatusBar style="dark" />
+        <StatusBar barStyle="dark-content" />
 
         <Stack
           screenOptions={{

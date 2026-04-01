@@ -6,5 +6,8 @@ tmp/
 temp/
 database.sqlite
 
+# Environment variables
+.env
+
 # Avatar uploads
 src/assets/images/avatars/

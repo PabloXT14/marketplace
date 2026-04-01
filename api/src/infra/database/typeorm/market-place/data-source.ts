@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import path from "node:path";
+import path = require("path");
 
 export const MarketPlaceDataSource = new DataSource({
   type: "sqlite",

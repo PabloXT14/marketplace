@@ -4,7 +4,6 @@ import { CreditCardController } from "../controllers/creditCard/credit-card.cont
 import {
   createCreditCardSchema,
   getCreditCardsSchema,
-  deleteCreditCardSchema
 } from "./schemas/creditCard/credit-card.schemas";
 
 export const configure = (fastify: FastifyInstance) => {
@@ -26,12 +25,4 @@ export const configure = (fastify: FastifyInstance) => {
     handler: creditCardController.createCreditCard,
     schema: createCreditCardSchema,
   });
-
-  fastify.route({
-    url: "/credit-cards/:id",
-    method: "delete",
-    preHandler: [checkAuthenticated.execute],
-    handler: creditCardController.deleteCreditCard,
-    schema: deleteCreditCardSchema,
-  })
 };

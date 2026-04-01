@@ -17,7 +17,7 @@ export class AuthenticateUseCase {
     this.jwtService = new JWTService();
   }
 
-  async execute({ email, password }: AuthLoginRequest) {
+  async execute({ email, password, notificationToken }: AuthLoginRequest) {
     const user = await this.authRepository.findByEmail(email);
 
     if (!user) {
@@ -31,6 +31,13 @@ export class AuthenticateUseCase {
     }
 
     await this.refreshTokenRepository.revokeByUserId(user.id!);
+
+    if (notificationToken) {
+      await this.authRepository.updateNotificationToken(
+        user.id!,
+        notificationToken
+      );
+    }
 
     const { accessToken, refreshToken } = this.jwtService.generateTokenPair({
       id: user.id!,
@@ -51,7 +58,7 @@ export class AuthenticateUseCase {
       user: {
         ...user,
         avatarUrl: user.avatar?.url,
-      }
+      },
     };
   }
 }

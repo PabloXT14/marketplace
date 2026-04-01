@@ -29,6 +29,7 @@ export class UploadUserAvatarUseCase implements IUploadUserAvatarUseCase {
       "image/png",
       "image/gif",
       "image/webp",
+      "image/heic",
     ];
     if (!allowedMimeTypes.includes(file.mimetype)) {
       throw new Error(

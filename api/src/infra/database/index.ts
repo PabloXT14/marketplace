@@ -5,8 +5,7 @@ export const connect = async () => {
   try {
     console.info("[DATABASE] Connecting...");
 
-    await MarketPlaceDataSource.initialize();
-    await MarketPlaceDataSource.runMigrations();
+    await Promise.all([MarketPlaceDataSource.initialize()]);
 
     const seeder = new SeederService(MarketPlaceDataSource);
     await seeder.run();

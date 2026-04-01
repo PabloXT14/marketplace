@@ -81,7 +81,7 @@ export const getCreditCardsSchema = {
   },
 };
 
-export const getCreditCardByIdSchema = {
+const getCreditCardByIdSchema = {
   description: "Buscar cartão de crédito por ID",
   tags: ["Credit Cards"],
   params: {
@@ -141,37 +141,3 @@ export const getCreditCardByIdSchema = {
     },
   },
 };
-
-
-export const deleteCreditCardSchema = {
-  description: "Excluir um cartão de crédito",
-  tags: ["Credit Cards"],
-  security: [{ bearerAuth: [] }],
-  params: {
-    type: "object",
-    required: ["id"],
-    properties: {
-      id: {
-        type: "string",
-        pattern: "^[0-9]+$",
-        description: "ID do cartão de crédito",
-      },
-    },
-    additionalProperties: false,
-  },
-  response: {
-    204: {
-      description: "Cartão excluído com sucesso",
-      type: "null"
-    },
-    401: {
-      $ref: "Unauthorized#",
-    },
-    422: {
-      $ref: "UnprocessableEntity#",
-    },
-    500: {
-      $ref: "ServerError#",
-    },
-  },
-}

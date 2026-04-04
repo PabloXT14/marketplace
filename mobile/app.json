@@ -45,6 +45,15 @@
           "photosPermission": "Este app precisa acessar sua galeria de fotos para que você possa selecionar e enviar sua foto.",
           "cameraPermission": "Este app precisa acessar sua câmera para que você possa tirar uma foto."
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/ios-icon.png",
+          "color": "#ffffff",
+          "defaultChannel": "default",
+          "enableBackgroundRemoteNotifications": false
+        }
       ]
     ],
     "experiments": {

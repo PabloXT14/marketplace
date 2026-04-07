@@ -6,6 +6,7 @@ import { useGetProductDetailsQuery } from "@/shared/queries/product/use-get-prod
 import { useCartStore } from "@/shared/store/cart-store"
 import { useModalStore } from "@/shared/store/modal-store"
 import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
+import { localNotificationsService } from "@/shared/services/local-notifications-service"
 
 import { AddToCartSuccessModal } from "./components/add-to-cart-success-modal"
 import { ReviewBottomSheet } from "./components/review-bottom-sheet"
@@ -73,6 +74,12 @@ export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
       name: product.name,
       price: product.value,
       image: product.photo,
+    })
+
+    localNotificationsService.scheduleCartReminderNotification({
+      productName: product.name,
+      productId: product.id,
+      delayInMinutes: 30,
     })
 
     open(

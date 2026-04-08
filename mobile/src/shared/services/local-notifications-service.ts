@@ -20,6 +20,19 @@ Notifications.setNotificationHandler({
   }),
 })
 
+const requestNotificationPermissions = async () => {
+  const { status: existingStatus } = await Notifications.getPermissionsAsync()
+
+  let finalStatus = existingStatus
+
+  if (existingStatus !== "granted") {
+    const { status } = await Notifications.requestPermissionsAsync()
+    finalStatus = status
+  }
+
+  return finalStatus === "granted"
+}
+
 const setUpNotificationChannel = async () => {
   if (Platform.OS === "android") {
     await Notifications.setNotificationChannelAsync(DEFAULT_CHANNEL, {
@@ -42,13 +55,12 @@ const scheduleCartReminderNotification = async ({
   productId,
   delayInMinutes,
 }: ScheduleCartReminderNotificationParams) => {
-  const hasPermission = await Notifications.requestPermissionsAsync()
+  const hasPermission = await requestNotificationPermissions()
 
-  if (!hasPermission.granted) {
+  if (!hasPermission) {
+    console.log("Notifications permission not granted.")
     return
   }
-
-  await setUpNotificationChannel()
 
   const notification = await Notifications.scheduleNotificationAsync({
     identifier: NOTIFICATION_IDS.CART_REMINDER,
@@ -71,5 +83,7 @@ const scheduleCartReminderNotification = async ({
 }
 
 export const localNotificationsService = {
+  setUpNotificationChannel,
+  requestNotificationPermissions,
   scheduleCartReminderNotification,
 }

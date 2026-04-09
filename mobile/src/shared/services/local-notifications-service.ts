@@ -82,8 +82,47 @@ const scheduleCartReminderNotification = async ({
   return notification
 }
 
+type SchedulePurchaseFeedbackNotificationParams = {
+  productName: string
+  productId: number
+  delayInMinutes: number
+}
+
+const schedulePurchaseFeedbackNotification = async ({
+  productName,
+  productId,
+  delayInMinutes,
+}: SchedulePurchaseFeedbackNotificationParams) => {
+  const hasPermission = await requestNotificationPermissions()
+
+  if (!hasPermission) {
+    console.log("Notifications permission not granted.")
+    return
+  }
+
+  const notification = await Notifications.scheduleNotificationAsync({
+    identifier: `${NOTIFICATION_IDS.PURCHASE_FEEDBACK}-${productId}`,
+    content: {
+      title: "🌟 Como foi sua compra?",
+      body: `Você realizou o pedido do produto ${productName}. Envie um feedback do que acho do produto!`,
+      data: {
+        type: "purchase-feedback",
+        productId: String(productId),
+        deepLink: "", // TODO: Aqui você pode adicionar um deep link para a página de avaliação do produto, se desejar
+      },
+    },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+      seconds: delayInMinutes * 60,
+    },
+  })
+
+  return notification
+}
+
 export const localNotificationsService = {
   setUpNotificationChannel,
   requestNotificationPermissions,
   scheduleCartReminderNotification,
+  schedulePurchaseFeedbackNotification,
 }

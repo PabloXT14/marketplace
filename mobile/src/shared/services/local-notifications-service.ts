@@ -6,10 +6,13 @@ import * as Notifications from "expo-notifications"
 import { colors } from "@/styles/colors"
 
 const DEFAULT_CHANNEL = "default-channel"
+
 const NOTIFICATION_IDS = {
   CART_REMINDER: "cart-reminder",
   PURCHASE_FEEDBACK: "purchase-feedback",
 }
+
+const BASE_DEEP_LINK = "marketplace:/"
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -70,7 +73,7 @@ const scheduleCartReminderNotification = async ({
       data: {
         type: "cart-reminder",
         productId: String(productId),
-        deepLink: "", // TODO: Aqui você pode adicionar um deep link para a página do produto, se desejar
+        deepLink: `${BASE_DEEP_LINK}/cart`, // TODO: Aqui você pode adicionar um deep link para a página do produto, se desejar
       },
     },
     trigger: {
@@ -108,7 +111,7 @@ const schedulePurchaseFeedbackNotification = async ({
       data: {
         type: "purchase-feedback",
         productId: String(productId),
-        deepLink: "", // TODO: Aqui você pode adicionar um deep link para a página de avaliação do produto, se desejar
+        deepLink: `${BASE_DEEP_LINK}/product/${productId}`, // TODO: Aqui você pode adicionar um deep link para a página de avaliação do produto, se desejar
       },
     },
     trigger: {

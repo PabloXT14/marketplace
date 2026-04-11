@@ -19,13 +19,21 @@ export const Header = ({ product, onOpenReview }: HeaderProps) => {
     return null
   }
 
+  const handleGoBack = () => {
+    if (router.canGoBack()) {
+      return router.back()
+    }
+
+    router.navigate("/home")
+  }
+
   return (
     <View>
       {/* BACK BUTTON */}
       <TouchableOpacity
         className="mb-4 flex-row items-center gap-2 p-0.5"
         activeOpacity={0.7}
-        onPress={() => router.back()}
+        onPress={handleGoBack}
       >
         <AppIcon name="ArrowLeft" size={20} color={colors.purple.base} />
 

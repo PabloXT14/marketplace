@@ -1,4 +1,4 @@
-import { createElement } from "react"
+import { createElement, useEffect } from "react"
 import { router } from "expo-router"
 
 import { useGetCommentsInfiniteQuery } from "@/shared/queries/product/use-get-comments-infinite-query"
@@ -13,9 +13,13 @@ import { ReviewBottomSheet } from "./components/review-bottom-sheet"
 
 type UseProductViewModelProps = {
   id: number
+  openFeedbackBottomSheet: boolean
 }
 
-export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
+export const useProductViewModel = ({
+  id,
+  openFeedbackBottomSheet,
+}: UseProductViewModelProps) => {
   const { data: product, isLoading, error } = useGetProductDetailsQuery({ id })
 
   const { addProduct } = useCartStore()
@@ -98,6 +102,12 @@ export const useProductViewModel = ({ id }: UseProductViewModelProps) => {
       config: {},
     })
   }
+
+  useEffect(() => {
+    if (openFeedbackBottomSheet) {
+      handleOpenReview()
+    }
+  }, [openFeedbackBottomSheet, product])
 
   return {
     product,

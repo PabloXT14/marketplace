@@ -5,11 +5,16 @@ import { useProductViewModel } from "@/view-models/product/use-product-view-mode
 
 type ProductDetailsParams = {
   id: string
+  openFeedbackBottomSheet?: string
 }
 
 export default function ProductDetails() {
-  const { id } = useLocalSearchParams<ProductDetailsParams>()
-  const props = useProductViewModel({ id: Number(id) })
+  const { id, openFeedbackBottomSheet } =
+    useLocalSearchParams<ProductDetailsParams>()
+  const props = useProductViewModel({
+    id: Number(id),
+    openFeedbackBottomSheet: Boolean(openFeedbackBottomSheet),
+  })
 
   return <ProductView {...props} />
 }

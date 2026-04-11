@@ -111,7 +111,7 @@ const schedulePurchaseFeedbackNotification = async ({
       data: {
         type: "purchase-feedback",
         productId: String(productId),
-        deepLink: `${BASE_DEEP_LINK}/product/${productId}`, // TODO: Aqui você pode adicionar um deep link para a página de avaliação do produto, se desejar
+        deepLink: `${BASE_DEEP_LINK}/product/${productId}?openFeedbackBottomSheet=true`, // Aqui você pode adicionar um deep link para a página de avaliação do produto, se desejar
       },
     },
     trigger: {

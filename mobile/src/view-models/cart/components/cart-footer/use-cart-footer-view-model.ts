@@ -50,6 +50,10 @@ export const useCartFooterViewModel = ({
         productId: product.id,
         delayInMinutes: 60 * 24 * 7 + index * 60 * 24, // 7 days + 1 day per product to avoid scheduling multiple notifications at the same time
       })
+
+      localNotificationsService.cancelNotification(
+        `${localNotificationsService.NOTIFICATION_IDS.CART_REMINDER}-${product.id}`
+      )
     })
 
     clearCart()

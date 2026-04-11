@@ -66,14 +66,14 @@ const scheduleCartReminderNotification = async ({
   }
 
   const notification = await Notifications.scheduleNotificationAsync({
-    identifier: NOTIFICATION_IDS.CART_REMINDER,
+    identifier: `${NOTIFICATION_IDS.CART_REMINDER}-${productId}`,
     content: {
       title: "Você esqueceu algo no carrinho!",
       body: `Você deixou ${productName} no carrinho. Volte para finalizar sua compra!`,
       data: {
         type: "cart-reminder",
         productId: String(productId),
-        deepLink: `${BASE_DEEP_LINK}/cart`, // TODO: Aqui você pode adicionar um deep link para a página do produto, se desejar
+        deepLink: `${BASE_DEEP_LINK}/cart`, // Aqui você pode adicionar um deep link para a página do produto, se desejar
       },
     },
     trigger: {
@@ -123,9 +123,22 @@ const schedulePurchaseFeedbackNotification = async ({
   return notification
 }
 
+const cancelNotification = async (identifier: string) => {
+  try {
+    await Notifications.cancelScheduledNotificationAsync(identifier)
+  } catch (error) {
+    console.log(
+      `Failed to cancel notification with identifier ${identifier}:`,
+      error
+    )
+  }
+}
+
 export const localNotificationsService = {
+  NOTIFICATION_IDS,
   setUpNotificationChannel,
   requestNotificationPermissions,
   scheduleCartReminderNotification,
   schedulePurchaseFeedbackNotification,
+  cancelNotification,
 }

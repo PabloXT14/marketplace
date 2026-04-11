@@ -24,7 +24,7 @@ export const Header = ({ product, onOpenReview }: HeaderProps) => {
       return router.back()
     }
 
-    router.navigate("/home")
+    router.replace("/home")
   }
 
   return (

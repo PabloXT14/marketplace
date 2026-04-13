@@ -13,6 +13,7 @@ import "@/styles/global.css"
 
 import { queryClient } from "@/shared/lib/query"
 import { useNotifications } from "@/shared/hooks/use-notifications"
+import { useOneSignal } from "@/shared/hooks/use-onesignal"
 
 import { Modal } from "@/shared/components/modal"
 
@@ -23,6 +24,7 @@ export default function RootLayout() {
   })
 
   useNotifications()
+  useOneSignal()
 
   if (!fontsLoaded) {
     return null

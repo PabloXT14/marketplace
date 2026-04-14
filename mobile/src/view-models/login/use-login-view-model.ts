@@ -4,9 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { type LoginFormData, loginSchema } from "./login-schema"
 
 import { useLoginMutation } from "@/shared/queries/auth/use-login-mutation"
+import { useOneSignal } from "@/shared/hooks/use-onesignal"
 
 export const useLoginViewModel = () => {
-  const { mutateAsync, isPending } = useLoginMutation()
+  const loginMutation = useLoginMutation()
+  const { playerId } = useOneSignal()
 
   const {
     control,
@@ -21,13 +23,13 @@ export const useLoginViewModel = () => {
   })
 
   const onSubmit = handleSubmit(async (data: LoginFormData) => {
-    await mutateAsync(data)
+    await loginMutation.mutateAsync({ ...data, notificationToken: playerId })
   })
 
   return {
     control,
     onSubmit,
     errors,
-    isPending,
+    isPending: loginMutation.isPending,
   }
 }

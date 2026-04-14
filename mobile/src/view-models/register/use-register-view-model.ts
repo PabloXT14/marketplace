@@ -8,13 +8,14 @@ import { type RegisterFormData, registerSchema } from "./register-schema"
 import { useRegisterMutation } from "@/shared/queries/auth/use-register-mutation"
 import { useUploadAvatarMutation } from "@/shared/queries/auth/use-upload-avatar-mutation"
 import { useUserStore } from "@/shared/store/user-store"
-
+import { useOneSignal } from "@/shared/hooks/use-onesignal"
 import { useImage } from "@/shared/hooks/use-image"
 
 export const useRegisterViewModel = () => {
   const [avatarUri, setAvatarUri] = useState<string | null>(null)
 
   const { updateUser } = useUserStore()
+  const { playerId } = useOneSignal()
 
   const uploadAvatarMutation = useUploadAvatarMutation()
   const registerMutation = useRegisterMutation({
@@ -53,7 +54,7 @@ export const useRegisterViewModel = () => {
   const onSubmit = handleSubmit(async (userData: RegisterFormData) => {
     const { confirmPassword: _, ...rest } = userData
 
-    await registerMutation.mutateAsync(rest)
+    await registerMutation.mutateAsync({ ...rest, notificationToken: playerId })
   })
 
   const handleSelectAvatar = async () => {

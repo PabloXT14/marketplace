@@ -6,6 +6,7 @@ export type RegisterHttpRequest = {
   password: string
   avatarUrl?: string
   phone: string
+  notificationToken?: string
 }
 
 export type RegisterHttpResponse = {

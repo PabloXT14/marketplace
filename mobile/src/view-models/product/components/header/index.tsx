@@ -3,6 +3,7 @@ import { router } from "expo-router"
 
 import { AppIcon } from "@/shared/components/app-icon"
 import { PriceText } from "@/shared/components/price-text"
+import { FavoriteButton } from "./components/favorite-button"
 
 import { colors } from "@/styles/colors"
 import { buildImageUrl } from "@/shared/helpers/build-image-url"
@@ -29,18 +30,23 @@ export const Header = ({ product, onOpenReview }: HeaderProps) => {
 
   return (
     <View>
-      {/* BACK BUTTON */}
-      <TouchableOpacity
-        className="mb-4 flex-row items-center gap-2 p-0.5"
-        activeOpacity={0.7}
-        onPress={handleGoBack}
-      >
-        <AppIcon name="ArrowLeft" size={20} color={colors.purple.base} />
+      {/* TOP */}
+      <View className="mb-4 flex-row items-center justify-between">
+        {/* BACK BUTTON */}
+        <TouchableOpacity
+          className="flex-row items-center gap-2 p-0.5"
+          activeOpacity={0.7}
+          onPress={handleGoBack}
+        >
+          <AppIcon name="ArrowLeft" size={20} color={colors.purple.base} />
 
-        <Text className="font-lato-bold text-purple-base text-sm leading-tight">
-          Voltar
-        </Text>
-      </TouchableOpacity>
+          <Text className="font-lato-bold text-purple-base text-sm leading-tight">
+            Voltar
+          </Text>
+        </TouchableOpacity>
+
+        <FavoriteButton productId={product.id} />
+      </View>
 
       {/* IMAGE */}
       <View className="relative mb-7 w-full overflow-hidden rounded-lg bg-white shadow-gray-500/30 shadow-xl">

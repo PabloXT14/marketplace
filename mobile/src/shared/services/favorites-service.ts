@@ -3,6 +3,7 @@ import { marketplaceApiClient } from "../api/marketplace"
 import type {
   Favorite,
   AddFavoriteRequest,
+  AddFavoriteResponse,
   RemoveFavoriteRequest,
 } from "../interfaces/http/favorite"
 
@@ -15,9 +16,12 @@ export const getFavoritesService = async () => {
 }
 
 export const addFavoriteService = async ({ productId }: AddFavoriteRequest) => {
-  const response = await marketplaceApiClient.post<Favorite>("/favorites", {
-    productId,
-  })
+  const response = await marketplaceApiClient.post<AddFavoriteResponse>(
+    "/favorites",
+    {
+      productId,
+    }
+  )
 
   const { data } = response
 

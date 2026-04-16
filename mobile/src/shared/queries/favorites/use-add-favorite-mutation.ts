@@ -10,7 +10,9 @@ export const useAddFavoriteMutation = () => {
     mutationFn: addFavoriteService,
     onSuccess: (_response) => {
       queryClient.invalidateQueries({ queryKey: ["favorites"] })
-      toast.success("Produto adicionado aos favoritos!")
+      toast.success("Produto adicionado aos favoritos!", {
+        position: "bottom-center",
+      })
     },
     onError: (error) => {
       toast.error(error.message ?? "Ocorreu um erro ao favoritar o produto.")

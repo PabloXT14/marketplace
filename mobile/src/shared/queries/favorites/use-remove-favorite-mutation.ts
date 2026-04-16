@@ -10,7 +10,9 @@ export const useRemoveFavoriteMutation = () => {
     mutationFn: removeFavoriteService,
     onSuccess: (_response) => {
       queryClient.invalidateQueries({ queryKey: ["favorites"] })
-      toast.success("Produto removido dos favoritos!")
+      toast.success("Produto removido dos favoritos!", {
+        position: "bottom-center",
+      })
     },
     onError: (error) => {
       toast.error(

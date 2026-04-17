@@ -13,6 +13,14 @@ export const useOneSignal = () => {
 
     OneSignal.initialize(ONESIGNAL_APP_ID)
 
+    // Handle notification taps (app was in background or closed)
+    // OneSignal.Notifications.addEventListener(
+    //   "click",
+    //   (event: NotificationClickEvent) => {
+    //     console.log("OneSignal: notification clicked:", event)
+    //   }
+    // )
+
     // Test if onesignal connection is working, and get the player id
     ;(async () => {
       const responsePlayerId =
